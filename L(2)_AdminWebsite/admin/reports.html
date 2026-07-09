@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Reports & Analytics | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/reports.css?v=700" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="admin-app reports-page" id="adminApp">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+            
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html" class="active">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content reports-main">
+
+      <header class="reports-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="top-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search reports, metrics or properties..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="refresh-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>Refresh</span>
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <span>Dashboard</span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Reports & Analytics</strong>
+          </div>
+
+          <h1>Reports & Analytics</h1>
+          <p>Track business performance, collections, occupancy, complaints, bookings and operational trends.</p>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon gold">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+          </div>
+          <div>
+            <h2 id="totalRevenueValue">₹0</h2>
+            <p>Total Revenue</p>
+            <small id="revenueTrendText">Live Firebase data</small>
+          </div>
+          <div class="sparkline" id="revenueSpark"></div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon navy">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div>
+            <h2 id="occupancyRateValue">0%</h2>
+            <p>Occupancy Rate</p>
+            <small id="occupancyTrendText">0/0 beds occupied</small>
+          </div>
+          <div class="sparkline" id="occupancySpark"></div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <div>
+            <h2 id="collectionsValue">₹0</h2>
+            <p>Collections This Month</p>
+            <small id="collectionsTrendText">Received payments</small>
+          </div>
+          <div class="sparkline" id="collectionsSpark"></div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon red">
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <div>
+            <h2 id="openComplaintsValue">0</h2>
+            <p>Open Complaints</p>
+            <small id="complaintsTrendText">Need attention</small>
+          </div>
+          <div class="sparkline" id="complaintsSpark"></div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon purple">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <div>
+            <h2 id="newBookingsValue">0</h2>
+            <p>New Bookings</p>
+            <small id="bookingsTrendText">This month</small>
+          </div>
+          <div class="sparkline" id="bookingsSpark"></div>
+        </article>
+      </section>
+
+      <section class="filter-card">
+        <div class="filter-search">
+          <input
+            type="text"
+            id="reportSearchInput"
+            placeholder="Search reports, metrics or properties..."
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <select id="propertyFilter">
+          <option>All Properties</option>
+        </select>
+
+        <select id="rangeFilter">
+          <option>Today</option>
+          <option>Last 7 Days</option>
+          <option>Last 30 Days</option>
+          <option selected>This Month</option>
+          <option>This Year</option>
+        </select>
+
+        <select id="reportTypeFilter">
+          <option>All Report Types</option>
+          <option>Financial</option>
+          <option>Occupancy</option>
+          <option>Collections</option>
+          <option>Complaints</option>
+          <option>Operational</option>
+          <option>Analytics</option>
+          <option>PDF Export</option>
+        </select>
+
+        <button type="button" class="secondary-btn" id="exportReportBtn">
+          <i class="fa-solid fa-file-export"></i>
+          Export Report
+        </button>
+
+        <button type="button" class="primary-btn" id="downloadPdfBtn">
+          <i class="fa-solid fa-download"></i>
+          Download PDF
+        </button>
+
+        <button type="button" class="danger-outline-btn" id="resetFiltersBtn">
+          <i class="fa-solid fa-xmark"></i>
+          Reset
+        </button>
+      </section>
+
+      <section class="top-analytics-grid">
+        <article class="panel-card revenue-card">
+          <div class="panel-head">
+            <div>
+              <h3>Revenue & Collection Trend</h3>
+              <p>Live trend from invoices and transactions.</p>
+            </div>
+          </div>
+          <div class="line-chart" id="revenueCollectionChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Property-wise Occupancy</h3>
+              <p>Current occupancy across properties.</p>
+            </div>
+          </div>
+          <div class="bar-chart" id="propertyOccupancyChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Complaint Category Split</h3>
+              <p id="complaintChartSubtitle">0 open complaints.</p>
+            </div>
+          </div>
+
+          <div class="donut-layout">
+            <div class="donut-box" id="complaintDonut">
+              <div class="donut-center">
+                <strong id="complaintDonutTotal">0</strong>
+                <span>Total</span>
+              </div>
+            </div>
+
+            <div class="donut-legend" id="complaintLegend"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="auto-chart-grid">
+        <article class="panel-card">
+          <h3>Food Subscription Chart</h3>
+          <p>Live food plan count from food_subscriptions.</p>
+          <div class="mini-bar-chart" id="foodSubscriptionChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Activity Chart</h3>
+          <p>This month visitors and parcels from Firebase.</p>
+          <div class="mini-bar-chart" id="activityChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Report Type Chart</h3>
+          <p>Generated reports grouped by type.</p>
+          <div class="mini-bar-chart" id="reportTypeChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Property Collection Chart</h3>
+          <p>Collections grouped by property.</p>
+          <div class="mini-bar-chart" id="propertyCollectionChart"></div>
+        </article>
+      </section>
+
+      <section class="main-grid">
+        <div class="left-column">
+          <section class="mini-panel-grid">
+            <article class="panel-card">
+              <h3>Food Subscription Performance</h3>
+              <p>Food subscribers, active plans and monthly revenue.</p>
+
+              <div class="metric-grid">
+                <div class="mini-metric">
+                  <i class="fa-solid fa-utensils"></i>
+                  <strong id="foodTotalSubscribers">0</strong>
+                  <span>Total Subscribers</span>
+                </div>
+
+                <div class="mini-metric green">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <strong id="foodActiveSubscribers">0</strong>
+                  <span>Active This Month</span>
+                </div>
+
+                <div class="mini-metric gold">
+                  <i class="fa-solid fa-wallet"></i>
+                  <strong id="foodRevenue">₹0</strong>
+                  <span>Food Revenue</span>
+                </div>
+
+                <div class="mini-metric purple">
+                  <i class="fa-solid fa-arrow-trend-up"></i>
+                  <strong id="foodActiveRate">0%</strong>
+                  <span>Active Rate</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel-card">
+              <h3>Visitor & Parcel Activity</h3>
+              <p>Visitor visits and parcels received this month.</p>
+
+              <div class="metric-grid two">
+                <div class="mini-metric">
+                  <i class="fa-solid fa-id-badge"></i>
+                  <strong id="visitorsThisMonth">0</strong>
+                  <span>Visitors</span>
+                </div>
+
+                <div class="mini-metric green">
+                  <i class="fa-solid fa-box"></i>
+                  <strong id="parcelsReceived">0</strong>
+                  <span>Parcels</span>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section class="bottom-grid">
+            <article class="panel-card">
+              <h3>Top Performing Properties</h3>
+              <p>Performance by occupancy, revenue and collections.</p>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Property</th>
+                      <th>Occupancy</th>
+                      <th>Revenue</th>
+                      <th>Collections</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="topPropertiesBody">
+                    <tr>
+                      <td colspan="5" class="empty-row">Loading properties...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="panel-card">
+              <div class="panel-head">
+                <div>
+                  <h3>Recent Reports</h3>
+                  <p>Generated reports and exports.</p>
+                </div>
+
+                <button type="button" class="small-primary-btn" id="generateOperationalReportBtn">
+                  <i class="fa-solid fa-plus"></i>
+                  Generate
+                </button>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Report Name</th>
+                      <th>Generated On</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentReportsBody">
+                    <tr>
+                      <td colspan="4" class="empty-row">Loading reports...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          </section>
+        </div>
+
+        <aside class="panel-card insights-panel">
+          <h3>Quick Insights</h3>
+          <p>Auto-generated business observations.</p>
+          <div class="insights-list" id="quickInsightsList">
+            <div class="empty-state">Loading insights...</div>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="reports-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/reports.js?v=700"></script>
+</body>
+</html>

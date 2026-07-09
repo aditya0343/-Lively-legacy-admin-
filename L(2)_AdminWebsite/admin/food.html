@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Food Management | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/food.css?v=100" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="admin-app food-page" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html" class="active">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content food-main">
+      <header class="food-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle sidebar">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Food Management</h1>
+            <p>Manage plans, subscriptions, food billing and feedback.</p>
+          </div>
+        </div>
+
+        <div class="food-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search resident, phone, property, food plan..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="top-action-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <span>Dashboard</span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Food Management</strong>
+          </div>
+
+          <h2>Food Management</h2>
+          <p>Same Firebase structure and activity flow as the admin mobile app.</p>
+        </div>
+
+        <div class="page-action-buttons">
+          <button class="outline-btn" type="button" id="addFoodPlanBtn">
+            <i class="fa-solid fa-restaurant"></i>
+            Add Food Type
+          </button>
+
+          <button class="gold-btn" type="button" id="addSubscriptionBtn">
+            <i class="fa-solid fa-plus"></i>
+            Add Subscription
+          </button>
+        </div>
+      </section>
+
+      <section class="food-stats-grid">
+        <article class="food-stat-card">
+          <div class="food-stat-icon gold">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div>
+            <p>Active Subscriptions</p>
+            <h2 id="activeSubscriptionsValue">0</h2>
+            <small id="activeSubscriptionsSub">Food active plans</small>
+          </div>
+        </article>
+
+        <article class="food-stat-card">
+          <div class="food-stat-icon green">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+          </div>
+          <div>
+            <p>Food Revenue</p>
+            <h2 id="foodRevenueValue">₹0</h2>
+            <small id="foodRevenueSub">Total bill amount</small>
+          </div>
+        </article>
+
+        <article class="food-stat-card">
+          <div class="food-stat-icon navy">
+           <i class="fa-solid fa-wallet"></i>
+          </div>
+          <div>
+            <p>Payments Collected</p>
+            <h2 id="paymentsCollectedValue">₹0</h2>
+            <small id="paymentsCollectedSub">Received amount</small>
+          </div>
+        </article>
+
+        <article class="food-stat-card">
+          <div class="food-stat-icon red">
+            <i class="fa-solid fa-receipt"></i>
+          </div>
+          <div>
+            <p>Pending Food Payments</p>
+            <h2 id="pendingPaymentsValue">₹0</h2>
+            <small id="pendingPaymentsSub">Pending amount</small>
+          </div>
+        </article>
+
+        <article class="food-stat-card">
+          <div class="food-stat-icon orange">
+            <i class="fa-solid fa-pause-circle"></i>
+          </div>
+          <div>
+            <p>Paused Plans</p>
+            <h2 id="pausedPlansValue">0</h2>
+            <small id="pausedPlansSub">Temporarily paused</small>
+          </div>
+        </article>
+
+        <article class="food-stat-card">
+          <div class="food-stat-icon purple">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div>
+            <p>Feedback Score</p>
+            <h2 id="feedbackScoreValue">-</h2>
+            <small id="feedbackScoreSub">0 feedbacks</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="food-reports-grid">
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Payment Collection Chart</h3>
+              <p>Auto fetched from food subscription totals in Firebase.</p>
+            </div>
+          </div>
+
+          <div class="donut-layout">
+            <div class="donut-box">
+              <canvas id="paymentCollectionChart"></canvas>
+              <div class="chart-center">
+                <strong id="paymentChartCenter">₹0</strong>
+                <span>Total Food Billing</span>
+              </div>
+            </div>
+
+            <div class="chart-legend" id="paymentLegend"></div>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Subscription Status Chart</h3>
+              <p>Active, paused and cancelled food subscriptions.</p>
+            </div>
+          </div>
+
+          <div class="status-bars" id="subscriptionStatusBars"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Food Schedule Rules</h3>
+              <p>Default management food schedule and optional add-ons.</p>
+            </div>
+          </div>
+
+          <div class="food-rule-list">
+            <div class="rule-row">
+              <i class="fa-solid fa-sun"></i>
+              <div>
+                <strong>Monday to Friday</strong>
+                <span>Breakfast + Dinner</span>
+              </div>
+            </div>
+
+            <div class="rule-row">
+              <i class="fa-solid fa-calendar-week"></i>
+              <div>
+                <strong>Saturday & Sunday</strong>
+                <span>Breakfast + Lunch + Dinner</span>
+              </div>
+            </div>
+
+            <div class="rule-row">
+              <i class="fa-solid fa-mug-hot"></i>
+              <div>
+                <strong>Bed Coffee</strong>
+                <span>Customer request only, chargeable</span>
+              </div>
+            </div>
+
+            <div class="rule-row">
+              <i class="fa-solid fa-bowl-food"></i>
+              <div>
+                <strong>Evening Tiffin</strong>
+                <span>Customer request only, chargeable</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="meal-plan-section">
+        <div class="section-head">
+          <div>
+            <h3>Food Plans & Packages</h3>
+            <p>Veg, non-veg, cuisine and add-on pricing managed by admin.</p>
+          </div>
+
+          <button type="button" id="sectionAddPlanBtn">
+            <i class="fa-solid fa-plus"></i>
+            Add Food Type
+          </button>
+        </div>
+
+        <div class="meal-plan-grid" id="mealPlansGrid">
+          <div class="empty-card">Loading food plans...</div>
+        </div>
+      </section>
+
+      <section class="food-filter-card">
+        <div class="filter-search">
+          <input
+            id="subscriptionSearchInput"
+            type="text"
+            placeholder="Search by resident, property, phone or meal plan..."
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <select id="propertyFilter">
+          <option value="All Properties">All Properties</option>
+        </select>
+
+        <select id="mealPlanFilter">
+          <option value="All Plans">All Plans</option>
+        </select>
+
+        <select id="subscriptionStatusFilter">
+          <option value="All Statuses">All Statuses</option>
+        </select>
+
+        <select id="paymentStatusFilter">
+          <option value="All Payments">All Payments</option>
+        </select>
+
+        <button id="clearFiltersBtn" type="button">
+          <i class="fa-solid fa-xmark"></i>
+          Clear
+        </button>
+      </section>
+
+      <section class="subscription-card">
+        <div class="subscription-head">
+          <div>
+            <h3>Resident Food Subscriptions</h3>
+            <p id="subscriptionSubText">Loading subscriptions...</p>
+          </div>
+        </div>
+
+        <div class="subscription-table-wrap">
+          <table class="subscription-table">
+            <thead>
+              <tr>
+                <th>Resident</th>
+                <th>Property</th>
+                <th>Plan</th>
+                <th>Food</th>
+                <th>Amount</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Renewal</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="subscriptionTableBody">
+              <tr>
+                <td colspan="9" class="empty-row">Loading subscriptions...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <p id="tableSummary">Showing 0 subscriptions</p>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </section>
+
+      <footer class="food-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Add Food Plan Modal -->
+  <div class="modal-overlay" id="foodPlanModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="foodPlanModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Food Plan</h2>
+          <p>Same fields and Firestore structure as the admin mobile app.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="foodPlanForm">
+        <div class="form-card">
+          <h3>Food Type Pricing</h3>
+
+          <label class="full-field">
+            <span>Plan Name *</span>
+            <input id="planNameInput" type="text" required />
+          </label>
+
+          <div class="field-grid">
+            <label>
+              <span>Food Type *</span>
+              <select id="foodTypeInput" required>
+                <option>Vegetarian</option>
+                <option>Non-Vegetarian</option>
+                <option>Eggetarian</option>
+                <option>Vegan</option>
+                <option>Jain</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Cuisine *</span>
+              <select id="cuisineTypeInput" required>
+                <option>South Indian</option>
+                <option>North Indian</option>
+                <option>Both South & North</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Monday to Friday Food</span>
+              <input id="weekdayMealsInput" type="text" value="Breakfast + Dinner" readonly />
+            </label>
+
+            <label>
+              <span>Saturday & Sunday Food</span>
+              <input id="weekendMealsInput" type="text" value="Breakfast + Lunch + Dinner" readonly />
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Monthly Plan Amount *</span>
+            <input id="monthlyPriceInput" type="number" min="0" required />
+          </label>
+
+          <label class="switch-row">
+            <div>
+              <strong>Bed Coffee Available</strong>
+              <span>Only if customer requests. Chargeable add-on.</span>
+            </div>
+            <input id="bedCoffeeAvailableInput" type="checkbox" />
+          </label>
+
+          <label class="full-field optional-price" id="bedCoffeePriceWrap">
+            <span>Bed Coffee Monthly Charge</span>
+            <input id="bedCoffeePriceInput" type="number" min="0" />
+          </label>
+
+          <label class="switch-row">
+            <div>
+              <strong>Evening Tiffin Available</strong>
+              <span>Only if customer requests. Chargeable add-on.</span>
+            </div>
+            <input id="eveningTiffinAvailableInput" type="checkbox" />
+          </label>
+
+          <label class="full-field optional-price" id="eveningTiffinPriceWrap">
+            <span>Evening Tiffin Monthly Charge</span>
+            <input id="eveningTiffinPriceInput" type="number" min="0" />
+          </label>
+
+          <label class="switch-row">
+            <div>
+              <strong>Hygiene Standard Enabled</strong>
+              <span>Visible in plan details and customer view.</span>
+            </div>
+            <input id="hygieneEnabledInput" type="checkbox" />
+          </label>
+
+          <label class="switch-row">
+            <div>
+              <strong>Branded Recipe / Standard Recipe</strong>
+              <span>Recipe process controlled by management.</span>
+            </div>
+            <input id="brandRecipeEnabledInput" type="checkbox" />
+          </label>
+
+          <label class="full-field">
+            <span>Plan Description</span>
+            <textarea id="planDescriptionInput" rows="4"></textarea>
+          </label>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" type="button" data-close-modal="foodPlanModal">Cancel</button>
+        <button class="modal-save-btn" type="submit" form="foodPlanForm" id="savePlanBtn">
+          <i class="fa-solid fa-check"></i>
+          Save Food Plan
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Add Food Subscription Modal -->
+  <div class="modal-overlay" id="foodSubscriptionModal" hidden>
+    <section class="modal-shell large">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="foodSubscriptionModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Food Subscription</h2>
+          <p>Assign food plan, optional bed coffee, optional evening tiffin and billing.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="foodSubscriptionForm">
+        <div class="form-card">
+          <h3>Resident Food Subscription</h3>
+
+          <div class="field-grid">
+            <label>
+              <span>Select Resident *</span>
+              <select id="subscriptionResidentInput" required>
+                <option value="">Select resident</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Select Property *</span>
+              <select id="subscriptionPropertyInput" required>
+                <option value="">Select property</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Select Food Plan *</span>
+              <select id="subscriptionPlanInput" required>
+                <option value="">Select food plan</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Subscription Status</span>
+              <select id="subscriptionStatusInput">
+                <option>Active</option>
+                <option>Paused</option>
+                <option>Cancelled</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="selected-plan-box" id="selectedPlanInfo" hidden></div>
+
+          <div class="addon-grid" id="addonOptionsBox" hidden>
+            <label class="switch-row" id="includeBedCoffeeWrap" hidden>
+              <div>
+                <strong>Add Bed Coffee</strong>
+                <span id="bedCoffeeChargeText">Customer requested add-on.</span>
+              </div>
+              <input id="includeBedCoffeeInput" type="checkbox" />
+            </label>
+
+            <label class="switch-row" id="includeEveningTiffinWrap" hidden>
+              <div>
+                <strong>Add Evening Tiffin</strong>
+                <span id="eveningTiffinChargeText">Customer requested add-on.</span>
+              </div>
+              <input id="includeEveningTiffinInput" type="checkbox" />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Start Date *</span>
+              <input id="subscriptionStartDateInput" type="date" required />
+            </label>
+
+            <label>
+              <span>Renewal Date *</span>
+              <input id="subscriptionRenewalDateInput" type="date" required />
+            </label>
+
+            <label>
+              <span>Amount Received</span>
+              <input id="subscriptionAmountReceivedInput" type="number" min="0" />
+            </label>
+
+            <label>
+              <span>Payment Mode</span>
+              <select id="subscriptionPaymentModeInput">
+                <option>UPI</option>
+                <option>Cash</option>
+                <option>Bank Transfer</option>
+                <option>Card</option>
+                <option>Payment Gateway</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Notes</span>
+            <textarea id="subscriptionNotesInput" rows="3" placeholder="Customer food preference or instruction"></textarea>
+          </label>
+
+          <div class="billing-summary" id="billingSummaryBox">
+            <div>
+              <span>Total Food Amount</span>
+              <strong id="summaryTotalAmount">₹0</strong>
+            </div>
+
+            <div>
+              <span>Amount Received</span>
+              <strong id="summaryReceivedAmount">₹0</strong>
+            </div>
+
+            <div>
+              <span>Pending Amount</span>
+              <strong id="summaryPendingAmount">₹0</strong>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" type="button" data-close-modal="foodSubscriptionModal">Cancel</button>
+        <button class="modal-save-btn" type="submit" form="foodSubscriptionForm" id="saveSubscriptionBtn">
+          <i class="fa-solid fa-check"></i>
+          Save Subscription
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/food.js?v=100"></script>
+</body>
+</html>

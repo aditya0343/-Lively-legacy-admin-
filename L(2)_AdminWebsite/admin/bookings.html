@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Bookings & Leads | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/bookings.css?v=31" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="admin-app" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+<nav class="sidebar-nav">
+  <a href="admin-home.html">
+    <i class="fa-solid fa-house"></i>
+    <span>Dashboard</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <div class="nav-dropdown" id="propertiesDropdown">
+    <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+      <span>
+        <i class="fa-solid fa-building"></i>
+        <span class="nav-text">Properties</span>
+      </span>
+      <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+    </button>
+
+    <div class="nav-submenu">
+      <a href="properties.html">All Properties</a>
+      <a href="rooms.html">Rooms</a>
+      <a href="beds.html">Beds</a>
+    </div>
+  </div>
+
+  <a href="residents.html">
+    <i class="fa-solid fa-users"></i>
+    <span>Residents</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="bookings.html" class="active">
+    <i class="fa-solid fa-calendar-check"></i>
+    <span>Bookings & Leads</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="revenue.html">
+    <i class="fa-solid fa-wallet"></i>
+    <span>Revenue & Billing</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="food.html">
+    <i class="fa-solid fa-utensils"></i>
+    <span>Food Management</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="complaints.html">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span>Complaints</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="staff-management.html">
+    <i class="fa-solid fa-user-gear"></i>
+    <span>Staff Management</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="visitors.html">
+    <i class="fa-solid fa-user-check"></i>
+    <span>Visitors</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="parcels.html">
+    <i class="fa-solid fa-box"></i>
+    <span>Parcels</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="agreements-kyc.html">
+    <i class="fa-solid fa-file-signature"></i>
+    <span>Agreements & KYC</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="referrals.html">
+    <i class="fa-solid fa-share-nodes"></i>
+    <span>Referrals</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="corporate.html">
+    <i class="fa-solid fa-building-columns"></i>
+    <span>Corporate</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="reports.html">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Reports & Analytics</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+
+  <a href="settings.html">
+    <i class="fa-solid fa-gear"></i>
+    <span>Settings</span>
+    <i class="fa-solid fa-chevron-right nav-arrow"></i>
+  </a>
+</nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content bookings-page">
+      <header class="bookings-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Bookings & Leads</h1>
+            <p>Manage reservations, check-ins, leads, payments and conversions.</p>
+          </div>
+        </div>
+
+        <div class="bookings-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="topSearchInput"
+            placeholder="Search resident, lead, phone, property..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="top-action-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <button class="top-action-btn" id="exportBtn" type="button">
+            <i class="fa-solid fa-download"></i>
+            Export
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="changePasswordBtn" type="button">
+                <i class="fa-solid fa-lock"></i>
+                Change Password
+              </button>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero-card">
+        <div>
+          <h2>Bookings & Leads</h2>
+          <p>
+            Live Firebase dashboard for leads, resident bookings, customers, room and bed occupancy,
+            invoices, transactions, KYC and food billing.
+          </p>
+        </div>
+
+        <div class="hero-actions">
+          <button class="outline-hero-btn" id="addBookingBtn" type="button">
+            <i class="fa-solid fa-user-plus"></i>
+            Add Resident Booking
+          </button>
+
+          <button class="gold-hero-btn" id="addLeadBtn" type="button">
+            <i class="fa-solid fa-plus"></i>
+            Add Lead
+          </button>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon purple">
+            <i class="fa-solid fa-calendar-days"></i>
+          </div>
+          <div>
+            <p>Total Bookings</p>
+            <h2 id="totalBookingsValue">0</h2>
+            <small>All reservations</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <p>Confirmed Check-ins</p>
+            <h2 id="confirmedCheckinsValue">0</h2>
+            <small>Confirmed / active</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon orange">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+          </div>
+          <div>
+            <p>Booking Value</p>
+            <h2 id="bookingValueValue">₹0</h2>
+            <small>Total value</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon blue">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div>
+            <p>Active Residents</p>
+            <h2 id="activeResidentsValue">0</h2>
+            <small>Currently staying</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon gold">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div>
+            <p>Active Leads</p>
+            <h2 id="activeLeadsValue">0</h2>
+            <small>Open enquiries</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon red">
+            <i class="fa-solid fa-address-card"></i>
+          </div>
+          <div>
+            <p>Pending KYC</p>
+            <h2 id="pendingKycValue">0</h2>
+            <small>Need verification</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon teal">
+            <i class="fa-solid fa-right-to-bracket"></i>
+          </div>
+          <div>
+            <p>Move-ins This Month</p>
+            <h2 id="moveInsValue">0</h2>
+            <small>Based on check-in</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon pink">
+            <i class="fa-solid fa-bell"></i>
+          </div>
+          <div>
+            <p>Follow-ups Due</p>
+            <h2 id="followupsDueValue">0</h2>
+            <small>Due today / overdue</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon amber">
+            <i class="fa-solid fa-percent"></i>
+          </div>
+          <div>
+            <p>Conversion Rate</p>
+            <h2 id="conversionRateValue">0%</h2>
+            <small>Lead to booking</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <div>
+            <p>Due Payments</p>
+            <h2 id="dueAmountValue">₹0</h2>
+            <small id="dueAmountSub">Pending from residents</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="analytics-grid">
+        <article class="analytics-card">
+          <h3>Booking Value</h3>
+          <p>Total booking value and due amount</p>
+
+          <div class="mini-list">
+            <div class="mini-row">
+              <span>Booking Value</span>
+              <strong id="miniBookingValue">₹0</strong>
+            </div>
+
+            <div class="mini-row">
+              <span>Received Amount</span>
+              <strong id="miniReceivedAmount">₹0</strong>
+            </div>
+
+            <div class="mini-row">
+              <span>Due Amount</span>
+              <strong id="miniDueAmount">₹0</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="analytics-card">
+          <h3>Pipeline Status</h3>
+          <p>Lead and booking status overview</p>
+          <div id="statusMiniList" class="mini-list"></div>
+        </article>
+
+        <article class="analytics-card">
+          <h3>Room Type Mix</h3>
+          <p>Single, double and triple demand</p>
+          <div id="roomMiniList" class="mini-list"></div>
+        </article>
+
+        <article class="analytics-card">
+          <h3>Property Split</h3>
+          <p>Records grouped by property</p>
+          <div id="propertyMiniList" class="mini-list"></div>
+        </article>
+      </section>
+
+      <section class="quick-actions-card">
+        <h3>Quick Actions</h3>
+        <p>Common booking and lead actions</p>
+
+        <div class="quick-actions-grid">
+          <button type="button" id="quickAddBooking" class="quick-action">
+            <span class="purple-soft"><i class="fa-solid fa-calendar-plus"></i></span>
+            <strong>Add Booking</strong>
+          </button>
+
+          <button type="button" id="quickAddLead" class="quick-action">
+            <span class="gold-soft"><i class="fa-solid fa-user-plus"></i></span>
+            <strong>Add Lead</strong>
+          </button>
+
+          <button type="button" id="quickViewBookings" class="quick-action">
+            <span class="blue-soft"><i class="fa-solid fa-clipboard-list"></i></span>
+            <strong>View Bookings</strong>
+          </button>
+
+          <button type="button" id="quickViewLeads" class="quick-action">
+            <span class="green-soft"><i class="fa-solid fa-users"></i></span>
+            <strong>View Leads</strong>
+          </button>
+        </div>
+      </section>
+
+      <section class="filters-card">
+        <div class="filter-search">
+          <input
+            id="bookingSearchInput"
+            type="text"
+            placeholder="Search by name, phone, lead ID, property..."
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div class="filters-grid">
+          <select id="propertyFilter">
+            <option>All Properties</option>
+          </select>
+
+          <select id="typeFilter">
+            <option>All Types</option>
+            <option>Booking</option>
+            <option>Lead</option>
+          </select>
+
+          <select id="statusFilter">
+            <option>All Statuses</option>
+          </select>
+
+          <select id="stayTypeFilter">
+            <option>All Stay Types</option>
+          </select>
+
+          <select id="roomTypeFilter">
+            <option>All Room Types</option>
+            <option>Single</option>
+            <option>Double</option>
+            <option>Triple</option>
+          </select>
+
+          <select id="sortFilter">
+            <option>Recently Added</option>
+            <option>Booking Value</option>
+            <option>Follow-up Date</option>
+            <option>Name A-Z</option>
+          </select>
+
+          <button id="clearFiltersBtn" type="button">
+            <i class="fa-solid fa-xmark"></i>
+            Clear
+          </button>
+        </div>
+      </section>
+
+      <section class="pipeline-card">
+        <div class="section-head">
+          <div>
+            <h3>Bookings and Leads Pipeline</h3>
+            <p id="pipelineSub">Loading records...</p>
+          </div>
+        </div>
+
+        <div class="pipeline-list" id="pipelineList">
+          <div class="empty-state">Loading bookings and leads...</div>
+        </div>
+
+        <div class="table-footer">
+          <p id="tableSummary">Showing 0 records</p>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Lead Modal -->
+  <div class="booking-modal-overlay" id="leadModal" hidden>
+    <section class="booking-modal-shell small">
+      <header class="booking-modal-header">
+        <button class="modal-icon-btn" id="closeLeadModal" type="button">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2 id="leadModalTitle">Add Lead</h2>
+          <p>Create or update a lead enquiry.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="booking-form" id="leadForm">
+        <input type="hidden" id="leadEditId" />
+
+        <div class="form-card">
+          <h3>Lead Details</h3>
+
+          <div class="field-grid">
+            <label>
+              <span>Lead No</span>
+              <input id="leadNoInput" type="text" placeholder="Auto generated" />
+            </label>
+
+            <label>
+              <span>Lead Name *</span>
+              <input id="leadNameInput" type="text" placeholder="Enter lead name" required />
+            </label>
+
+            <label>
+              <span>Phone Number *</span>
+              <input id="leadPhoneInput" type="text" placeholder="Enter phone number" required />
+            </label>
+
+            <label>
+              <span>Email</span>
+              <input id="leadEmailInput" type="email" placeholder="Enter email" />
+            </label>
+
+            <label>
+              <span>Interested Property</span>
+              <select id="leadPropertyInput">
+                <option value="">Select property</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Source</span>
+              <select id="leadSourceInput">
+                <option>Website</option>
+                <option>Mobile App</option>
+                <option>Instagram</option>
+                <option>Facebook</option>
+                <option>Google Ads</option>
+                <option>Referral</option>
+                <option>Walk-in</option>
+                <option>Phone Inquiry</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Room Type</span>
+              <select id="leadRoomTypeInput">
+                <option>Single</option>
+                <option>Double</option>
+                <option>Triple</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Stay Type</span>
+              <select id="leadStayTypeInput">
+                <option>Monthly Stay</option>
+                <option>Daily Stay</option>
+                <option>Short Stay</option>
+                <option>Corporate Stay</option>
+                <option>Flexible</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Lead Stage</span>
+              <select id="leadStageInput">
+                <option value="new_lead">New Lead</option>
+                <option value="follow_up">Follow Up</option>
+                <option value="negotiation">Negotiation</option>
+                <option value="proposal_sent">Proposal Sent</option>
+                <option value="converted">Converted</option>
+                <option value="lost">Lost</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Follow-up Date</span>
+              <input id="leadFollowUpInput" type="date" />
+            </label>
+
+            <label>
+              <span>Expected Move-in</span>
+              <input id="leadExpectedMoveInInput" type="date" />
+            </label>
+
+            <label>
+              <span>Budget</span>
+              <input id="leadBudgetInput" type="number" placeholder="Enter budget" />
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Notes</span>
+            <textarea id="leadNotesInput" rows="4" placeholder="Enter notes"></textarea>
+          </label>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" id="cancelLeadBtn" type="button">Cancel</button>
+        <button class="modal-back-btn" id="convertLeadBtn" type="button" hidden>Convert to Booking</button>
+        <button class="modal-save-btn" id="saveLeadBtn" type="submit" form="leadForm">
+          <i class="fa-solid fa-check"></i>
+          Save Lead
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="booking-modal-overlay" id="bookingModal" hidden>
+    <section class="booking-modal-shell">
+      <header class="booking-modal-header">
+        <button class="modal-icon-btn" id="closeBookingModal" type="button">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Resident Booking</h2>
+          <p>Create customer, resident, booking, invoice and activity log in Firebase.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="booking-form" id="bookingForm">
+        <input type="hidden" id="convertedLeadId" />
+
+        <div class="form-card">
+          <h3>Resident Details</h3>
+
+          <div class="field-grid">
+            <label>
+              <span>Resident Name *</span>
+              <input id="bookingNameInput" type="text" placeholder="Enter resident name" required />
+            </label>
+
+            <label>
+              <span>Phone Number *</span>
+              <input id="bookingPhoneInput" type="text" placeholder="Enter phone number" required />
+            </label>
+
+            <label>
+              <span>Email</span>
+              <input id="bookingEmailInput" type="email" placeholder="Enter email" />
+            </label>
+
+            <label>
+              <span>Emergency Contact Name</span>
+              <input id="emergencyNameInput" type="text" placeholder="Emergency contact name" />
+            </label>
+
+            <label>
+              <span>Emergency Contact Phone</span>
+              <input id="emergencyPhoneInput" type="text" placeholder="Emergency contact phone" />
+            </label>
+
+            <label>
+              <span>KYC Status</span>
+              <select id="bookingKycStatusInput">
+                <option value="pending">Pending</option>
+                <option value="verified">Verified</option>
+                <option value="in_review">In Review</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Room & Stay Details</h3>
+
+          <div class="field-grid">
+            <label>
+              <span>Property *</span>
+              <select id="bookingPropertyInput" required>
+                <option value="">Select property</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Room Type</span>
+              <select id="bookingRoomTypeInput">
+                <option>All Room Types</option>
+                <option>Single</option>
+                <option>Double</option>
+                <option>Triple</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Room *</span>
+              <select id="bookingRoomInput" required>
+                <option value="">Select room</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Bed</span>
+              <select id="bookingBedInput">
+                <option value="">No bed selected</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Stay Type</span>
+              <select id="bookingStayTypeInput">
+                <option>Monthly Stay</option>
+                <option>Daily Stay</option>
+                <option>Short Stay</option>
+                <option>Corporate Stay</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Source</span>
+              <select id="bookingSourceInput">
+                <option>Manual Entry</option>
+                <option>Website</option>
+                <option>Mobile App</option>
+                <option>Walk-in</option>
+                <option>Phone Inquiry</option>
+                <option>Instagram</option>
+                <option>Referral</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Check-in Date *</span>
+              <input id="bookingCheckInInput" type="date" required />
+            </label>
+
+            <label>
+              <span>Check-out Date</span>
+              <input id="bookingCheckOutInput" type="date" />
+            </label>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>Billing Details</h3>
+
+          <div class="field-grid">
+            <label>
+              <span>Rent Amount *</span>
+              <input id="bookingRentInput" type="number" placeholder="Auto fetched or enter amount" required />
+            </label>
+
+            <label>
+              <span>Amount Received</span>
+              <input id="bookingAmountReceivedInput" type="number" placeholder="Enter received amount" />
+            </label>
+
+            <label>
+              <span>Advance Rent</span>
+              <input id="bookingAdvanceRentInput" type="number" placeholder="Auto fetched" />
+            </label>
+
+            <label>
+              <span>Food Billing</span>
+              <select id="foodBillingInput">
+                <option>No Food</option>
+                <option>Include Food</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="foodOptionsBox" class="food-options" hidden>
+            <div class="field-grid">
+              <label>
+                <span>Food Type</span>
+                <select id="foodPlanInput">
+                  <option value="">Select food type</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Food Amount</span>
+                <input id="foodAmountInput" type="number" readonly />
+              </label>
+
+              <label class="checkbox-label">
+                <input id="morningTeaInput" type="checkbox" />
+                <span>Morning Tea</span>
+              </label>
+
+              <label class="checkbox-label">
+                <input id="eveningTeaInput" type="checkbox" />
+                <span>Evening Tea</span>
+              </label>
+            </div>
+
+            <div id="foodSummaryBox" class="food-summary">
+              Select a food type to fetch price.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>KYC & Notes</h3>
+
+          <div class="kyc-upload">
+            <strong>KYC Documents</strong>
+
+            <div class="kyc-row">
+              <label class="file-button">
+                Upload File
+                <input id="kycFilesInput" type="file" multiple accept=".pdf,.jpg,.jpeg,.png" />
+              </label>
+
+              <label class="file-button">
+                Live Capture
+                <input id="kycCameraInput" type="file" accept="image/*" capture="environment" />
+              </label>
+            </div>
+
+            <div id="kycFilesList"></div>
+          </div>
+
+          <label class="full-field">
+            <span>Notes</span>
+            <textarea id="bookingNotesInput" rows="4" placeholder="Enter notes"></textarea>
+          </label>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" id="cancelBookingBtn" type="button">Cancel</button>
+        <button class="modal-save-btn" id="saveBookingBtn" type="submit" form="bookingForm">
+          <i class="fa-solid fa-check"></i>
+          Save Booking
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Password Modal -->
+  <div class="password-modal-overlay" id="passwordModal" hidden>
+    <form class="password-card" id="passwordForm">
+      <h3>Change Password</h3>
+      <p id="passwordAccountText">Enter your new password.</p>
+
+      <label>
+        New Password
+        <input type="password" id="newPasswordInput" minlength="6" required />
+      </label>
+
+      <label>
+        Confirm Password
+        <input type="password" id="confirmPasswordInput" minlength="6" required />
+      </label>
+
+      <div class="password-actions">
+        <button type="button" id="cancelPasswordBtn">Cancel</button>
+        <button type="submit">Update Password</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/bookings.js?v=31"></script>
+</body>
+</html>

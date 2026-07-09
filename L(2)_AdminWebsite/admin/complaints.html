@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Complaints | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/complaints.css?v=300" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="admin-app complaints-page" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+            
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html" class="active">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content complaints-main">
+      <header class="complaints-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="complaints-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search complaint no, resident, phone, property, issue..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="top-action-btn" type="button" id="refreshBtn">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <a href="admin-home.html">Dashboard</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Complaints</strong>
+          </div>
+
+          <h1>Complaints</h1>
+          <p>Complaints raised by residents are displayed here. Admin can add, assign and update complaint status.</p>
+        </div>
+
+        <button class="gold-btn" id="openAddComplaintBtn" type="button">
+          <i class="fa-solid fa-plus"></i>
+          Add Complaint
+        </button>
+      </section>
+
+      <section class="complaint-stats-grid">
+        <article class="complaint-stat-card">
+          <div class="stat-icon navy">
+            <i class="fa-solid fa-clipboard-list"></i>
+          </div>
+          <div>
+            <h2 id="openComplaintsValue">0</h2>
+            <p>Open Complaints</p>
+            <small>Require attention</small>
+          </div>
+        </article>
+
+        <article class="complaint-stat-card">
+          <div class="stat-icon gold">
+            <i class="fa-solid fa-user-clock"></i>
+          </div>
+          <div>
+            <h2 id="unassignedValue">0</h2>
+            <p>Unassigned</p>
+            <small>Awaiting assignment</small>
+          </div>
+        </article>
+
+        <article class="complaint-stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div>
+            <h2 id="assignedTodayValue">0</h2>
+            <p>Assigned Today</p>
+            <small>In progress</small>
+          </div>
+        </article>
+
+        <article class="complaint-stat-card">
+          <div class="stat-icon red">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <h2 id="urgentPriorityValue">0</h2>
+            <p>Urgent Priority</p>
+            <small>High attention needed</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="analytics-grid">
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Status Chart</h3>
+              <p>Live complaint status split from Firebase complaints.</p>
+            </div>
+          </div>
+
+          <div class="chart-layout">
+            <div class="donut-box">
+              <canvas id="statusChart"></canvas>
+              <div class="chart-center">
+                <strong id="statusChartCenter">0</strong>
+                <span>Total</span>
+              </div>
+            </div>
+
+            <div class="chart-legend" id="statusLegend"></div>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Priority Chart</h3>
+              <p>Urgent, high, medium and low complaint count.</p>
+            </div>
+          </div>
+
+          <div class="bar-list" id="priorityBars"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Category Chart</h3>
+              <p>Complaint categories raised by residents.</p>
+            </div>
+          </div>
+
+          <div class="bar-list" id="categoryBars"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Assignment Chart</h3>
+              <p>Open assigned, open unassigned and closed complaints.</p>
+            </div>
+          </div>
+
+          <div class="bar-list" id="assignmentBars"></div>
+        </article>
+      </section>
+
+      <section class="complaint-filter-card">
+        <div class="filter-search">
+          <input
+            id="complaintSearchInput"
+            type="text"
+            placeholder="Search resident, property, complaint ID or issue..."
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <select id="propertyFilter">
+          <option value="All Properties">All Properties</option>
+        </select>
+
+        <select id="statusFilter">
+          <option value="All Statuses">All Statuses</option>
+        </select>
+
+        <select id="priorityFilter">
+          <option value="All Priorities">All Priorities</option>
+        </select>
+
+        <select id="categoryFilter">
+          <option value="All Categories">All Categories</option>
+        </select>
+
+        <button id="clearFiltersBtn" type="button">
+          <i class="fa-solid fa-xmark"></i>
+          Clear
+        </button>
+      </section>
+
+      <section class="complaints-layout">
+        <div class="complaints-main-column">
+          <article class="panel-card">
+            <div class="panel-head">
+              <div>
+                <h3>Complaints Raised by Residents</h3>
+                <p id="complaintListSubText">Loading complaints...</p>
+              </div>
+            </div>
+
+            <div class="complaint-list" id="complaintList">
+              <div class="empty-state">Loading complaints...</div>
+            </div>
+          </article>
+
+          <article class="panel-card">
+            <div class="panel-head">
+              <div>
+                <h3>Assign Staff by Property</h3>
+                <p>Select a complaint, then assign available staff from the same property.</p>
+              </div>
+            </div>
+
+            <div class="assign-property-row">
+              <label>
+                <span>Property</span>
+                <select id="assignPropertyFilter">
+                  <option value="All Properties">All Properties</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="assign-grid">
+              <div class="assign-sub-panel">
+                <h4>Unassigned Complaints</h4>
+                <div id="assignComplaintList">
+                  <div class="empty-state small">Loading complaints...</div>
+                </div>
+              </div>
+
+              <div class="assign-sub-panel">
+                <h4 id="availableStaffTitle">Available Staff</h4>
+                <div id="assignStaffList">
+                  <div class="empty-state small">Select a complaint.</div>
+                </div>
+
+                <p class="staff-note">
+                  <i class="fa-solid fa-circle-info"></i>
+                  Only staff linked to the selected complaint property are shown.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <aside class="complaints-side">
+          <article class="side-card">
+            <h3>How it works</h3>
+
+            <div class="how-list">
+              <div class="how-item gold">
+                <span><i class="fa-solid fa-mobile-screen-button"></i></span>
+                <div>
+                  <strong>1. Resident Raises Complaint</strong>
+                  <p>Resident app saves complaint into complaints collection.</p>
+                </div>
+              </div>
+
+              <div class="how-item blue">
+                <span><i class="fa-solid fa-clipboard-check"></i></span>
+                <div>
+                  <strong>2. Admin Reviews Complaint</strong>
+                  <p>Admin checks priority, property and issue details.</p>
+                </div>
+              </div>
+
+              <div class="how-item green">
+                <span><i class="fa-solid fa-user-check"></i></span>
+                <div>
+                  <strong>3. Assign Staff</strong>
+                  <p>Assign available staff from the same property.</p>
+                </div>
+              </div>
+
+              <div class="how-item orange">
+                <span><i class="fa-solid fa-track"></i></span>
+                <div>
+                  <strong>4. Track Progress</strong>
+                  <p>Update status as assigned, in progress, resolved or closed.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="side-card">
+            <h3>Quick Tips</h3>
+
+            <ul class="tips-list">
+              <li>Resident app and admin website must use the same complaints collection.</li>
+              <li>Staff must have same propertyId or propertyName to appear for assignment.</li>
+              <li>Use priority to handle urgent complaints first.</li>
+            </ul>
+          </article>
+        </aside>
+      </section>
+
+      <footer class="complaints-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Add Complaint Modal -->
+  <div class="modal-overlay" id="addComplaintModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="addComplaintModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Complaint</h2>
+          <p>Create complaint directly from admin website. Saved to the same Firebase collection.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="addComplaintForm">
+        <div class="form-card">
+          <h3>Complaint Details</h3>
+
+          <div class="field-grid">
+            <label>
+              <span>Resident *</span>
+              <select id="complaintResidentInput" required>
+                <option value="">Select resident</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Property *</span>
+              <select id="complaintPropertyInput" required>
+                <option value="">Select property</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Room / Bed / Location</span>
+            <input id="complaintRoomInput" type="text" placeholder="Example: Room 204, Bed A" />
+          </label>
+
+          <div class="field-grid">
+            <label>
+              <span>Category *</span>
+              <select id="complaintCategoryInput" required>
+                <option>Maintenance</option>
+                <option>Plumbing</option>
+                <option>Electrical</option>
+                <option>Food</option>
+                <option>Internet</option>
+                <option>Housekeeping</option>
+                <option>Payments</option>
+                <option>Security</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Priority *</span>
+              <select id="complaintPriorityInput" required>
+                <option>Low</option>
+                <option selected>Medium</option>
+                <option>High</option>
+                <option>Urgent</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Issue Title *</span>
+            <input id="complaintTitleInput" type="text" placeholder="Example: Bathroom tap is leaking" required />
+          </label>
+
+          <label class="full-field">
+            <span>Complaint Description *</span>
+            <textarea id="complaintDescriptionInput" rows="5" placeholder="Describe the issue clearly" required></textarea>
+          </label>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" type="button" data-close-modal="addComplaintModal">Cancel</button>
+        <button class="modal-save-btn" type="submit" form="addComplaintForm" id="saveComplaintBtn">
+          <i class="fa-solid fa-check"></i>
+          Save Complaint
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Complaint Detail Modal -->
+  <div class="modal-overlay" id="complaintDetailModal" hidden>
+    <section class="modal-shell small">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="complaintDetailModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2 id="detailComplaintNo">Complaint Details</h2>
+          <p id="detailComplaintTitle">Complaint issue</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-card" id="complaintDetailContent">
+          Loading...
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/complaints.js?v=300"></script>
+</body>
+</html>

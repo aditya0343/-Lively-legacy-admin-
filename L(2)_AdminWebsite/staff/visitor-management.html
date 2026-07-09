@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Visitor Management | Lively Legacy</title>
+
+  <link rel="stylesheet" href="css/visitor-management.css?v=500" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="staff-app" id="staffApp">
+
+    <aside class="staff-sidebar" id="staffSidebar">
+      <div class="staff-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" />
+      </div>
+
+      <nav class="staff-nav">
+        <a href="staff-dashboard.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="attendance.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Mark Attendance</span>
+        </a>
+
+        <a href="visitor-management.html" class="active">
+          <i class="fa-solid fa-users"></i>
+          <span>Visitor Management</span>
+        </a>
+
+        <a href="parcel-management.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcel Management</span>
+        </a>
+
+        <a href="assigned-tasks.html">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span>Assigned Tasks</span>
+        </a>
+
+        <a href="moveout-settlement.html">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <span>Move-out Settlement</span>
+        </a>
+
+        <a href="announcements.html">
+          <i class="fa-solid fa-bullhorn"></i>
+          <span>Announcements</span>
+        </a>
+
+        <button type="button" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="staff-value-card">
+        <div class="value-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="staff-main">
+
+      <header class="staff-topbar">
+        <div class="top-left">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Visitor Management</h1>
+            <p id="topPropertyText">Staff panel</p>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <button class="notification-btn" type="button" id="notificationBtn">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notificationCount">0</span>
+          </button>
+
+          <div class="staff-profile-mini">
+            <div class="staff-avatar" id="staffAvatarText">ST</div>
+            <div>
+              <strong id="staffNameTop">Staff</strong>
+              <p id="staffEmailTop">staff@email.com</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="date-row">
+        <div>
+          <h2>Manage and Track Visitors</h2>
+          <p>Approve, decline, check-in and check-out visitor requests.</p>
+        </div>
+
+        <div class="date-time-card">
+          <div>
+            <i class="fa-regular fa-calendar"></i>
+            <span id="todayDate">Today</span>
+          </div>
+
+          <div>
+            <i class="fa-regular fa-clock"></i>
+            <span id="currentTime">--:--</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card orange">
+          <div class="stat-icon">
+            <i class="fa-solid fa-users"></i>
+          </div>
+
+          <div>
+            <strong id="todayVisitorsCount">00</strong>
+            <span>Today's Visitors</span>
+          </div>
+        </article>
+
+        <article class="stat-card green">
+          <div class="stat-icon">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          </div>
+
+          <div>
+            <strong id="checkedInCount">00</strong>
+            <span>Checked In</span>
+          </div>
+        </article>
+
+        <article class="stat-card blue">
+          <div class="stat-icon">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </div>
+
+          <div>
+            <strong id="checkedOutCount">00</strong>
+            <span>Checked Out</span>
+          </div>
+        </article>
+
+        <article class="stat-card purple">
+          <div class="stat-icon">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+
+          <div>
+            <strong id="pendingCount">00</strong>
+            <span>Pending Approval</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="charts-grid">
+        <article class="chart-card">
+          <div class="chart-head">
+            <div>
+              <h3>Visitor Status</h3>
+              <p>Live visitor status from Firebase.</p>
+            </div>
+          </div>
+
+          <div class="bar-chart" id="statusChart">
+            <div class="empty-box">Loading chart...</div>
+          </div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-head">
+            <div>
+              <h3>Visit Purpose</h3>
+              <p>Purpose-wise visitor split.</p>
+            </div>
+          </div>
+
+          <div class="bar-chart" id="purposeChart">
+            <div class="empty-box">Loading chart...</div>
+          </div>
+        </article>
+
+        <article class="chart-card full-chart">
+          <div class="chart-head">
+            <div>
+              <h3>7 Day Visitor Trend</h3>
+              <p>Daily visitor requests and check-ins from Firebase.</p>
+            </div>
+          </div>
+
+          <div class="daily-chart" id="dailyTrendChart">
+            <div class="empty-box">Loading trend...</div>
+          </div>
+        </article>
+      </section>
+
+      <section class="visitor-layout">
+
+        <section class="visitor-main-card">
+          <div class="tabs">
+            <button type="button" class="tab-btn active" data-tab="pending">
+              Pending Approval <span id="pendingTabCount">(0)</span>
+            </button>
+
+            <button type="button" class="tab-btn" data-tab="checkedIn">
+              Checked In <span id="checkedInTabCount">(0)</span>
+            </button>
+
+            <button type="button" class="tab-btn" data-tab="checkedOut">
+              Checked Out <span id="checkedOutTabCount">(0)</span>
+            </button>
+
+            <button type="button" class="tab-btn" data-tab="all">
+              All Visitors <span id="allTabCount">(0)</span>
+            </button>
+          </div>
+
+          <div class="visitor-list-head">
+            <div>
+              <h2 id="listTitle">Pending Approval</h2>
+              <p id="listSubtitle">Review visitor requests and approve or decline.</p>
+            </div>
+
+            <button type="button" id="refreshVisitorsBtn">
+              <i class="fa-solid fa-rotate-right"></i>
+              Refresh
+            </button>
+          </div>
+
+          <div class="visitor-list" id="visitorList">
+            <div class="empty-box">Loading visitors...</div>
+          </div>
+        </section>
+
+        <aside class="checkin-card">
+          <h2>Visitor Check-In</h2>
+          <p>Scan QR code or enter visitor code to check-in.</p>
+
+          <button type="button" class="qr-box" id="scanQrBox">
+            <div class="corner tl"></div>
+            <div class="corner tr"></div>
+            <div class="corner bl"></div>
+            <div class="corner br"></div>
+
+            <i class="fa-solid fa-qrcode"></i>
+            <strong>Scan Visitor QR Code</strong>
+            <span>Position the QR code within the frame to check-in the visitor.</span>
+          </button>
+
+          <div class="or-line">
+            <span>OR</span>
+          </div>
+
+          <label for="visitorCodeInput">Enter Visitor Code</label>
+
+          <div class="code-input-box">
+            <input
+              type="text"
+              id="visitorCodeInput"
+              placeholder="Enter visitor code"
+            />
+            <i class="fa-solid fa-keyboard"></i>
+          </div>
+
+          <button type="button" class="checkin-btn" id="checkInVisitorBtn">
+            Check-In Visitor
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <div class="checkin-note">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Ask the visitor for the code shared by the resident.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="recent-card">
+        <div class="recent-head">
+          <h2>Recently Checked In</h2>
+          <button type="button" id="viewAllRecentBtn">View All</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Visitor Name</th>
+                <th>Visiting</th>
+                <th>Check-In Time</th>
+                <th>Purpose</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="recentCheckedInTable">
+              <tr>
+                <td colspan="6">Loading recent visitors...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="bottom-help">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>If you are facing any issue, contact your administrator.</span>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="notificationModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <div>
+          <h2>Notifications</h2>
+          <p>Visitor actions and related updates.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="notificationModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="notification-list" id="notificationList">
+          <div class="empty-box">No notifications yet.</div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button type="button" id="markNotificationsReadBtn">
+          Mark all as read
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="modal-overlay" id="qrScannerModal" hidden>
+    <section class="modal-shell scanner-modal">
+      <header class="modal-header">
+        <div>
+          <h2>Scan Visitor QR</h2>
+          <p>Place visitor QR code inside the frame.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="qrScannerModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="scanner-box">
+          <video id="qrVideo" playsinline muted></video>
+          <div class="scanner-frame"></div>
+        </div>
+
+        <p class="scanner-help" id="scannerHelpText">
+          Browser QR scanning works when BarcodeDetector is supported.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="js/visitor-management.js?v=500"></script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Residents | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/residents.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="admin-app residents-page" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span class="nav-btn-left">
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+          </div>
+        </div>
+
+        <a href="residents.html" class="active">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content residents-main">
+      <header class="residents-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Residents</h1>
+            <p>Live resident overview with occupancy, KYC, payments and stay lifecycle.</p>
+          </div>
+        </div>
+
+        <div class="residents-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search resident, phone, email, property..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="light-action-btn" type="button" id="refreshBtn">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <button class="light-action-btn" type="button" id="exportBtn">
+            <i class="fa-solid fa-download"></i>
+            Export
+          </button>
+
+          <button class="light-action-btn" type="button" id="filterBtn">
+            <i class="fa-solid fa-filter"></i>
+            Filter
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="residents-hero-card">
+        <div class="hero-content">
+          <h2>Residents</h2>
+          <p>Live resident records from Firebase with property, room, bed, KYC, payments and agreement actions.</p>
+
+          <div class="hero-metrics">
+            <div>
+              <i class="fa-solid fa-users"></i>
+              <strong id="heroTotalResidents">0</strong>
+              <span>Residents</span>
+            </div>
+
+            <div>
+              <i class="fa-solid fa-user-check"></i>
+              <strong id="heroActiveResidents">0</strong>
+              <span>Active</span>
+            </div>
+
+            <div>
+              <i class="fa-solid fa-wallet"></i>
+              <strong id="heroDueResidents">0</strong>
+              <span>Due</span>
+            </div>
+          </div>
+        </div>
+
+        <i class="fa-solid fa-hotel hero-watermark"></i>
+      </section>
+
+      <section class="resident-stats-grid">
+        <article class="resident-stat-card">
+          <div class="resident-stat-icon navy">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div>
+            <p>Residents</p>
+            <h2 id="totalResidentsValue">0</h2>
+            <small id="totalResidentsSub">0 new this month</small>
+          </div>
+        </article>
+
+        <article class="resident-stat-card">
+          <div class="resident-stat-icon gold">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div>
+            <p>Active</p>
+            <h2 id="activeResidentsValue">0</h2>
+            <small>Currently staying</small>
+          </div>
+        </article>
+
+        <article class="resident-stat-card">
+          <div class="resident-stat-icon red">
+            <i class="fa-solid fa-id-card"></i>
+          </div>
+          <div>
+            <p>Pending KYC</p>
+            <h2 id="pendingKycValue">0</h2>
+            <small>Need verification</small>
+          </div>
+        </article>
+
+        <article class="resident-stat-card">
+          <div class="resident-stat-icon green">
+            <i class="fa-solid fa-right-to-bracket"></i>
+          </div>
+          <div>
+            <p>Move-ins</p>
+            <h2 id="moveInsValue">0</h2>
+            <small>This month</small>
+          </div>
+        </article>
+
+        <article class="resident-stat-card">
+          <div class="resident-stat-icon purple">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </div>
+          <div>
+            <p>Move-out Requests</p>
+            <h2 id="vacatingSoonValue">0</h2>
+            <small>Raised / approvals</small>
+          </div>
+        </article>
+
+        <article class="resident-stat-card">
+          <div class="resident-stat-icon orange">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+          </div>
+          <div>
+            <p>Due Payments</p>
+            <h2 id="duePaymentsValue">₹0</h2>
+            <small id="duePaymentsSub">0 residents</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="analytics-grid">
+        <article class="panel-card">
+          <div class="panel-head">
+            <h3>Resident Status</h3>
+            <p>Active, KYC, due payment and vacating residents</p>
+          </div>
+
+          <div class="chart-layout">
+            <div class="chart-box">
+              <canvas id="statusChart"></canvas>
+              <div class="chart-center">
+                <strong id="statusChartTotal">0</strong>
+                <span>Residents</span>
+              </div>
+            </div>
+
+            <div class="chart-legend" id="statusLegend"></div>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <h3>Outstanding Payments</h3>
+            <p>Amounts fetched from invoices, transactions and payments</p>
+          </div>
+
+          <div class="amount-bars" id="outstandingBars"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <h3>KYC Overview</h3>
+            <p>Verified and pending KYC split</p>
+          </div>
+
+          <div class="bar-list" id="kycBars"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <h3>Property Distribution</h3>
+            <p>Residents grouped by property</p>
+          </div>
+
+          <div class="bar-list" id="propertyBars"></div>
+        </article>
+      </section>
+
+      <section class="resident-filter-card" id="filterSection">
+        <div class="filter-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="residentSearchInput"
+            placeholder="Search resident, phone, email, property..."
+          />
+        </div>
+
+        <select id="statusFilter">
+          <option value="All Status">All Status</option>
+          <option value="Active">Active</option>
+          <option value="Pending KYC">Pending KYC</option>
+          <option value="Due Payment">Due Payment</option>
+          <option value="Vacating Soon">Vacating Soon</option>
+          <option value="Request Raised">Request Raised</option>
+          <option value="Approved by Staff">Approved by Staff</option>
+          <option value="Approved by Admin">Approved by Admin</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+
+        <button type="button" id="clearFiltersBtn">
+          <i class="fa-solid fa-xmark"></i>
+          Clear
+        </button>
+      </section>
+
+      <section class="resident-directory-card">
+        <div class="directory-head">
+          <div>
+            <h3>Resident Directory</h3>
+            <p id="directorySub">Showing 0 resident profiles</p>
+          </div>
+        </div>
+
+        <div class="resident-list" id="residentList">
+          <div class="empty-state">Loading residents...</div>
+        </div>
+
+        <div class="table-footer">
+          <p id="tableSummary">Showing 0 residents</p>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </section>
+
+      <footer class="residents-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 1.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="sheet-overlay" id="profileSheet" hidden>
+    <section class="bottom-sheet profile-sheet">
+      <button class="sheet-close" type="button" id="closeProfileSheet">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div id="profileSheetContent"></div>
+    </section>
+  </div>
+
+  <div class="sheet-overlay" id="agreementSheet" hidden>
+    <section class="bottom-sheet agreement-sheet">
+      <button class="sheet-close" type="button" id="closeAgreementSheet">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div id="agreementSheetContent"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/residents.js?v=50"></script>
+</body>
+</html>

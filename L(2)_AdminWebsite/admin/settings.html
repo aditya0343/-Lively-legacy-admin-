@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Settings | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/settings.css?v=900" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="admin-app settings-page" id="adminApp">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+            
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html" class="active">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content settings-main">
+
+      <header class="settings-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="top-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search settings, staff, admin accounts..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="refresh-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>Refresh</span>
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <span>Dashboard</span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Settings</strong>
+          </div>
+
+          <h1>Settings</h1>
+          <p>Manage admin and staff login access with Firebase Auth, Firestore records, permissions and email credentials.</p>
+        </div>
+      </section>
+
+      <section class="settings-stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon blue">
+            <i class="fa-solid fa-users-gear"></i>
+          </div>
+          <div>
+            <h2 id="totalAccountsValue">0</h2>
+            <p>Total Accounts</p>
+            <small>Admin + staff</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <h2 id="activeAccountsValue">0</h2>
+            <p>Active Accounts</p>
+            <small>Can login</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon gold">
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+          <div>
+            <h2 id="adminAccountsValue">0</h2>
+            <p>Admin Accounts</p>
+            <small>Admin access</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon red">
+            <i class="fa-solid fa-id-badge"></i>
+          </div>
+          <div>
+            <h2 id="staffAccountsValue">0</h2>
+            <p>Staff Accounts</p>
+            <small>Staff access</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="settings-chart-grid">
+        <article class="panel-card">
+          <h3>Account Status Chart</h3>
+          <p>Live split from Firestore login account status.</p>
+          <div class="bar-chart" id="statusChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Role Chart</h3>
+          <p>Admin and staff access distribution.</p>
+          <div class="bar-chart" id="roleChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Account Source Chart</h3>
+          <p>Merged from staff_login_accounts, users and staff.</p>
+          <div class="bar-chart" id="sourceChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Created Accounts Trend</h3>
+          <p>Accounts created in the last 7 days.</p>
+          <div class="trend-chart" id="createdTrendChart"></div>
+        </article>
+      </section>
+
+      <section class="panel-card create-login-card">
+        <div class="section-head">
+          <div>
+            <h2>Create New Admin / Staff Login Account</h2>
+            <p>Select Admin or Staff, search existing employee, then create login. Employee details are auto fetched.</p>
+          </div>
+        </div>
+
+        <form id="staffLoginForm">
+          <div class="form-grid first-grid">
+            <label>
+              <span>Login Role *</span>
+              <select id="loginRoleInput" required>
+                <option>Admin</option>
+                <option selected>Staff</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Account Status *</span>
+              <select id="accountStatusInput" required>
+                <option selected>Active</option>
+                <option>Inactive</option>
+                <option>Suspended</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="employee-search-box">
+            <label>
+              <span id="employeeSearchLabel">Search Staff Employee *</span>
+              <div class="employee-search-field">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input
+                  type="text"
+                  id="employeeSearchInput"
+                  placeholder="Search by name, email, phone, property or shift"
+                  autocomplete="off"
+                />
+                <button type="button" id="clearEmployeeBtn" title="Clear employee">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </label>
+
+            <div class="employee-results" id="employeeResults">
+              Search and select an employee first.
+            </div>
+          </div>
+
+          <div class="selected-employee-card" id="selectedEmployeeCard" hidden>
+            <h3>Auto fetched employee details</h3>
+            <div class="selected-employee-tags" id="selectedEmployeeTags"></div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              <span>Name *</span>
+              <input type="text" id="staffNameInput" placeholder="Auto fetched after selecting employee" readonly required />
+            </label>
+
+            <label>
+              <span>Staff ID</span>
+              <input type="text" id="staffIdInput" placeholder="Auto fetched" readonly />
+            </label>
+
+            <label>
+              <span>Username / Email *</span>
+              <input type="email" id="emailInput" placeholder="Auto fetched or enter email address" required />
+            </label>
+
+            <label>
+              <span>Temporary Password *</span>
+              <div class="password-field">
+                <input type="password" id="temporaryPasswordInput" placeholder="Enter temporary password" required />
+                <button type="button" class="toggle-password" data-target="temporaryPasswordInput">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </label>
+
+            <label>
+              <span>Confirm Password *</span>
+              <div class="password-field">
+                <input type="password" id="confirmPasswordInput" placeholder="Confirm temporary password" required />
+                <button type="button" class="toggle-password" data-target="confirmPasswordInput">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </label>
+          </div>
+
+          <div class="form-bottom-row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="sendCredentialsEmailInput" checked />
+              <span>Send email with login password</span>
+            </label>
+
+            <button type="submit" class="primary-btn" id="createLoginBtn">
+              <i class="fa-solid fa-plus"></i>
+              Create Login Account
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel-card accounts-card">
+        <div class="section-head accounts-head">
+          <div>
+            <h2>Admin & Staff Login Accounts</h2>
+            <p>Manage and monitor active admin and staff login accounts.</p>
+          </div>
+        </div>
+
+        <div class="accounts-filter-row">
+          <div class="filter-search">
+            <input type="text" id="staffSearchInput" placeholder="Search accounts..." />
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+
+          <select id="statusFilterInput">
+            <option selected>All Accounts</option>
+            <option>Active</option>
+            <option>Inactive</option>
+            <option>Suspended</option>
+          </select>
+        </div>
+
+        <div class="staff-table-wrap">
+          <table class="staff-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Login Status</th>
+                <th>Source</th>
+                <th>Last Login</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="staffAccountsBody">
+              <tr>
+                <td colspan="7" class="empty-row">Loading login accounts...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <p id="tableSummary">Showing 0 login accounts</p>
+        </div>
+      </section>
+
+      <footer class="settings-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="accountDetailsModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="accountDetailsModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2 id="detailsTitle">Account Details</h2>
+          <p id="detailsSubtitle">Complete login account information.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button" id="detailsResetPasswordBtn">
+          <i class="fa-solid fa-lock"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="details-card" id="accountDetailsBody">
+          Loading account details...
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-overlay" id="editAccountModal" hidden>
+    <section class="modal-shell small-modal">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="editAccountModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Edit Login Account</h2>
+          <p id="editSubtitle">Update account name, role and status.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="editAccountForm">
+        <label>
+          <span>Name *</span>
+          <input type="text" id="editNameInput" required />
+        </label>
+
+        <label>
+          <span>Role *</span>
+          <select id="editRoleInput" required>
+            <option>Admin</option>
+            <option>Staff</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Status *</span>
+          <select id="editStatusInput" required>
+            <option>Active</option>
+            <option>Inactive</option>
+            <option>Suspended</option>
+          </select>
+        </label>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="secondary-btn" type="button" data-close-modal="editAccountModal">Cancel</button>
+        <button class="primary-btn" type="submit" form="editAccountForm" id="saveEditBtn">
+          <i class="fa-solid fa-check"></i>
+          Save Changes
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/settings.js?v=900"></script>
+</body>
+</html>

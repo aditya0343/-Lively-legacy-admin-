@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Revenue & Billing | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/revenue.css?v=5001" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="admin-app revenue-page" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+          
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html" class="active">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content revenue-main">
+      <header class="revenue-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="revenue-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search invoice no, resident, phone, property, amount..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="top-mini-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <span>Dashboard</span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Revenue & Billing</strong>
+          </div>
+
+          <h1>Revenue & Billing</h1>
+          <p>Track rent, food invoices, payments, taxes, dues, vendors, billing fields and collection performance from Firebase.</p>
+        </div>
+
+        <div class="title-actions">
+          <button class="outline-btn" id="openVendorBtn" type="button">
+            <i class="fa-solid fa-store"></i>
+            Vendors
+          </button>
+
+          <button class="outline-btn" id="openFieldBtn" type="button">
+            <i class="fa-solid fa-sliders"></i>
+            Billing Fields
+          </button>
+
+          <button class="gold-btn" id="openInvoiceBtn" type="button">
+            <i class="fa-solid fa-plus"></i>
+            Add Invoice
+          </button>
+        </div>
+      </section>
+
+      <section class="stat-grid">
+        <article class="stat-card">
+          <span class="stat-icon green"><i class="fa-solid fa-arrow-trend-up"></i></span>
+          <div>
+            <p>Total Revenue</p>
+            <h2 id="totalRevenueValue">₹0</h2>
+            <small id="totalRevenueSub">Net after credits</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon gold"><i class="fa-solid fa-wallet"></i></span>
+          <div>
+            <p>Collected This Month</p>
+            <h2 id="collectedMonthValue">₹0</h2>
+            <small id="collectedMonthSub">Current month collections</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon purple"><i class="fa-solid fa-building"></i></span>
+          <div>
+            <p>Avg Revenue / Property</p>
+            <h2 id="avgRevenueValue">₹0</h2>
+            <small id="avgRevenueSub">Property average</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon red"><i class="fa-solid fa-receipt"></i></span>
+          <div>
+            <p>Outstanding Dues</p>
+            <h2 id="outstandingDuesValue">₹0</h2>
+            <small id="outstandingDuesSub">Pending collection</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon orange"><i class="fa-solid fa-bell"></i></span>
+          <div>
+            <p>Overdue Invoices</p>
+            <h2 id="overdueInvoicesValue">0</h2>
+            <small id="overdueInvoicesSub">Past due date</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon teal"><i class="fa-solid fa-percent"></i></span>
+          <div>
+            <p>Collection Rate</p>
+            <h2 id="collectionRateValue">0%</h2>
+            <small id="collectionRateSub">Paid vs billed</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="analytics-grid">
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Collection Trend</h3>
+              <p>Last 6 months collections from invoices and transactions.</p>
+            </div>
+          </div>
+          <div class="chart-box">
+            <canvas id="collectionTrendChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Revenue Split</h3>
+              <p>Rent, food, deposit, maintenance and custom invoices.</p>
+            </div>
+          </div>
+
+          <div class="split-layout">
+            <div class="donut-box">
+              <canvas id="revenueSplitChart"></canvas>
+              <div class="donut-center">
+                <strong id="revenueSplitCenter">₹0</strong>
+                <span>Revenue</span>
+              </div>
+            </div>
+
+            <div id="revenueSplitLegend" class="legend-list"></div>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Payment Status</h3>
+              <p>Paid, partially paid, due and overdue invoices.</p>
+            </div>
+          </div>
+
+          <div id="statusBars" class="bar-list"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Payment Mode</h3>
+              <p>Collection grouped by cash, UPI, bank transfer and more.</p>
+            </div>
+          </div>
+
+          <div id="modeBars" class="bar-list"></div>
+        </article>
+      </section>
+
+      <section class="filter-card">
+        <div class="filter-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="invoiceSearchInput"
+            placeholder="Search invoice no, resident, property or amount..."
+          />
+        </div>
+
+        <select id="propertyFilter">
+          <option value="All Properties">All Properties</option>
+        </select>
+
+        <select id="categoryFilter">
+          <option value="All Categories">All Categories</option>
+        </select>
+
+        <select id="periodFilter">
+          <option>This Month</option>
+          <option>All Time</option>
+          <option>Last 3 Months</option>
+          <option>Last 6 Months</option>
+          <option>This Year</option>
+        </select>
+
+        <select id="statusFilter">
+          <option value="All Statuses">All Statuses</option>
+        </select>
+
+        <select id="modeFilter">
+          <option value="All Modes">All Modes</option>
+        </select>
+
+        <select id="sortFilter">
+          <option>Recently Added</option>
+          <option>Name A-Z</option>
+          <option>Amount High</option>
+          <option>Due Date</option>
+        </select>
+
+        <button id="clearFiltersBtn" type="button">
+          <i class="fa-solid fa-rotate-left"></i>
+          Reset
+        </button>
+      </section>
+
+      <section class="invoice-card">
+        <div class="invoice-head">
+          <div>
+            <h3>Invoices & Transactions</h3>
+            <p id="invoiceCountText">0 invoice records shown</p>
+          </div>
+        </div>
+
+        <div class="invoice-list" id="invoiceList">
+          <div class="empty-state">
+            <i class="fa-solid fa-receipt"></i>
+            <strong>Loading invoices...</strong>
+            <span>Please wait while Firebase records are loaded.</span>
+          </div>
+        </div>
+
+        <div class="table-footer">
+          <p id="tableSummary">Showing 0 records</p>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </section>
+
+      <section class="bottom-grid">
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Revenue by Category</h3>
+              <p>Auto calculated from invoice line items.</p>
+            </div>
+          </div>
+          <div id="categoryBars" class="bar-list"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Upcoming Dues</h3>
+              <p>Invoices with pending balance.</p>
+            </div>
+          </div>
+          <div id="upcomingDuesList" class="dues-list"></div>
+        </article>
+      </section>
+
+      <footer class="revenue-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Add Invoice Modal -->
+  <div class="modal-overlay" id="invoiceModal" hidden>
+    <section class="modal-shell large">
+      <header class="modal-header">
+        <button class="modal-icon-btn" id="closeInvoiceModal" type="button">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Create Invoice</h2>
+          <p>Create rent, food, deposit, maintenance or custom invoice.</p>
+        </div>
+
+        <button class="modal-icon-btn" id="reloadInvoiceOptionsBtn" type="button">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="invoiceForm">
+        <div class="form-card">
+          <h3>Invoice Details</h3>
+
+          <div class="field-grid">
+            <label>
+              <span>Select Resident *</span>
+              <select id="invoiceResidentInput" required>
+                <option value="">Choose resident</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Select Property *</span>
+              <select id="invoicePropertyInput" required>
+                <option value="">Choose property</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Billing Entity / Vendor *</span>
+              <select id="invoiceEntityInput" required>
+                <option value="">Choose vendor</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Billing Period *</span>
+              <input id="invoicePeriodInput" type="text" placeholder="Example: Jul 2026" required />
+            </label>
+
+            <label>
+              <span>Due Date *</span>
+              <input id="invoiceDueDateInput" type="date" required />
+            </label>
+
+            <label>
+              <span>Payment Mode</span>
+              <select id="invoicePaymentModeInput">
+                <option>UPI</option>
+                <option>Cash</option>
+                <option>Bank Transfer</option>
+                <option>Card</option>
+                <option>Net Banking</option>
+                <option>Payment Gateway</option>
+              </select>
+            </label>
+          </div>
+
+          <p class="helper-text" id="noVendorHelp" hidden>
+            No vendor found. Open Vendors and add Lively Legacy, food vendor or any billing entity first.
+          </p>
+        </div>
+
+        <div class="form-card">
+          <div class="form-title-row">
+            <div>
+              <h3>Billing Items</h3>
+              <p>Add saved billing fields or custom amount.</p>
+            </div>
+
+            <button class="small-outline-btn" id="addBillingItemBtn" type="button">
+              <i class="fa-solid fa-plus"></i>
+              Add Billing Item
+            </button>
+          </div>
+
+          <div id="invoiceLinesBox" class="invoice-lines-box">
+            <div class="dashed-empty">
+              <i class="fa-solid fa-receipt"></i>
+              <strong>No billing items added</strong>
+              <span>Add rent, food, deposit, maintenance or a custom amount.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card" id="adjustmentCard" hidden>
+          <h3>Approved Credits Auto Applied</h3>
+          <p>Pending referral rewards and credits for this billing period are deducted automatically.</p>
+          <div id="adjustmentList" class="adjustment-list"></div>
+        </div>
+
+        <div class="form-card">
+          <h3>Payment Details</h3>
+
+          <div class="field-grid">
+            <label>
+              <span>Amount Received</span>
+              <input id="invoiceAmountReceivedInput" type="number" placeholder="Example: 5000" />
+            </label>
+
+            <label>
+              <span>Notes Optional</span>
+              <input id="invoiceNotesInput" type="text" maxlength="200" placeholder="Add a note" />
+            </label>
+          </div>
+        </div>
+
+        <div class="summary-box" id="invoiceSummaryBox">
+          <div>
+            <span>Subtotal</span>
+            <strong id="summarySubtotal">₹0</strong>
+          </div>
+          <div>
+            <span>Taxes</span>
+            <strong id="summaryTax">₹0</strong>
+          </div>
+          <div>
+            <span>Credits</span>
+            <strong id="summaryCredits">₹0</strong>
+          </div>
+          <div>
+            <span>Grand Total</span>
+            <strong id="summaryTotal">₹0</strong>
+          </div>
+          <div>
+            <span>Amount Received</span>
+            <strong id="summaryReceived">₹0</strong>
+          </div>
+          <div>
+            <span>Balance Due</span>
+            <strong id="summaryBalance">₹0</strong>
+          </div>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" id="cancelInvoiceBtn" type="button">Cancel</button>
+        <button class="modal-save-btn" id="previewInvoiceBtn" type="button">
+          <i class="fa-solid fa-eye"></i>
+          Preview Invoice
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Add Billing Item Modal -->
+  <div class="modal-overlay" id="billingItemModal" hidden>
+    <section class="modal-shell small">
+      <header class="modal-header">
+        <button class="modal-icon-btn" id="closeBillingItemModal" type="button">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div>
+          <h2>Add Billing Item</h2>
+          <p>Choose saved billing field or add custom amount.</p>
+        </div>
+
+        <button class="modal-icon-btn ghost" type="button"></button>
+      </header>
+
+      <div class="modal-body">
+        <button class="sheet-row" id="addCustomLineBtn" type="button">
+          <span class="sheet-icon gold-soft"><i class="fa-solid fa-plus"></i></span>
+          <div>
+            <strong>Custom Amount</strong>
+            <small>Add manual invoice amount</small>
+          </div>
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div id="billingFieldPickList" class="sheet-list"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Invoice Preview Modal -->
+  <div class="modal-overlay" id="invoicePreviewModal" hidden>
+    <section class="modal-shell small">
+      <header class="modal-header">
+        <button class="modal-icon-btn" id="closePreviewModal" type="button">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Invoice Preview</h2>
+          <p>Review invoice before saving.</p>
+        </div>
+
+        <button class="modal-icon-btn ghost" type="button"></button>
+      </header>
+
+      <div class="modal-body">
+        <div id="invoicePreviewContent" class="preview-card"></div>
+      </div>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" id="cancelPreviewBtn" type="button">Back</button>
+        <button class="modal-save-btn" id="saveInvoiceBtn" type="button">
+          <i class="fa-solid fa-check"></i>
+          Save Invoice
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Invoice Detail Modal -->
+  <div class="modal-overlay" id="invoiceDetailModal" hidden>
+    <section class="modal-shell medium">
+      <header class="modal-header">
+        <button class="modal-icon-btn" id="closeDetailModal" type="button">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div>
+          <h2 id="detailInvoiceTitle">Invoice Detail</h2>
+          <p>Resident billing details, line items, tax, vendor and payment summary.</p>
+        </div>
+
+        <button class="modal-icon-btn ghost" type="button"></button>
+      </header>
+
+      <div class="modal-body">
+        <div id="invoiceDetailContent" class="preview-card"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Vendors Modal -->
+  <div class="modal-overlay" id="vendorModal" hidden>
+    <section class="modal-shell medium">
+      <header class="modal-header">
+        <button class="modal-icon-btn" id="closeVendorModal" type="button">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Vendors / Billing Entities</h2>
+          <p>Add Lively Legacy, food vendor or other billing entities.</p>
+        </div>
+
+        <button class="modal-icon-btn" id="createRentVendorBtn" type="button" title="Create Rent Default">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-title-row">
+          <div>
+            <h3>Active Vendors</h3>
+            <p>Invoices use selected vendor name, PAN, GSTIN and bank details.</p>
+          </div>
+
+          <button class="small-outline-btn" id="newVendorBtn" type="button">
+            <i class="fa-solid fa-plus"></i>
+            Add Vendor
+          </button>
+        </div>
+
+        <div id="vendorList" class="settings-list"></div>
+
+        <form id="vendorForm" class="settings-form" hidden>
+          <input type="hidden" id="vendorEditId" />
+
+          <h3 id="vendorFormTitle">Add Vendor</h3>
+
+          <div class="field-grid">
+            <label>
+              <span>Vendor / Billing Entity Name *</span>
+              <input id="vendorNameInput" type="text" required />
+            </label>
+
+            <label>
+              <span>Entity Type</span>
+              <select id="vendorTypeInput">
+                <option>Rent</option>
+                <option>Food</option>
+                <option>Deposit</option>
+                <option>Maintenance</option>
+                <option>Custom</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Invoice Prefix *</span>
+              <input id="vendorPrefixInput" type="text" placeholder="FOOD / RENT" required />
+            </label>
+
+            <label>
+              <span>PAN Optional</span>
+              <input id="vendorPanInput" type="text" />
+            </label>
+
+            <label>
+              <span>GSTIN Optional</span>
+              <input id="vendorGstinInput" type="text" />
+            </label>
+
+            <label>
+              <span>Bank Name Optional</span>
+              <input id="vendorBankInput" type="text" />
+            </label>
+
+            <label>
+              <span>Account Number Optional</span>
+              <input id="vendorAccountInput" type="text" />
+            </label>
+
+            <label>
+              <span>IFSC Optional</span>
+              <input id="vendorIfscInput" type="text" />
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Address Optional</span>
+            <textarea id="vendorAddressInput" rows="3"></textarea>
+          </label>
+
+          <div class="settings-actions">
+            <button class="modal-back-btn" id="cancelVendorFormBtn" type="button">Cancel</button>
+            <button class="modal-save-btn" id="saveVendorBtn" type="submit">
+              <i class="fa-solid fa-check"></i>
+              Save Vendor
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- Billing Fields Modal -->
+  <div class="modal-overlay" id="fieldModal" hidden>
+    <section class="modal-shell medium">
+      <header class="modal-header">
+        <button class="modal-icon-btn" id="closeFieldModal" type="button">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Billing Fields</h2>
+          <p>Create Rent, Food, Deposit, Maintenance or Custom billing fields.</p>
+        </div>
+
+        <button class="modal-icon-btn" id="createDefaultFieldsBtn" type="button" title="Create Defaults">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-title-row">
+          <div>
+            <h3>Active Billing Fields</h3>
+            <p>Saved fields can be selected inside Add Invoice.</p>
+          </div>
+
+          <button class="small-outline-btn" id="newFieldBtn" type="button">
+            <i class="fa-solid fa-plus"></i>
+            Add Field
+          </button>
+        </div>
+
+        <div id="fieldList" class="settings-list"></div>
+
+        <form id="fieldForm" class="settings-form" hidden>
+          <input type="hidden" id="fieldEditId" />
+
+          <h3 id="fieldFormTitle">Add Billing Field</h3>
+
+          <div class="field-grid">
+            <label>
+              <span>Field Name *</span>
+              <input id="fieldNameInput" type="text" required />
+            </label>
+
+            <label>
+              <span>Category *</span>
+              <input id="fieldCategoryInput" type="text" placeholder="Rent / Food / Deposit" required />
+            </label>
+
+            <label>
+              <span>Default Amount</span>
+              <input id="fieldDefaultAmountInput" type="number" value="0" />
+            </label>
+
+            <label>
+              <span>Tax Rate %</span>
+              <input id="fieldTaxRateInput" type="number" value="0" />
+            </label>
+
+            <label>
+              <span>Tax Mode</span>
+              <select id="fieldTaxModeInput">
+                <option value="excluded">Tax Not Included</option>
+                <option value="included">Tax Included</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="settings-actions">
+            <button class="modal-back-btn" id="cancelFieldFormBtn" type="button">Cancel</button>
+            <button class="modal-save-btn" id="saveFieldBtn" type="submit">
+              <i class="fa-solid fa-check"></i>
+              Save Field
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/revenue.js?v=5001"></script>
+</body>
+</html>

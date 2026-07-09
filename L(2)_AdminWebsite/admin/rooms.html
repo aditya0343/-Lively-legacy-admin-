@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Rooms | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/rooms.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="admin-app rooms-page" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <div class="nav-dropdown active" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html" class="active-sub">Rooms</a>
+            <a href="beds.html">Beds</a>
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content rooms-main">
+      <header class="rooms-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <h1>Rooms</h1>
+        </div>
+
+        <div class="rooms-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search rooms, properties or notes..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="refresh-btn" id="refreshBtn" type="button" title="Refresh">
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="rooms-subheader">
+        <div></div>
+
+        <div class="room-actions">
+          <button class="export-btn" type="button" id="exportBtn">
+            <i class="fa-solid fa-download"></i>
+            Export
+          </button>
+
+          <button class="add-room-btn" type="button" id="addRoomBtn">
+            <i class="fa-solid fa-plus"></i>
+            Add Room
+          </button>
+        </div>
+      </section>
+
+      <section class="room-stats-grid">
+        <article class="room-stat-card">
+          <div class="room-stat-icon navy">
+            <i class="fa-solid fa-door-open"></i>
+          </div>
+          <div>
+            <p>Total Rooms</p>
+            <h2 id="totalRoomsValue">0</h2>
+            <small id="totalRoomsSub">Live Firebase Data</small>
+          </div>
+        </article>
+
+        <article class="room-stat-card">
+          <div class="room-stat-icon green">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <p>Available</p>
+            <h2 id="availableRoomsValue">0</h2>
+            <small id="availableRoomsPercent">0%</small>
+          </div>
+        </article>
+
+        <article class="room-stat-card">
+          <div class="room-stat-icon red">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div>
+            <p>Occupied</p>
+            <h2 id="occupiedRoomsValue">0</h2>
+            <small id="occupiedRoomsPercent">0%</small>
+          </div>
+        </article>
+
+        <article class="room-stat-card">
+          <div class="room-stat-icon gold">
+            <i class="fa-solid fa-bed"></i>
+          </div>
+          <div>
+            <p>Capacity</p>
+            <h2 id="totalCapacityValue">0</h2>
+            <small id="capacitySub">0 available beds</small>
+          </div>
+        </article>
+
+        <article class="room-stat-card">
+          <div class="room-stat-icon purple">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+          </div>
+          <div>
+            <p>Monthly Revenue</p>
+            <h2 id="monthlyRevenueValue">₹0</h2>
+            <small id="totalRevenueValue">Total ₹0</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="room-analytics-grid">
+        <article class="analytics-card">
+          <div class="card-head">
+            <div>
+              <h3>Room Revenue Trend</h3>
+              <p>Last 6 months from Firebase bookings</p>
+            </div>
+          </div>
+
+          <div class="bar-chart" id="revenueTrendChart"></div>
+        </article>
+
+        <article class="analytics-card">
+          <div class="card-head">
+            <div>
+              <h3>Room Status Overview</h3>
+              <p>Available, occupied and maintenance split</p>
+            </div>
+          </div>
+
+          <div class="chart-layout">
+            <div class="chart-box">
+              <canvas id="statusChart"></canvas>
+              <div class="chart-center">
+                <strong id="statusChartTotal">0</strong>
+                <span>Rooms</span>
+              </div>
+            </div>
+
+            <div class="chart-legend" id="statusLegend"></div>
+          </div>
+        </article>
+
+        <article class="analytics-card">
+          <div class="card-head">
+            <div>
+              <h3>Room Type Mix</h3>
+              <p>Single, double and triple sharing</p>
+            </div>
+          </div>
+
+          <div class="bar-list" id="roomTypeMixList"></div>
+        </article>
+
+        <article class="analytics-card">
+          <div class="card-head">
+            <div>
+              <h3>Cooling Type Mix</h3>
+              <p>AC, Non AC and cooler rooms</p>
+            </div>
+          </div>
+
+          <div class="bar-list" id="coolingMixList"></div>
+        </article>
+      </section>
+
+      <section class="rooms-layout">
+        <div class="rooms-main-card">
+          <div class="filters-row">
+            <div class="filter-search">
+              <input
+                type="text"
+                id="roomSearchInput"
+                placeholder="Search room number, property or notes..."
+              />
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <select id="propertyFilter">
+              <option value="All">All Properties</option>
+            </select>
+
+            <select id="statusFilter">
+              <option value="All">All Status</option>
+            </select>
+
+            <select id="coolingFilter">
+              <option value="All">All Cooling</option>
+            </select>
+
+            <select id="roomTypeFilter">
+              <option value="All">All Room Types</option>
+            </select>
+
+            <button type="button" id="clearFiltersBtn">
+              <i class="fa-solid fa-xmark"></i>
+              Clear
+            </button>
+          </div>
+
+          <div class="section-title-row">
+            <h2>Room Details</h2>
+            <span id="roomShownCount">0 shown</span>
+          </div>
+
+          <div class="room-cards-list" id="roomCardsList">
+            <div class="empty-card">Loading rooms...</div>
+          </div>
+
+          <div class="table-footer">
+            <p id="tableSummary">Showing 0 rooms</p>
+            <div class="pagination" id="pagination"></div>
+          </div>
+        </div>
+
+        <aside class="rooms-side">
+          <article class="side-card">
+            <h3>Quick Actions</h3>
+
+            <div class="quick-list">
+              <button type="button" id="quickAddRoom">
+                <i class="fa-solid fa-plus"></i>
+                <span>Add New Room</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+
+              <button type="button" id="quickAllRooms">
+                <i class="fa-solid fa-door-open"></i>
+                <span>All Rooms</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+
+              <button type="button" id="quickAvailableRooms">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Available Rooms</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+
+              <button type="button" id="quickMaintenance">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <span>Maintenance Rooms</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="side-card">
+            <h3>Property Room Distribution</h3>
+            <div class="bar-list" id="propertyDistributionList"></div>
+          </article>
+
+          <article class="side-card">
+            <h3>Occupancy Overview</h3>
+            <div class="mini-stats" id="occupancyOverview"></div>
+          </article>
+        </aside>
+      </section>
+
+      <footer class="rooms-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 1.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ADD ROOM MODAL -->
+  <div class="modal-overlay" id="addRoomModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" id="closeAddRoomBtn" type="button">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Room</h2>
+          <p>Same room flow as mobile admin app. Saves to Firebase rooms collection.</p>
+        </div>
+
+        <button class="modal-icon-btn" id="reloadPropertiesBtn" type="button">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="addRoomForm">
+        <div class="form-card">
+          <h3>Room Details</h3>
+
+          <label>
+            <span>Select Property *</span>
+            <select id="addPropertySelect" required>
+              <option value="">Select property</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Room No *</span>
+            <input
+              type="text"
+              id="addRoomNo"
+              placeholder="Example: 101"
+              required
+            />
+          </label>
+
+          <label>
+            <span>Cooling Type *</span>
+            <select id="addCoolingType" required>
+              <option value="AC">AC</option>
+              <option value="Non AC">Non AC</option>
+              <option value="Cooler">Cooler</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Room Type *</span>
+            <select id="addRoomType" required>
+              <option value="Single Sharing">Single Sharing</option>
+              <option value="Double Sharing">Double Sharing</option>
+              <option value="Triple Sharing">Triple Sharing</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Room Status *</span>
+            <select id="addRoomStatus" required>
+              <option value="available">Available</option>
+              <option value="occupied">Occupied</option>
+              <option value="maintenance">Maintenance</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Description</span>
+            <textarea
+              id="addRoomDescription"
+              rows="4"
+              placeholder="Example: First floor room near common area"
+            ></textarea>
+          </label>
+
+          <div class="capacity-preview" id="capacityPreview">
+            <i class="fa-solid fa-bed"></i>
+            <div>
+              <strong>Capacity Auto-Fetch</strong>
+              <p>Single Sharing creates 1 bed capacity.</p>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="secondary-btn" type="button" id="cancelAddRoomBtn">
+              Cancel
+            </button>
+
+            <button class="primary-btn" type="submit" id="saveRoomBtn">
+              <i class="fa-solid fa-check"></i>
+              Save Room
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/rooms.js?v=20"></script>
+</body>
+</html>

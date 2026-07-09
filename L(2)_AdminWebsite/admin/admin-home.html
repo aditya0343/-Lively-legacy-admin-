@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lively Legacy Admin Dashboard</title>
+
+  <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="admin-shell" id="adminShell">
+    <aside class="admin-sidebar" id="sidebar">
+  <div class="brand-box">
+    <img src="../assets/logo.png" alt="Lively Legacy" />
+  </div>
+
+  <nav class="side-nav">
+    <a class="active" href="admin-home.html">
+      <i class="fa-solid fa-house"></i>
+      <span>Dashboard</span>
+    </a>
+
+    <div class="nav-group" id="propertiesGroup">
+      <button type="button" id="propertiesToggle">
+        <span>
+          <i class="fa-solid fa-building"></i>
+          Properties
+        </span>
+        <i class="fa-solid fa-chevron-down arrow"></i>
+      </button>
+
+      <div class="nav-submenu">
+        <a href="properties.html">All Properties</a>
+        <a href="rooms.html">Rooms</a>
+        <a href="beds.html">Beds</a>
+      </div>
+    </div>
+
+    <a href="residents.html">
+      <i class="fa-solid fa-users"></i>
+      <span>Residents</span>
+    </a>
+
+    <a href="bookings.html">
+      <i class="fa-solid fa-calendar-check"></i>
+      <span>Bookings & Leads</span>
+    </a>
+
+    <a href="revenue.html">
+      <i class="fa-solid fa-wallet"></i>
+      <span>Revenue & Billing</span>
+    </a>
+
+    <a href="food.html">
+      <i class="fa-solid fa-utensils"></i>
+      <span>Food Management</span>
+    </a>
+
+    <a href="complaints.html">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span>Complaints</span>
+    </a>
+
+    <a href="staff-management.html">
+      <i class="fa-solid fa-user-gear"></i>
+      <span>Staff Management</span>
+    </a>
+
+    <a href="visitors.html">
+      <i class="fa-solid fa-user-check"></i>
+      <span>Visitors</span>
+    </a>
+
+    <a href="parcels.html">
+      <i class="fa-solid fa-box"></i>
+      <span>Parcels</span>
+    </a>
+
+    <a href="agreements-kyc.html">
+      <i class="fa-solid fa-file-signature"></i>
+      <span>Agreements & KYC</span>
+    </a>
+
+    <a href="referrals.html">
+      <i class="fa-solid fa-share-nodes"></i>
+      <span>Referrals</span>
+    </a>
+
+    <a href="corporate.html">
+      <i class="fa-solid fa-building-columns"></i>
+      <span>Corporate</span>
+    </a>
+
+    <a href="reports.html">
+      <i class="fa-solid fa-chart-line"></i>
+      <span>Reports & Analytics</span>
+    </a>
+
+    <a href="settings.html">
+      <i class="fa-solid fa-gear"></i>
+      <span>Settings</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-note">
+    <i class="fa-solid fa-shield-halved"></i>
+    <div>
+      <b>Admin Portal</b>
+      <small>Synced with mobile app Firebase data.</small>
+    </div>
+  </div>
+</aside>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <button class="icon-btn" id="menuBtn" type="button" aria-label="Toggle menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="topbar-title">
+          <h1>Admin Dashboard</h1>
+          <p id="liveDate">Loading date...</p>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="icon-btn notification-btn" id="notificationBtn" type="button">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notificationCount">0</span>
+          </button>
+
+          <div class="profile-wrap">
+            <button class="profile-btn" id="adminProfileBtn" type="button">
+              <span id="adminAvatar">AD</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-menu" id="profileDropdown">
+              <div class="profile-head">
+                <span id="adminAvatarSmall">AD</span>
+                <div>
+                  <b id="dropdownAdminName">Admin</b>
+                  <small id="dropdownAdminEmail">admin@email.com</small>
+                </div>
+              </div>
+
+              <button type="button" id="changePasswordBtn">
+                <i class="fa-solid fa-lock"></i>
+                Change Password
+              </button>
+
+              <button type="button" id="logoutBtn" class="danger">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero-panel">
+        <div class="hero-copy">
+          <div class="pill-row">
+            <span><i class="fa-solid fa-clock"></i><b id="liveTime">--:--</b></span>
+            <span><i class="fa-solid fa-calendar"></i><b>This Month</b></span>
+          </div>
+
+          <h2>
+            <span id="greetingText">Good Morning</span>,
+            <span id="welcomeName">Admin</span>
+          </h2>
+
+          <p>
+            Manage properties, residents, bookings, billing, staff, complaints
+            and reports from one live web dashboard.
+          </p>
+
+          <div class="hero-mini">
+            <div>
+              <strong id="heroScore">0/100</strong>
+              <span>Health Score</span>
+            </div>
+
+            <div>
+              <strong id="heroRooms">0</strong>
+              <span>Rooms</span>
+            </div>
+
+            <div>
+              <strong id="heroBeds">0</strong>
+              <span>Beds</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <div class="score-circle">
+            <strong id="healthScoreValue">0</strong>
+            <span id="healthScoreLabel">Loading</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="metric-grid">
+        <article class="metric-card gold">
+          <div class="metric-icon">
+            <i class="fa-solid fa-users"></i>
+          </div>
+
+          <div>
+            <p>Occupancy</p>
+            <h3 id="occupancyValue">0%</h3>
+            <small id="occupancyChange">0 active stays</small>
+          </div>
+
+          <div class="spark-wrap">
+            <canvas id="occupancySpark"></canvas>
+          </div>
+        </article>
+
+        <article class="metric-card purple">
+          <div class="metric-icon">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+
+          <div>
+            <p>Total Bookings</p>
+            <h3 id="bookingValue">0</h3>
+            <small id="bookingChange">0 this month</small>
+          </div>
+
+          <div class="spark-wrap">
+            <canvas id="bookingSpark"></canvas>
+          </div>
+        </article>
+
+        <article class="metric-card green">
+          <div class="metric-icon">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+
+          <div>
+            <p>Revenue</p>
+            <h3 id="revenueValue">₹0</h3>
+            <small>Paid / completed income</small>
+          </div>
+
+          <div class="spark-wrap">
+            <canvas id="revenueSpark"></canvas>
+          </div>
+        </article>
+
+        <article class="metric-card red">
+          <div class="metric-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+
+          <div>
+            <p>Open Complaints</p>
+            <h3 id="complaintValue">0</h3>
+            <small id="complaintChange">0 resolved</small>
+          </div>
+
+          <div class="spark-wrap">
+            <canvas id="complaintSpark"></canvas>
+          </div>
+        </article>
+      </section>
+
+      <section class="quick-panel">
+        <div class="section-head">
+          <div>
+            <h2>Quick Actions</h2>
+            <p>Common admin actions</p>
+          </div>
+        </div>
+
+        <div class="quick-grid">
+          <a href="properties.html" class="quick-add-property">
+            <span class="quick-action-icon">
+              <i class="fa-solid fa-building"></i>
+              <i class="fa-solid fa-plus quick-plus"></i>
+            </span>
+            <span>Add Property</span>
+          </a>
+
+          <a href="bookings.html">
+            <i class="fa-solid fa-calendar-plus"></i>
+            <span>New Booking</span>
+          </a>
+
+          <a href="residents.html">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>View Resident</span>
+          </a>
+
+          <a href="complaints.html">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Add Complaint</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="content-grid charts">
+        <article class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Booking Trend</h2>
+              <p>Last 6 months</p>
+            </div>
+          </div>
+
+          <div class="chart-box">
+            <canvas id="bookingTrendChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Revenue Trend</h2>
+              <p>Transactions, invoices and bookings</p>
+            </div>
+          </div>
+
+          <div class="chart-box">
+            <canvas id="revenueTrendChart"></canvas>
+          </div>
+        </article>
+      </section>
+
+      <section class="content-grid dashboard-lower">
+        <article class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Property Wise Occupancy</h2>
+              <p>Live bed availability</p>
+            </div>
+
+            <a href="properties.html">View All</a>
+          </div>
+
+          <div class="property-list" id="propertyList">
+            <p class="empty-state">Loading property data...</p>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Operational Overview</h2>
+              <p>Live system summary</p>
+            </div>
+          </div>
+
+          <div class="info-list" id="operationsList"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Action Required</h2>
+              <p>Needs attention</p>
+            </div>
+          </div>
+
+          <div class="info-list" id="actionList"></div>
+        </article>
+      </section>
+
+      <section class="content-grid activity-section">
+        <article class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Latest Activities</h2>
+              <p>Recent Firebase activity</p>
+            </div>
+          </div>
+
+          <ul class="activity-list" id="activityList"></ul>
+        </article>
+
+        <article class="panel-card">
+          <div class="section-head">
+            <div>
+              <h2>Complaint Analytics</h2>
+              <p>Open vs resolved</p>
+            </div>
+          </div>
+
+          <div class="complaint-layout">
+            <div class="donut-box">
+              <canvas id="complaintChart"></canvas>
+
+              <div class="chart-center">
+                <strong id="complaintTotalCenter">0</strong>
+                <span>Total</span>
+              </div>
+            </div>
+
+            <div class="legend-list" id="complaintList"></div>
+          </div>
+        </article>
+      </section>
+
+      <footer class="admin-footer">
+        <span>© 2026 Lively Legacy Accommodations (Y)</span>
+        <span>Admin Web Dashboard</span>
+      </footer>
+    </main>
+  </div>
+
+  <div class="notification-overlay" id="notificationOverlay" hidden>
+    <aside class="notification-panel">
+      <div class="sheet-handle"></div>
+
+      <div class="notification-head">
+        <div>
+          <i class="fa-solid fa-bell"></i>
+        </div>
+
+        <section>
+          <h3>Notifications</h3>
+          <p>Unread activity disappears after closing this panel.</p>
+        </section>
+
+        <button type="button" id="closeNotificationsBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="notification-list" id="notificationList"></div>
+    </aside>
+  </div>
+
+  <div class="modal-overlay" id="passwordModal" hidden>
+    <form class="password-modal" id="passwordForm">
+      <h3>Change Password</h3>
+      <p id="passwordAccountText">Enter your new password.</p>
+
+      <label>
+        New Password
+        <input type="password" id="newPasswordInput" minlength="6" required />
+      </label>
+
+      <label>
+        Confirm Password
+        <input type="password" id="confirmPasswordInput" minlength="6" required />
+      </label>
+
+      <div class="modal-actions">
+        <button type="button" id="cancelPasswordBtn" class="ghost">Cancel</button>
+        <button type="submit" class="primary">Update Password</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/admin.js"></script>
+</body>
+</html>

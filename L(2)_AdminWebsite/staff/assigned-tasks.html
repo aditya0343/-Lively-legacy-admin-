@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Assigned Tasks | Lively Legacy</title>
+
+  <link rel="stylesheet" href="css/assigned-tasks.css?v=500" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="staff-app" id="staffApp">
+
+    <aside class="staff-sidebar" id="staffSidebar">
+      <div class="staff-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" />
+      </div>
+
+      <nav class="staff-nav">
+        <a href="staff-dashboard.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="attendance.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Mark Attendance</span>
+        </a>
+
+        <a href="visitor-management.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Visitor Management</span>
+        </a>
+
+        <a href="parcel-management.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcel Management</span>
+        </a>
+
+        <a href="assigned-tasks.html" class="active">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span>Assigned Tasks</span>
+        </a>
+
+        <a href="moveout-settlement.html">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <span>Move-out Settlement</span>
+        </a>
+
+        <a href="announcements.html">
+          <i class="fa-solid fa-bullhorn"></i>
+          <span>Announcements</span>
+        </a>
+
+        <button type="button" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="staff-value-card">
+        <div class="value-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="staff-main">
+
+      <header class="staff-topbar">
+        <div class="top-left">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Assigned Tasks</h1>
+            <p id="topPropertyText">View admin assigned tasks and update their status.</p>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <button class="notification-btn" type="button" id="notificationBtn">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notificationCount">0</span>
+          </button>
+
+          <div class="staff-profile-mini">
+            <div class="staff-avatar" id="staffAvatarText">ST</div>
+            <div>
+              <strong id="staffNameTop">Staff</strong>
+              <p id="staffEmailTop">staff@email.com</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="date-row">
+        <div>
+          <h2>Task Overview</h2>
+          <p>Live task data from Firebase tasks and complaint assignments.</p>
+        </div>
+
+        <div class="date-time-card">
+          <div>
+            <i class="fa-regular fa-calendar"></i>
+            <span id="todayDate">Today</span>
+          </div>
+
+          <div>
+            <i class="fa-regular fa-clock"></i>
+            <span id="currentTime">--:--</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card blue">
+          <div class="stat-icon">
+            <i class="fa-regular fa-clipboard"></i>
+          </div>
+
+          <div>
+            <span>Total Assigned</span>
+            <strong id="totalAssignedCount">00</strong>
+            <small>Tasks</small>
+          </div>
+        </article>
+
+        <article class="stat-card orange">
+          <div class="stat-icon">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+
+          <div>
+            <span>In Progress</span>
+            <strong id="inProgressCount">00</strong>
+            <small>Tasks</small>
+          </div>
+        </article>
+
+        <article class="stat-card green">
+          <div class="stat-icon">
+            <i class="fa-regular fa-circle-check"></i>
+          </div>
+
+          <div>
+            <span>Completed</span>
+            <strong id="completedCount">00</strong>
+            <small>Tasks</small>
+          </div>
+        </article>
+
+        <article class="stat-card purple">
+          <div class="stat-icon">
+            <i class="fa-regular fa-calendar"></i>
+          </div>
+
+          <div>
+            <span>Pending</span>
+            <strong id="pendingCount">00</strong>
+            <small>Tasks</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="charts-grid">
+        <article class="chart-card">
+          <div class="chart-head">
+            <h3>Task Status Chart</h3>
+            <p>Live status split from Firebase tasks and complaints.</p>
+          </div>
+
+          <div class="bar-chart" id="statusChart">
+            <div class="empty-box">Loading chart...</div>
+          </div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-head">
+            <h3>Priority Chart</h3>
+            <p>Task priority distribution from Firebase.</p>
+          </div>
+
+          <div class="bar-chart" id="priorityChart">
+            <div class="empty-box">Loading chart...</div>
+          </div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-head">
+            <h3>Source Chart</h3>
+            <p>Shows tasks created by admin and complaint tasks.</p>
+          </div>
+
+          <div class="bar-chart" id="sourceChart">
+            <div class="empty-box">Loading chart...</div>
+          </div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-head">
+            <h3>Last 7 Days Tasks</h3>
+            <p>Assigned task trend from Firebase dates.</p>
+          </div>
+
+          <div class="daily-chart" id="dailyTrendChart">
+            <div class="empty-box">Loading trend...</div>
+          </div>
+        </article>
+      </section>
+
+      <section class="tasks-layout">
+        <section class="tasks-list-card">
+          <div class="tabs">
+            <button type="button" class="tab-btn active" data-tab="all">
+              All Tasks <span id="allTabCount">(0)</span>
+            </button>
+
+            <button type="button" class="tab-btn" data-tab="in-progress">
+              In Progress <span id="progressTabCount">(0)</span>
+            </button>
+
+            <button type="button" class="tab-btn" data-tab="completed">
+              Completed <span id="completedTabCount">(0)</span>
+            </button>
+
+            <button type="button" class="tab-btn" data-tab="pending">
+              Pending <span id="pendingTabCount">(0)</span>
+            </button>
+          </div>
+
+          <div class="list-tools">
+            <div class="search-box">
+              <input type="text" id="taskSearchInput" placeholder="Search tasks..." />
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <select id="taskFilterSelect">
+              <option value="All Tasks">Filter: All Tasks</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="Pending">Pending</option>
+              <option value="High Priority">High Priority</option>
+              <option value="Medium Priority">Medium Priority</option>
+              <option value="Low Priority">Low Priority</option>
+            </select>
+
+            <button type="button" class="filter-btn" id="refreshTasksBtn">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+          </div>
+
+          <div class="task-list" id="taskList">
+            <div class="empty-box">Loading assigned tasks...</div>
+          </div>
+
+          <div class="list-footer">
+            <span id="taskShowingText">Showing 0 tasks</span>
+
+            <div class="pagination">
+              <button type="button" disabled>
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button type="button" class="active">1</button>
+              <button type="button" disabled>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="task-details-card">
+          <div class="details-head">
+            <h2>Task Details</h2>
+
+            <button type="button" id="closeDetailsBtn">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <div id="taskDetailsContent">
+            <div class="empty-box details-empty">Select a task to view details.</div>
+          </div>
+        </aside>
+      </section>
+
+      <div class="bottom-help">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>If you are facing any issue, contact your administrator.</span>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="notificationModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <div>
+          <h2>Task Notifications</h2>
+          <p>Unread task updates from Firebase.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="notificationModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="notification-list" id="notificationList">
+          <div class="empty-box">No notifications yet.</div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button type="button" id="markNotificationsReadBtn">
+          Mark all as read
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="js/assigned-tasks.js?v=500"></script>
+</body>
+</html>

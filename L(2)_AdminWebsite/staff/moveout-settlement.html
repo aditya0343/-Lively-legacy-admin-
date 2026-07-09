@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Move-out Settlement | Lively Legacy</title>
+
+  <link rel="stylesheet" href="css/moveout-settlement.css?v=500" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="staff-app" id="staffApp">
+    <aside class="staff-sidebar" id="staffSidebar">
+      <div class="staff-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" />
+      </div>
+
+      <nav class="staff-nav">
+        <a href="staff-dashboard.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="attendance.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Mark Attendance</span>
+        </a>
+
+        <a href="visitor-management.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Visitor Management</span>
+        </a>
+
+        <a href="parcel-management.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcel Management</span>
+        </a>
+
+        <a href="assigned-tasks.html">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span>Assigned Tasks</span>
+        </a>
+
+        <a href="moveout-settlement.html" class="active">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <span>Move-out Settlement</span>
+        </a>
+
+        <a href="announcements.html">
+          <i class="fa-solid fa-bullhorn"></i>
+          <span>Announcements</span>
+        </a>
+
+        <button type="button" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="staff-value-card">
+        <div class="value-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="staff-main">
+      <header class="staff-topbar">
+        <div class="top-left">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Move-out Settlement</h1>
+            <p id="topPropertyText">Manage and complete the move-out process for residents.</p>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <button class="notification-btn" type="button" id="notificationBtn">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notificationCount">0</span>
+          </button>
+
+          <div class="staff-profile-mini">
+            <div class="staff-avatar" id="staffAvatarText">ST</div>
+            <div>
+              <strong id="staffNameTop">Staff</strong>
+              <p id="staffEmailTop">staff@email.com</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="date-row">
+        <div>
+          <h2>Settlement Overview</h2>
+          <p>Live move-out records from settlements, requests, residents, and bookings.</p>
+        </div>
+
+        <div class="date-time-card">
+          <div>
+            <i class="fa-regular fa-calendar"></i>
+            <span id="todayDate">Today</span>
+          </div>
+
+          <div>
+            <i class="fa-regular fa-clock"></i>
+            <span id="currentTime">--:--</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card purple">
+          <div class="stat-icon">
+            <i class="fa-regular fa-calendar-check"></i>
+          </div>
+
+          <div>
+            <span>Move-outs Today</span>
+            <strong id="moveoutsTodayCount">00</strong>
+            <small>Today's Scheduled</small>
+          </div>
+        </article>
+
+        <article class="stat-card orange">
+          <div class="stat-icon">
+            <i class="fa-regular fa-file-lines"></i>
+          </div>
+
+          <div>
+            <span>Pending</span>
+            <strong id="pendingCount">00</strong>
+            <small>Pending Settlement</small>
+          </div>
+        </article>
+
+        <article class="stat-card green">
+          <div class="stat-icon">
+            <i class="fa-regular fa-circle-check"></i>
+          </div>
+
+          <div>
+            <span>Completed</span>
+            <strong id="completedCount">00</strong>
+            <small>This Month</small>
+          </div>
+        </article>
+
+        <article class="stat-card red">
+          <div class="stat-icon">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+
+          <div>
+            <span>Overdue</span>
+            <strong id="overdueCount">00</strong>
+            <small>Overdue</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="settlement-layout">
+        <section class="settlement-list-card">
+          <div class="tabs">
+            <button type="button" class="tab-btn active" data-tab="today">
+              Move-out Today <span id="todayTabCount">(0)</span>
+            </button>
+
+            <button type="button" class="tab-btn" data-tab="pending">
+              Pending <span id="pendingTabCount">(0)</span>
+            </button>
+
+            <button type="button" class="tab-btn" data-tab="completed">
+              Completed <span id="completedTabCount">(0)</span>
+            </button>
+
+            <button type="button" class="tab-btn" data-tab="cancelled">
+              Cancelled <span id="cancelledTabCount">(0)</span>
+            </button>
+          </div>
+
+          <div class="disclaimer-box" id="disclaimerBox">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div>
+              <strong>Disclaimer</strong>
+              <p>
+                Please ensure that all essential room items are checked thoroughly before approving the settlement. Verify damages, pending dues, keys, access cards, and returned items before approval.
+              </p>
+            </div>
+          </div>
+
+          <div class="settlement-list" id="settlementList">
+            <div class="empty-box">Loading move-out records...</div>
+          </div>
+
+          <div class="list-footer">
+            <span id="showingText">Showing 0 entries</span>
+          </div>
+        </section>
+
+        <aside class="settlement-details-card">
+          <div id="settlementDetailsContent">
+            <div class="empty-box details-empty">Select a resident to view settlement details.</div>
+          </div>
+        </aside>
+      </section>
+
+      <div class="bottom-help">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>If you are facing any issue, contact your administrator.</span>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="notificationModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <div>
+          <h2>Move-out Notifications</h2>
+          <p>Unread settlement, checkout, and room handover updates.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="notificationModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="notification-list" id="notificationList">
+          <div class="empty-box">No unread notifications.</div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button type="button" id="markNotificationsReadBtn">
+          Mark all as read
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="js/moveout-settlement.js?v=500"></script>
+</body>
+</html>

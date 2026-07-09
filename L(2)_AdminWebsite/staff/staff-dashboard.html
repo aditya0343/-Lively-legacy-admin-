@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Staff Dashboard | Lively Legacy</title>
+
+  <link rel="stylesheet" href="css/staff-dashboard.css?v=300" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="staff-app" id="staffApp">
+
+    <aside class="staff-sidebar" id="staffSidebar">
+      <div class="staff-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" />
+      </div>
+
+      <nav class="staff-nav">
+        <a href="staff-dashboard.html" class="active">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="attendance.html">
+          <i class="fa-regular fa-calendar-check"></i>
+          <span>Mark Attendance</span>
+        </a>
+
+        <a href="visitor-management.html">
+          <i class="fa-regular fa-address-book"></i>
+          <span>Visitor Management</span>
+        </a>
+
+        <a href="parcel-management.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcel Management</span>
+        </a>
+
+        <a href="assigned-tasks.html">
+          <i class="fa-regular fa-rectangle-list"></i>
+          <span>Assigned Tasks</span>
+        </a>
+
+        <a href="moveout-settlement.html">
+          <i class="fa-regular fa-file-lines"></i>
+          <span>Move-out Settlement</span>
+        </a>
+
+        <a href="announcements.html">
+          <i class="fa-solid fa-bullhorn"></i>
+          <span>Announcements</span>
+        </a>
+
+        <button type="button" id="sidebarLogoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="staff-value-card">
+        <div class="value-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="staff-main">
+
+      <header class="staff-topbar">
+        <div class="top-left">
+          <button class="menu-btn" type="button" id="menuBtn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Dashboard</h1>
+            <p id="topPropertyText">Staff panel</p>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <button class="notification-btn" type="button" id="notificationBtn">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notificationCount">0</span>
+          </button>
+
+          <div class="staff-profile-box">
+            <button class="staff-avatar-btn" id="profileBtn" type="button">
+              <span id="staffAvatarText">ST</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-head">
+                <div class="profile-avatar" id="profileAvatarText">ST</div>
+                <div>
+                  <strong id="profileNameText">Staff</strong>
+                  <p id="profileEmailText">staff@email.com</p>
+                </div>
+              </div>
+
+              <button type="button" id="changePasswordBtn">
+                <i class="fa-solid fa-lock"></i>
+                Change Password
+              </button>
+
+              <button type="button" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="welcome-row">
+        <div>
+          <h2><span id="greetingText">Good Morning</span>, <span id="staffNameText">Staff</span>!</h2>
+          <p>Here’s what’s happening today.</p>
+        </div>
+
+        <div class="date-time-card">
+          <div>
+            <i class="fa-regular fa-calendar"></i>
+            <span id="todayDate">Today</span>
+          </div>
+
+          <div>
+            <i class="fa-regular fa-clock"></i>
+            <span id="currentTime">--:--</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="top-cards-grid">
+
+        <article class="info-card attendance-card">
+          <div class="round-icon green">
+            <i class="fa-regular fa-calendar-check"></i>
+          </div>
+
+          <h3>Mark Attendance</h3>
+          <p>Mark or verify your attendance for today.</p>
+
+          <div class="attendance-status-row">
+            <span>Status</span>
+            <strong id="attendanceStatusBadge" class="status-badge not-marked">Not Marked</strong>
+          </div>
+
+          <div class="attendance-actions">
+            <button type="button" class="danger-action-btn" id="quickMarkAttendanceBtn">
+              Mark Attendance
+            </button>
+
+            <a href="attendance.html" class="outline-action-btn">
+              Open Attendance Page
+            </a>
+          </div>
+        </article>
+
+        <article class="info-card shift-card">
+          <div class="round-icon purple">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+
+          <h3>Shift Timing</h3>
+          <p>Your shift details for today.</p>
+
+          <div class="shift-pill" id="shiftName">-</div>
+
+          <div class="key-value-list">
+            <div>
+              <span>Start Time</span>
+              <strong id="shiftStart">-</strong>
+            </div>
+
+            <div>
+              <span>End Time</span>
+              <strong id="shiftEnd">-</strong>
+            </div>
+          </div>
+
+          <div class="break-box">
+            Total Break: <strong id="breakTime">30 mins</strong>
+          </div>
+        </article>
+
+        <article class="info-card location-card">
+          <div class="round-icon blue">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+
+          <h3>Property Location</h3>
+
+          <div class="key-value-list property-list">
+            <div>
+              <span>Property</span>
+              <strong id="propertyName">-</strong>
+            </div>
+
+            <div>
+              <span>Address</span>
+              <strong id="propertyAddress">-</strong>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <section class="quick-stats-grid">
+
+        <article class="quick-card orange">
+          <div class="quick-icon">
+            <i class="fa-solid fa-users"></i>
+          </div>
+
+          <h3>Visitors</h3>
+          <h2 id="todayVisitorsValue">0</h2>
+          <p>Total Visitors Today</p>
+
+          <a href="visitor-management.html">
+            View Visitors
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </article>
+
+        <article class="quick-card green">
+          <div class="quick-icon">
+            <i class="fa-solid fa-box"></i>
+          </div>
+
+          <h3>Parcels</h3>
+          <h2 id="parcelsValue">0</h2>
+          <p>Parcels to Handle</p>
+
+          <a href="parcel-management.html">
+            View Parcels
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </article>
+
+        <article class="quick-card blue">
+          <div class="quick-icon">
+            <i class="fa-regular fa-clipboard"></i>
+          </div>
+
+          <h3>Tasks</h3>
+          <h2 id="assignedTasksValue">0</h2>
+          <p>Tasks Assigned</p>
+
+          <a href="assigned-tasks.html">
+            View Tasks
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </article>
+
+        <article class="quick-card red">
+          <div class="quick-icon">
+            <i class="fa-regular fa-file-lines"></i>
+          </div>
+
+          <h3>Settlements</h3>
+          <h2 id="settlementsValue">0</h2>
+          <p>Pending Settlements</p>
+
+          <a href="moveout-settlement.html">
+            View Settlements
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </article>
+
+      </section>
+
+      <section class="charts-grid">
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>7 Day Staff Activity</h3>
+              <p>Visitors, parcels and assigned tasks auto-fetched from Firestore.</p>
+            </div>
+          </div>
+
+          <div class="line-chart" id="activityTrendChart"></div>
+
+          <div class="chart-legend-row">
+            <span><i class="legend-dot orange"></i> Visitors</span>
+            <span><i class="legend-dot green"></i> Parcels</span>
+            <span><i class="legend-dot blue"></i> Tasks</span>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Task Status</h3>
+              <p>Live task and complaint workload from Firestore.</p>
+            </div>
+          </div>
+
+          <div class="bar-chart" id="taskStatusChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Parcel Status</h3>
+              <p>Live parcel handling status from Firestore.</p>
+            </div>
+          </div>
+
+          <div class="bar-chart" id="parcelStatusChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Today Workload Split</h3>
+              <p>Live split of today’s operational workload.</p>
+            </div>
+          </div>
+
+          <div class="donut-layout">
+            <div class="donut-box" id="workloadDonut">
+              <div class="donut-center">
+                <strong id="workloadTotal">0</strong>
+                <span>Total</span>
+              </div>
+            </div>
+
+            <div class="donut-legend" id="workloadLegend"></div>
+          </div>
+        </article>
+
+      </section>
+
+      <section class="checkin-card">
+        <div class="checkin-left">
+          <div class="checkin-icon">
+            <i class="fa-solid fa-qrcode"></i>
+          </div>
+
+          <div>
+            <h3>New Resident Check-In</h3>
+            <p>Scan QR or enter code to check-in a new resident.</p>
+          </div>
+        </div>
+
+        <div class="checkin-form">
+          <input type="text" id="residentCheckInCode" placeholder="Scan QR or enter code" />
+          <button type="button" class="scan-btn" id="scanQrBtn">
+            <i class="fa-solid fa-qrcode"></i>
+            Scan QR
+          </button>
+          <button type="button" id="checkInResidentBtn">
+            Check-In
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="bottom-grid">
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <h3>Announcements</h3>
+            <a href="announcements.html">View All</a>
+          </div>
+
+          <div class="announcement-list" id="announcementList">
+            <div class="empty-box">Loading announcements...</div>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <h3>Assigned Tasks <span>(Today)</span></h3>
+            <a href="assigned-tasks.html">View All</a>
+          </div>
+
+          <div class="task-list" id="taskList">
+            <div class="empty-box">Loading tasks...</div>
+          </div>
+
+          <div class="task-summary">
+            <div>
+              <strong id="totalTasksBottom">0</strong>
+              <span>Total Tasks</span>
+            </div>
+
+            <div>
+              <strong id="completedTasksBottom">0</strong>
+              <span>Completed</span>
+            </div>
+
+            <div>
+              <strong id="pendingTasksBottom">0</strong>
+              <span>Pending</span>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <section class="overview-card panel-card">
+        <div class="panel-head">
+          <h3>Today’s Overview</h3>
+        </div>
+
+        <div class="overview-grid">
+          <div class="overview-tile">
+            <span><i class="fa-regular fa-calendar-check green-text"></i> Attendance</span>
+            <strong id="overviewAttendance">Not Marked</strong>
+          </div>
+
+          <div class="overview-tile">
+            <span><i class="fa-solid fa-users orange-text"></i> Visitors</span>
+            <strong id="overviewVisitors">0</strong>
+          </div>
+
+          <div class="overview-tile">
+            <span><i class="fa-solid fa-box green-text"></i> Parcels</span>
+            <strong id="overviewParcels">0</strong>
+          </div>
+
+          <div class="overview-tile">
+            <span><i class="fa-regular fa-clipboard blue-text"></i> Tasks</span>
+            <strong id="overviewTasks">0</strong>
+          </div>
+
+          <div class="overview-tile">
+            <span><i class="fa-regular fa-file-lines red-text"></i> Pending Settlements</span>
+            <strong id="overviewSettlements">0</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-card parcel-preview-card" id="parcelPreviewSection" hidden>
+        <div class="panel-head">
+          <div>
+            <h3>Parcel Management</h3>
+            <p>Receive parcels and hand them over to residents.</p>
+          </div>
+
+          <a href="parcel-management.html">View All</a>
+        </div>
+
+        <div class="parcel-preview-list" id="parcelPreviewList"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <div class="modal-overlay" id="notificationModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <div>
+          <h2>Activity Updates</h2>
+          <p>Latest staff, visitor, parcel, task and system activity.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="notificationModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="notification-list" id="notificationList">
+          <div class="empty-box">No activity updates.</div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button type="button" class="outline-action-btn" id="markNotificationsReadBtn">
+          Mark all as read
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="modal-overlay" id="changePasswordModal" hidden>
+    <section class="modal-shell small-modal">
+      <header class="modal-header">
+        <div>
+          <h2>Change Password</h2>
+          <p>Update your staff login password.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="changePasswordModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="changePasswordForm">
+        <label>
+          New Password
+          <div class="password-field">
+            <input type="password" id="newPasswordInput" placeholder="Enter new password" required />
+            <button type="button" class="toggle-password" data-target="newPasswordInput">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </label>
+
+        <label>
+          Confirm Password
+          <div class="password-field">
+            <input type="password" id="confirmNewPasswordInput" placeholder="Confirm new password" required />
+            <button type="button" class="toggle-password" data-target="confirmNewPasswordInput">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </label>
+      </form>
+
+      <footer class="modal-footer">
+        <button type="button" class="outline-action-btn" data-close-modal="changePasswordModal">
+          Cancel
+        </button>
+
+        <button type="submit" class="primary-action-btn" form="changePasswordForm" id="savePasswordBtn">
+          Update Password
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="modal-overlay" id="qrScannerModal" hidden>
+    <section class="modal-shell small-modal">
+      <header class="modal-header">
+        <div>
+          <h2>Scan Check-in QR</h2>
+          <p>Place the resident booking QR inside the camera frame.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="qrScannerModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="scanner-box">
+          <video id="qrVideo" playsinline muted></video>
+          <div class="scanner-frame"></div>
+        </div>
+
+        <p class="scanner-help" id="scannerHelpText">
+          Browser QR scanning works only when BarcodeDetector is supported.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="js/staff-dashboard.js?v=300"></script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Parcel Management | Lively Legacy</title>
+
+  <link rel="stylesheet" href="css/parcel-management.css?v=500" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="staff-app" id="staffApp">
+
+    <aside class="staff-sidebar" id="staffSidebar">
+      <div class="staff-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" />
+      </div>
+
+      <nav class="staff-nav">
+        <a href="staff-dashboard.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="attendance.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Mark Attendance</span>
+        </a>
+
+        <a href="visitor-management.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Visitor Management</span>
+        </a>
+
+        <a href="parcel-management.html" class="active">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcel Management</span>
+        </a>
+
+        <a href="assigned-tasks.html">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span>Assigned Tasks</span>
+        </a>
+
+        <a href="moveout-settlement.html">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <span>Move-out Settlement</span>
+        </a>
+
+        <a href="announcements.html">
+          <i class="fa-solid fa-bullhorn"></i>
+          <span>Announcements</span>
+        </a>
+
+        <button type="button" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="staff-value-card">
+        <div class="value-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="staff-main">
+
+      <header class="staff-topbar">
+        <div class="top-left">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Parcel Management</h1>
+            <p id="topPropertyText">Staff panel</p>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <button class="notification-btn" type="button" id="notificationBtn">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notificationCount">0</span>
+          </button>
+
+          <div class="staff-profile-mini">
+            <div class="staff-avatar" id="staffAvatarText">ST</div>
+            <div>
+              <strong id="staffNameTop">Staff</strong>
+              <p id="staffEmailTop">staff@email.com</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="date-row">
+        <div>
+          <h2>Manage Parcel Requests</h2>
+          <p>Track parcel requests, handover status, returns, and resident deliveries.</p>
+        </div>
+
+        <div class="date-time-card">
+          <div>
+            <i class="fa-regular fa-calendar"></i>
+            <span id="todayDate">Today</span>
+          </div>
+
+          <div>
+            <i class="fa-regular fa-clock"></i>
+            <span id="currentTime">--:--</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card orange">
+          <div class="stat-icon">
+            <i class="fa-solid fa-box-open"></i>
+          </div>
+
+          <div>
+            <span>Request Received</span>
+            <strong id="requestReceivedCount">00</strong>
+            <small>Parcels</small>
+          </div>
+        </article>
+
+        <article class="stat-card green">
+          <div class="stat-icon">
+            <i class="fa-regular fa-circle-check"></i>
+          </div>
+
+          <div>
+            <span>Handed Over</span>
+            <strong id="handedOverCount">00</strong>
+            <small>Parcels</small>
+          </div>
+        </article>
+
+        <article class="stat-card blue">
+          <div class="stat-icon">
+            <i class="fa-solid fa-truck-fast"></i>
+          </div>
+
+          <div>
+            <span>In Transit / Pending</span>
+            <strong id="pendingCount">00</strong>
+            <small>Parcels</small>
+          </div>
+        </article>
+
+        <article class="stat-card purple">
+          <div class="stat-icon">
+            <i class="fa-solid fa-rotate-left"></i>
+          </div>
+
+          <div>
+            <span>Returned / Cancelled</span>
+            <strong id="returnedCount">00</strong>
+            <small>Parcels</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="parcel-toolbar">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="parcelSearchInput"
+            placeholder="Search by resident, phone, room, courier, tracking ID..."
+          />
+        </div>
+
+        <button type="button" id="clearSearchBtn">
+          <i class="fa-solid fa-xmark"></i>
+          Clear
+        </button>
+      </section>
+
+      <section class="parcel-card request-card">
+        <div class="section-tabs">
+          <button type="button" class="section-tab active" data-tab="request">
+            Request Received <span id="requestTabCount">(0)</span>
+          </button>
+
+          <button type="button" class="section-tab" data-tab="handled">
+            Handed Over <span id="handedTabCount">(0)</span>
+          </button>
+
+          <button type="button" class="section-tab" data-tab="transit">
+            In Transit <span id="transitTabCount">(0)</span>
+          </button>
+
+          <button type="button" class="section-tab" data-tab="returned">
+            Returned <span id="returnedTabCount">(0)</span>
+          </button>
+        </div>
+
+        <div class="table-head">
+          <div>
+            <h2 id="mainSectionTitle">Request Received</h2>
+            <p id="mainSectionSubtitle">Parcels received and pending action.</p>
+          </div>
+
+          <div class="table-actions">
+            <select id="parcelStatusFilter">
+              <option value="all">All Status</option>
+              <option value="Requested">Requested</option>
+              <option value="Collected by Staff">Collected by Staff</option>
+              <option value="Ready for Pickup">Ready for Pickup</option>
+              <option value="Handed Over to Resident">Handed Over</option>
+              <option value="Returned">Returned</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+
+            <button type="button" id="refreshBtn">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date / Time</th>
+                <th>Resident Details</th>
+                <th>Delivery By</th>
+                <th>Tracking / Reference ID</th>
+                <th>Additional Remarks</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="parcelTableBody">
+              <tr>
+                <td colspan="8">Loading parcels...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button class="view-all-btn" id="toggleViewAllBtn" type="button">
+          View All
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </section>
+
+      <section class="parcel-card handed-card">
+        <div class="card-title-row">
+          <div>
+            <h2>Recent Handed Over <span id="handedSectionCount">(0)</span></h2>
+            <p>Latest parcels handed over to residents.</p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Handed Over On</th>
+                <th>Resident Details</th>
+                <th>Delivery By</th>
+                <th>Tracking / Reference ID</th>
+                <th>Handover To</th>
+                <th>Additional Remarks</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="handedOverTable">
+              <tr>
+                <td colspan="8">Loading handed over parcels...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="bottom-help">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>If you are facing any issue, contact your administrator.</span>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="parcelDetailModal" hidden>
+    <section class="modal-shell detail-modal">
+      <header class="modal-header">
+        <div>
+          <h2 id="detailTrackingId">Parcel Details</h2>
+          <p id="detailStatusText">Status</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="parcelDetailModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="detail-grid" id="parcelDetailGrid"></div>
+
+        <div class="detail-note">
+          <strong>Additional Note</strong>
+          <p id="detailNotes">No additional note.</p>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" data-modal-status="Collected by Staff">
+            Mark In Transit
+          </button>
+
+          <button type="button" data-modal-status="Ready for Pickup">
+            Ready for Pickup
+          </button>
+
+          <button type="button" data-modal-status="Handed Over to Resident" class="primary">
+            Mark Handed Over
+          </button>
+
+          <button type="button" data-modal-status="Returned">
+            Returned
+          </button>
+
+          <button type="button" data-modal-status="Cancelled" class="danger">
+            Cancelled
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-overlay" id="notificationModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <div>
+          <h2>Parcel Notifications</h2>
+          <p>Unread parcel updates from Firebase.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="notificationModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="notification-list" id="notificationList">
+          <div class="empty-table">No notifications yet.</div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button type="button" id="markNotificationsReadBtn">
+          Mark all as read
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="js/parcel-management.js?v=500"></script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Announcements | Lively Legacy</title>
+
+  <link rel="stylesheet" href="css/announcements.css?v=600" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="staff-app" id="staffApp">
+    <aside class="staff-sidebar" id="staffSidebar">
+      <div class="staff-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" />
+      </div>
+
+      <nav class="staff-nav">
+        <a href="staff-dashboard.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="attendance.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Mark Attendance</span>
+        </a>
+
+        <a href="visitor-management.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Visitor Management</span>
+        </a>
+
+        <a href="parcel-management.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcel Management</span>
+        </a>
+
+        <a href="assigned-tasks.html">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span>Assigned Tasks</span>
+        </a>
+
+        <a href="moveout-settlement.html">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <span>Move-out Settlement</span>
+        </a>
+
+        <a href="announcements.html" class="active">
+          <i class="fa-solid fa-bullhorn"></i>
+          <span>Announcements</span>
+        </a>
+
+        <button type="button" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="staff-value-card">
+        <div class="value-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="staff-main">
+      <header class="staff-topbar">
+        <div class="top-left">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Announcements</h1>
+            <p id="topPropertyText">Create new announcements and view all recent announcements.</p>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <button class="notification-btn" type="button" id="notificationBtn">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notificationCount">0</span>
+          </button>
+
+          <div class="staff-profile-mini">
+            <div class="staff-avatar" id="staffAvatarText">ST</div>
+            <div>
+              <strong id="staffNameTop">Staff</strong>
+              <p id="staffEmailTop">staff@email.com</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="date-row">
+        <div>
+          <h2>Announcement Center</h2>
+          <p>Publish updates to residents and manage previous announcements.</p>
+        </div>
+
+        <div class="date-time-card">
+          <div>
+            <i class="fa-regular fa-calendar"></i>
+            <span id="todayDate">Today</span>
+          </div>
+
+          <div>
+            <i class="fa-regular fa-clock"></i>
+            <span id="currentTime">--:--</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="announcement-layout">
+        <section class="create-card">
+          <div class="card-head">
+            <h2>Create New Announcement</h2>
+            <p>Send important updates to residents of a selected property.</p>
+          </div>
+
+          <form id="announcementForm">
+            <div class="form-group">
+              <label for="announcementTitle">Title <span>*</span></label>
+              <input
+                type="text"
+                id="announcementTitle"
+                placeholder="Enter announcement title"
+                maxlength="150"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="propertySelect">Property Location <span>*</span></label>
+
+              <select id="propertySelect" required>
+                <option value="">Loading properties...</option>
+              </select>
+
+              <small>Select the property location for this announcement.</small>
+            </div>
+
+            <div class="form-group">
+              <label>Priority</label>
+
+              <div class="priority-options">
+                <button type="button" class="priority-btn high active" data-priority="High">
+                  <i class="fa-regular fa-bell"></i>
+                  High
+                </button>
+
+                <button type="button" class="priority-btn medium" data-priority="Medium">
+                  <i class="fa-solid fa-circle-info"></i>
+                  Medium
+                </button>
+
+                <button type="button" class="priority-btn low" data-priority="Low">
+                  <i class="fa-regular fa-circle-check"></i>
+                  Low
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="announcementMessage">Message <span>*</span></label>
+
+              <textarea
+                id="announcementMessage"
+                maxlength="2000"
+                placeholder="Enter your announcement message here..."
+                required
+              ></textarea>
+
+              <div class="char-count">
+                <span id="messageCount">0</span>/2000
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Attachments <small>(Optional)</small></label>
+
+              <label class="upload-box" for="attachmentInput">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <strong>Drag and drop files here or click to upload</strong>
+                <span>PDF, JPG, JPEG, PNG. Max 5 files, 5 MB each.</span>
+                <input
+                  type="file"
+                  id="attachmentInput"
+                  multiple
+                  accept=".pdf,.jpg,.jpeg,.png,image/jpeg,image/png,application/pdf"
+                />
+              </label>
+
+              <div class="attachment-list" id="attachmentList"></div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="clear-btn" id="clearBtn">
+                Clear All
+              </button>
+
+              <button type="submit" class="publish-btn" id="publishBtn">
+                <i class="fa-regular fa-paper-plane"></i>
+                Publish Announcement
+              </button>
+            </div>
+          </form>
+
+          <div class="important-notes">
+            <strong>Important Notes</strong>
+            <ul>
+              <li>Ensure all information is accurate before publishing.</li>
+              <li>Announcements will be visible to residents of the selected property.</li>
+              <li>You can delete an announcement after publishing.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="recent-card">
+          <div class="recent-top">
+            <div>
+              <h2>Recent Announcements</h2>
+              <p>View announcements published for your assigned property.</p>
+            </div>
+
+            <div class="recent-actions">
+              <select id="announcementFilter">
+                <option value="All Announcements">All Announcements</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+
+              <button type="button" id="refreshBtn">
+                <i class="fa-solid fa-filter"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="announcement-list" id="announcementList">
+            <div class="empty-box">Loading announcements...</div>
+          </div>
+
+          <div class="list-footer">
+            <span id="showingText">Showing 0 announcements</span>
+
+            <div class="pagination" id="paginationBox">
+              <button type="button" id="prevPageBtn">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+
+              <button type="button" class="active" id="pageOneBtn">1</button>
+              <button type="button" id="pageTwoBtn">2</button>
+              <button type="button" id="pageThreeBtn">3</button>
+
+              <button type="button" id="nextPageBtn">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <div class="bottom-help">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>If you are facing any issue, contact your administrator.</span>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="announcementDetailsModal" hidden>
+    <section class="modal-shell details-modal">
+      <header class="modal-header">
+        <div>
+          <h2>Announcement Details</h2>
+          <p>View full announcement information and attachments.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="announcementDetailsModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body" id="announcementDetailsBody"></div>
+    </section>
+  </div>
+
+  <div class="modal-overlay" id="notificationModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <div>
+          <h2>Announcement Notifications</h2>
+          <p>Unread publish and delete activity.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="notificationModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="notification-list" id="notificationList">
+          <div class="empty-box">No unread notifications.</div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button type="button" id="markNotificationsReadBtn">
+          Mark all as read
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="js/announcements.js?v=600"></script>
+</body>
+</html>

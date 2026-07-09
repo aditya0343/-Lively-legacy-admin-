@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>All Properties | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/properties.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <div class="admin-app" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <div class="nav-dropdown active" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html" class="active-sub">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content properties-page">
+      <header class="properties-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <h1>Properties</h1>
+        </div>
+
+        <div class="properties-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="topSearchInput"
+            placeholder="Search properties, locations..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="changePasswordBtn" type="button">
+                <i class="fa-solid fa-lock"></i>
+                Change Password
+              </button>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="properties-subheader">
+        <div>
+          <div class="breadcrumb">
+            <a href="admin-home.html">Dashboard</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <button type="button" id="breadcrumbPropertiesBtn">Properties</button>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>All Properties</strong>
+          </div>
+
+          <h2>All Properties</h2>
+          <p>Manage properties, rooms, beds, locations, amenities, images and occupancy.</p>
+        </div>
+
+        <div class="property-actions">
+          <button class="export-btn" id="exportBtn" type="button">
+            <i class="fa-solid fa-download"></i>
+            Export
+          </button>
+
+          <button class="add-property-btn" id="openAddPropertyBtn" type="button">
+            <i class="fa-solid fa-plus"></i>
+            Add Property
+          </button>
+        </div>
+      </section>
+
+      <section class="property-stats-grid">
+        <article class="property-stat-card">
+          <div class="property-stat-icon navy">
+            <i class="fa-solid fa-building"></i>
+          </div>
+
+          <div>
+            <p>Total Properties</p>
+            <h2 id="totalProperties">0</h2>
+            <small>Active Properties <span id="activeProperties">0</span></small>
+          </div>
+        </article>
+
+        <article class="property-stat-card">
+          <div class="property-stat-icon gold">
+            <i class="fa-solid fa-door-open"></i>
+          </div>
+
+          <div>
+            <p>Total Rooms</p>
+            <h2 id="totalRooms">0</h2>
+            <small>Available Rooms <span id="availableRooms">0</span></small>
+          </div>
+        </article>
+
+        <article class="property-stat-card">
+          <div class="property-stat-icon red">
+            <i class="fa-solid fa-bed"></i>
+          </div>
+
+          <div>
+            <p>Total Beds</p>
+            <h2 id="totalBeds">0</h2>
+            <small>Available Beds <span id="availableBeds">0</span></small>
+          </div>
+        </article>
+
+        <article class="property-stat-card">
+          <div class="property-stat-icon purple">
+            <i class="fa-solid fa-users"></i>
+          </div>
+
+          <div>
+            <p>Total Occupancy</p>
+            <h2 id="totalOccupancy">0%</h2>
+            <small>Live Firebase Data</small>
+          </div>
+        </article>
+
+        <article class="property-stat-card wide">
+          <div class="property-stat-icon green">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+          </div>
+
+          <div>
+            <p>Monthly Revenue</p>
+            <h2 id="monthlyRevenue">₹0</h2>
+            <small class="positive">
+              <i class="fa-solid fa-arrow-up"></i>
+              Auto fetched
+            </small>
+          </div>
+        </article>
+      </section>
+
+      <section class="properties-layout">
+        <div class="properties-main-card">
+          <div class="filters-row">
+            <div class="filter-search">
+              <input
+                type="text"
+                id="tableSearchInput"
+                placeholder="Search by property name, location, state or PIN..."
+              />
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <select id="statusFilter">
+              <option value="">Status: All</option>
+              <option value="active">Active</option>
+              <option value="available">Available</option>
+              <option value="inactive">Inactive</option>
+              <option value="under_maintenance">Under Maintenance</option>
+            </select>
+
+            <select id="cityFilter">
+              <option value="">City: All</option>
+            </select>
+
+            <select id="typeFilter">
+              <option value="">Property Type: All</option>
+              <option value="PG">PG</option>
+              <option value="Co-Living">Co-Living</option>
+              <option value="Hostel">Hostel</option>
+              <option value="Apartment">Apartment</option>
+            </select>
+
+            <button id="clearFiltersBtn" type="button">
+              <i class="fa-solid fa-xmark"></i>
+              Clear Filters
+            </button>
+          </div>
+
+          <div class="properties-table-wrap">
+            <table class="properties-table">
+              <thead>
+                <tr>
+                  <th>Property Details</th>
+                  <th>Property Type</th>
+                  <th>Location</th>
+                  <th>Rooms</th>
+                  <th>Beds</th>
+                  <th>Occupancy</th>
+                  <th>Status</th>
+                  <th>Monthly Revenue</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="propertiesTableBody">
+                <tr>
+                  <td colspan="9" class="empty-table">Loading properties...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <p id="tableShowingText">Showing 0 properties</p>
+            <div class="pagination" id="pagination"></div>
+          </div>
+        </div>
+
+        <aside class="properties-side">
+          <article class="side-card">
+            <h3>Property Status Overview</h3>
+
+            <div class="status-chart-layout">
+              <div class="status-chart-box">
+                <canvas id="propertyStatusChart"></canvas>
+              </div>
+
+              <div class="status-legend" id="statusLegend"></div>
+            </div>
+          </article>
+
+          <article class="side-card">
+            <h3>Quick Actions</h3>
+
+            <div class="quick-list">
+              <button type="button" id="sideAddPropertyBtn">
+                <i class="fa-regular fa-square-plus"></i>
+                <span>Add New Property</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+
+              <button type="button" id="bulkUploadBtn">
+                <i class="fa-solid fa-file-arrow-up"></i>
+                <span>Bulk Upload Properties</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+
+              <button type="button" id="importExcelBtn">
+                <i class="fa-solid fa-file-excel"></i>
+                <span>Import from Excel</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+
+              <a href="rooms.html">
+                <i class="fa-solid fa-door-open"></i>
+                <span>Manage Rooms</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+
+              <a href="beds.html">
+                <i class="fa-solid fa-bed"></i>
+                <span>Manage Beds</span>
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="managed-card">
+            <div class="managed-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+              <h3>Well Managed Properties</h3>
+              <p>Better management leads to higher occupancy and resident satisfaction.</p>
+
+              <a href="reports.html">
+                <i class="fa-solid fa-chart-column"></i>
+                View Reports
+              </a>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <footer class="footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 1.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="property-modal-overlay" id="addPropertyModal" hidden>
+    <section class="property-modal-shell">
+      <header class="add-modal-header">
+        <button class="modal-icon-btn" id="closeAddPropertyBtn" type="button">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Property</h2>
+          <p>Same Firebase structure as admin mobile app.</p>
+        </div>
+
+        <button class="modal-icon-btn" id="helpAddPropertyBtn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <div class="add-stepper" id="addStepHeader">
+        <button type="button" data-step="0" class="active">
+          <b>1</b>
+          <span>Details</span>
+        </button>
+
+        <button type="button" data-step="1">
+          <b>2</b>
+          <span>Amenities</span>
+        </button>
+
+        <button type="button" data-step="2">
+          <b>3</b>
+          <span>Address</span>
+        </button>
+
+        <button type="button" data-step="3">
+          <b>4</b>
+          <span>Images</span>
+        </button>
+
+        <button type="button" data-step="4">
+          <b>5</b>
+          <span>Review</span>
+        </button>
+      </div>
+
+      <form class="add-property-form" id="addPropertyForm">
+        <section class="wizard-step active" data-step-panel="0">
+          <div class="form-card">
+            <h3>Property Details</h3>
+
+            <div class="field-grid">
+              <label>
+                <span>Property Name *</span>
+                <input id="propertyNameInput" type="text" placeholder="Enter property name" required />
+              </label>
+
+              <label>
+                <span>Property Type *</span>
+                <input id="propertyTypeInput" type="text" placeholder="PG" value="PG" required />
+              </label>
+
+              <label>
+                <span>Property Status *</span>
+                <select id="propertyStatusInput" required>
+                  <option value="active">Active</option>
+                  <option value="available">Available</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="under_maintenance">Under Maintenance</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Notice Period (Days) *</span>
+                <input id="noticePeriodInput" type="number" min="0" placeholder="Enter notice period" required />
+              </label>
+
+              <label>
+                <span>Advance Rent (₹) *</span>
+                <input id="advanceRentInput" type="number" min="0" placeholder="Enter advance rent" required />
+              </label>
+
+              <label>
+                <span>Security Deposit (Months) *</span>
+                <input id="securityDepositInput" type="number" min="0" placeholder="Enter deposit months" required />
+              </label>
+            </div>
+
+            <label class="full-field">
+              <span>Description *</span>
+              <textarea id="descriptionInput" rows="5" maxlength="300" placeholder="Enter property description" required></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="wizard-step" data-step-panel="1">
+          <div class="form-card">
+            <h3>Amenities</h3>
+            <div class="amenity-groups" id="amenityGroups"></div>
+          </div>
+        </section>
+
+        <section class="wizard-step" data-step-panel="2">
+          <div class="form-card">
+            <h3>Address & Exact Location</h3>
+
+            <label class="full-field geo-search-wrap">
+              <span>Search Place Name *</span>
+              <input
+                id="placeSearchInput"
+                type="text"
+                placeholder="Type area, landmark, building, city or PIN code"
+                autocomplete="off"
+              />
+
+              <div class="geo-loading" id="geoLoading" hidden>
+                Searching location...
+              </div>
+
+              <div class="geo-suggestions" id="geoSuggestions" hidden></div>
+            </label>
+
+            <label class="full-field">
+              <span>Full Address *</span>
+              <textarea id="addressInput" rows="3" placeholder="Auto-filled address or enter full address" required></textarea>
+            </label>
+
+            <label class="full-field">
+              <span>Landmark</span>
+              <input id="landmarkInput" type="text" placeholder="Nearby landmark" />
+            </label>
+
+            <div class="field-grid">
+              <label>
+                <span>City *</span>
+                <input id="cityInput" type="text" placeholder="City" required />
+              </label>
+
+              <label>
+                <span>State *</span>
+                <input id="stateInput" type="text" placeholder="State" required />
+              </label>
+
+              <label>
+                <span>PIN Code *</span>
+                <input id="pinCodeInput" type="text" placeholder="PIN code" required />
+              </label>
+
+              <label>
+                <span>Country *</span>
+                <input id="countryInput" type="text" placeholder="India" value="India" required />
+              </label>
+            </div>
+
+            <div class="map-box" id="propertyMap"></div>
+
+            <p class="map-note" id="mapNote">
+              Start typing and select a Geoapify location from the dropdown. You can also tap the map to adjust the marker.
+            </p>
+          </div>
+        </section>
+
+        <section class="wizard-step" data-step-panel="3">
+          <div class="form-card">
+            <h3>Property Images</h3>
+
+            <label class="upload-box">
+              <input id="propertyImagesInput" type="file" accept="image/*" multiple hidden />
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <strong>Click to upload property images</strong>
+              <span>JPG, PNG or WEBP. Saved in Firestore. Max 15 images.</span>
+            </label>
+
+            <div class="image-preview-grid" id="imagePreviewGrid">
+              <div class="empty-upload">No images selected</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="wizard-step" data-step-panel="4">
+          <div class="form-card">
+            <h3>Review & Save</h3>
+            <div class="review-list" id="reviewList"></div>
+          </div>
+        </section>
+      </form>
+
+      <footer class="add-modal-footer">
+        <button class="wizard-back-btn" id="wizardBackBtn" type="button">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back
+        </button>
+
+        <button class="wizard-next-btn" id="wizardNextBtn" type="button">
+          Next
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="password-modal-overlay" id="passwordModal" hidden>
+    <form class="password-card" id="passwordForm">
+      <h3>Change Password</h3>
+      <p id="passwordAccountText">Enter your new password.</p>
+
+      <label>
+        New Password
+        <input type="password" id="newPasswordInput" minlength="6" required />
+      </label>
+
+      <label>
+        Confirm Password
+        <input type="password" id="confirmPasswordInput" minlength="6" required />
+      </label>
+
+      <div class="password-actions">
+        <button type="button" id="cancelPasswordBtn">Cancel</button>
+        <button type="submit">Update Password</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/properties.js?v=50"></script>
+</body>
+</html>

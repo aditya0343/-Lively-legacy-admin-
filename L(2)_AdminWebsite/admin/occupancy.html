@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Occupancy | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="stylesheet" href="../css/occupancy.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="admin-app occupancy-page" id="adminApp">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <div class="nav-dropdown active" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+            <a href="occupancy.html" class="active-sub">Occupancy</a>
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+        </a>
+
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- MAIN -->
+    <main class="main-content occupancy-main">
+
+      <!-- TOPBAR -->
+      <header class="occupancy-topbar">
+
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <h1>Occupancy</h1>
+        </div>
+
+        <div class="occupancy-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search residents, rooms, beds, properties..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </header>
+
+      <!-- SUBHEADER -->
+      <section class="occupancy-subheader">
+        <div class="breadcrumb">
+          <a href="admin-home.html">Dashboard</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <a href="properties.html">Properties</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <strong>Occupancy</strong>
+        </div>
+
+        <div class="occupancy-actions">
+          <button class="export-btn" type="button" id="exportReportBtn">
+            <i class="fa-solid fa-download"></i>
+            Export Report
+          </button>
+
+          <button class="download-btn" type="button" id="downloadExcelBtn">
+            <i class="fa-solid fa-file-excel"></i>
+            Download Excel
+          </button>
+        </div>
+      </section>
+
+      <!-- PROPERTY SELECTOR -->
+      <section class="property-selector-wrap">
+        <p>Select Property</p>
+
+        <div class="property-selector" id="propertySelector">
+          <button class="property-select-card active" type="button" data-property-id="all">
+            <div class="property-select-icon">
+              <i class="fa-solid fa-building"></i>
+            </div>
+
+            <div>
+              <strong>All Properties</strong>
+              <span>View overall occupancy</span>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- STATS -->
+      <section class="occupancy-stats-grid">
+
+        <article class="occupancy-stat-card">
+          <div class="occupancy-stat-icon navy">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+
+          <div>
+            <p>Overall Occupancy</p>
+            <h2 id="overallOccupancyValue">0%</h2>
+            <small id="overallOccupancySub">0 occupied beds</small>
+          </div>
+        </article>
+
+        <article class="occupancy-stat-card">
+          <div class="occupancy-stat-icon green">
+            <i class="fa-solid fa-bed"></i>
+          </div>
+
+          <div>
+            <p>Occupied Beds</p>
+            <h2 id="occupiedBedsValue">0 / 0</h2>
+            <small id="occupiedBedsSub">0 beds occupied</small>
+          </div>
+        </article>
+
+        <article class="occupancy-stat-card">
+          <div class="occupancy-stat-icon gold">
+            <i class="fa-solid fa-bed-pulse"></i>
+          </div>
+
+          <div>
+            <p>Available Beds</p>
+            <h2 id="availableBedsValue">0 / 0</h2>
+            <small id="availableBedsSub">0 beds available</small>
+          </div>
+        </article>
+
+        <article class="occupancy-stat-card">
+          <div class="occupancy-stat-icon purple">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+          </div>
+
+          <div>
+            <p>Under Maintenance</p>
+            <h2 id="maintenanceBedsValue">0</h2>
+            <small id="maintenanceBedsSub">0 beds maintenance</small>
+          </div>
+        </article>
+
+        <article class="occupancy-stat-card">
+          <div class="occupancy-stat-icon red">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+          </div>
+
+          <div>
+            <p>Vacant Beds</p>
+            <h2 id="vacantBedsValue">0</h2>
+            <small id="vacantBedsSub">0 vacant beds</small>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- FILTERS -->
+      <section class="occupancy-filter-card">
+
+        <div class="filter-group">
+          <label for="timePeriodFilter">Time Period</label>
+          <select id="timePeriodFilter">
+            <option value="this-month">This Month</option>
+            <option value="last-month">Last Month</option>
+            <option value="this-week">This Week</option>
+            <option value="all">All Time</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="floorFilter">Floor</label>
+          <select id="floorFilter">
+            <option value="all">All Floors</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="roomTypeFilter">Room Type</label>
+          <select id="roomTypeFilter">
+            <option value="all">All Types</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="bedTypeFilter">Bed Type</label>
+          <select id="bedTypeFilter">
+            <option value="all">All Types</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="statusFilter">Status</label>
+          <select id="statusFilter">
+            <option value="all">All Status</option>
+            <option value="occupied">Occupied</option>
+            <option value="available">Available</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="reserved">Reserved</option>
+          </select>
+        </div>
+
+        <button type="button" id="clearFiltersBtn">
+          <i class="fa-solid fa-xmark"></i>
+          Clear
+        </button>
+
+      </section>
+
+      <!-- DASHBOARD GRID -->
+      <section class="occupancy-grid">
+
+        <article class="panel-card trend-card">
+          <div class="panel-head">
+            <h3>Occupancy Trend</h3>
+            <select id="trendRangeSelect">
+              <option value="this-month">This Month</option>
+              <option value="this-week">This Week</option>
+              <option value="all">All Time</option>
+            </select>
+          </div>
+
+          <div class="trend-chart-box">
+            <canvas id="occupancyTrendChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel-card floor-card">
+          <div class="panel-head">
+            <h3>Occupancy by Floor</h3>
+            <select id="floorSummarySelect">
+              <option value="this-month">This Month</option>
+              <option value="all">All Time</option>
+            </select>
+          </div>
+
+          <div class="floor-table-wrap">
+            <table class="mini-table">
+              <thead>
+                <tr>
+                  <th>Floor</th>
+                  <th>Occupied</th>
+                  <th>Available</th>
+                  <th>Occupancy</th>
+                </tr>
+              </thead>
+              <tbody id="floorSummaryBody">
+                <tr>
+                  <td colspan="4" class="empty-row-small">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel-card room-type-card">
+          <h3>Occupancy by Room Type</h3>
+
+          <div class="chart-layout">
+            <div class="donut-box">
+              <canvas id="roomTypeChart"></canvas>
+
+              <div class="chart-center">
+                <strong id="roomTypeCenter">0%</strong>
+                <span>Overall</span>
+              </div>
+            </div>
+
+            <div class="chart-legend" id="roomTypeLegend"></div>
+          </div>
+        </article>
+
+        <article class="panel-card property-table-card">
+          <h3>Occupancy by Property</h3>
+
+          <div class="property-table-wrap">
+            <table class="property-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Total Beds</th>
+                  <th>Occupied</th>
+                  <th>Available</th>
+                  <th>Maintenance</th>
+                  <th>Occupancy %</th>
+                </tr>
+              </thead>
+
+              <tbody id="propertySummaryBody">
+                <tr>
+                  <td colspan="6" class="empty-row-small">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel-card vacant-card">
+          <h3>Vacant & Maintenance Overview</h3>
+
+          <div class="chart-layout">
+            <div class="donut-box">
+              <canvas id="vacancyChart"></canvas>
+
+              <div class="chart-center">
+                <strong id="vacancyCenter">0</strong>
+                <span>Total Beds</span>
+              </div>
+            </div>
+
+            <div class="chart-legend" id="vacancyLegend"></div>
+          </div>
+        </article>
+
+        <article class="panel-card summary-card">
+          <h3>Occupancy Summary</h3>
+
+          <div class="summary-list" id="occupancySummaryList">
+            <div class="summary-item">
+              <i class="fa-solid fa-circle-info"></i>
+              <div>
+                <strong>Loading</strong>
+                <span>Fetching occupancy data...</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <footer class="occupancy-footer">
+        <p>© 2026 Lively Legacy Accommodations (Y). All rights reserved.</p>
+        <p>Version 1.0.0</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <script type="module" src="../js/occupancy.js?v=1"></script>
+</body>
+</html>

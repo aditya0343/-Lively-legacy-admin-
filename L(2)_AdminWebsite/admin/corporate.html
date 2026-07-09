@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Corporate Management | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/corporate.css?v=500" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="admin-app corporate-page" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+            
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html" class="active">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content corporate-main">
+      <header class="corporate-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="top-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search corporate name, contact, property..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="refresh-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <span>Dashboard</span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Corporate Management</strong>
+          </div>
+
+          <h1>Corporate Management</h1>
+          <p>Manage corporate clients, contracts, allotments and billing details.</p>
+        </div>
+
+        <button type="button" class="primary-btn" id="addCorporateBtn">
+          <i class="fa-solid fa-plus"></i>
+          Add Corporate
+        </button>
+      </section>
+
+      <section class="corporate-stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon blue">
+            <i class="fa-solid fa-building"></i>
+          </div>
+          <div>
+            <h2 id="totalCorporateValue">0</h2>
+            <p>Total Corporates</p>
+            <small>All time</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <h2 id="activeCorporateValue">0</h2>
+            <p>Active Corporates</p>
+            <small>Currently active</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon orange">
+            <i class="fa-solid fa-file-lines"></i>
+          </div>
+          <div>
+            <h2 id="activeContractsValue">0</h2>
+            <p>Active Contracts</p>
+            <small>Ongoing</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon purple">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div>
+            <h2 id="corporateResidentsValue">0</h2>
+            <p>Residents</p>
+            <small>Under corporates</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon cyan">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <div>
+            <h2 id="contractValueValue">₹0</h2>
+            <p>Contract Value</p>
+            <small>Monthly total</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="chart-grid">
+        <article class="panel-card">
+          <h3>Corporate Status Chart</h3>
+          <p>Live status distribution from Firebase corporates.</p>
+          <div class="bar-chart" id="corporateStatusChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Contract Status Chart</h3>
+          <p>Live contract status distribution from Firebase contracts.</p>
+          <div class="bar-chart" id="contractStatusChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Industry Chart</h3>
+          <p>Corporate clients grouped by industry.</p>
+          <div class="bar-chart" id="industryChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Property Contract Value Chart</h3>
+          <p>Monthly corporate contract value by property.</p>
+          <div class="bar-chart" id="propertyContractValueChart"></div>
+        </article>
+      </section>
+
+      <section class="filter-card">
+        <div class="filter-search">
+          <input
+            type="text"
+            id="corporateSearchInput"
+            placeholder="Search by corporate name, email, phone..."
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <select id="statusFilter">
+          <option>All Status</option>
+        </select>
+
+        <select id="propertyFilter">
+          <option>All Properties</option>
+        </select>
+
+        <select id="contractFilter">
+          <option>All Contracts</option>
+        </select>
+
+        <button type="button" class="reset-btn" id="resetFiltersBtn">
+          <i class="fa-solid fa-xmark"></i>
+          Reset
+        </button>
+      </section>
+
+      <section class="corporate-content-grid">
+        <div class="corporate-left">
+          <section class="panel-card">
+            <div class="panel-head">
+              <div>
+                <h3>Corporate Clients</h3>
+                <p id="tableSummary">Loading corporate records...</p>
+              </div>
+            </div>
+
+            <div class="corporate-list" id="corporateList">
+              <div class="empty-state">Loading corporates...</div>
+            </div>
+          </section>
+
+          <section class="panel-card recent-contracts-card">
+            <div class="panel-head">
+              <div>
+                <h3>Recent Contracts</h3>
+                <p>Latest corporate contracts and billing setup.</p>
+              </div>
+            </div>
+
+            <div class="contracts-list" id="contractsList">
+              <div class="empty-state small">Loading contracts...</div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="panel-card details-panel">
+          <h3>Corporate Details</h3>
+          <p id="detailsSubtitle">Select a corporate to view details.</p>
+
+          <div id="corporateDetailsBody">
+            <div class="empty-state small">No corporate selected.</div>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="corporate-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ADD CORPORATE MODAL -->
+  <div class="modal-overlay" id="corporateModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="corporateModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Corporate</h2>
+          <p>Add corporate client, contract details, allotment information and billing setup.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="corporateForm">
+        <div class="add-layout">
+          <div class="add-form-area">
+            <section class="form-card">
+              <h3>1. Corporate Information</h3>
+
+              <label>
+                <span>Corporate Name *</span>
+                <input type="text" id="corporateNameInput" required placeholder="Enter corporate name" />
+              </label>
+
+              <div class="form-grid">
+                <label>
+                  <span>Company Email</span>
+                  <input type="email" id="companyEmailInput" placeholder="name@company.com" />
+                </label>
+
+                <label>
+                  <span>Company Phone *</span>
+                  <input type="tel" id="companyPhoneInput" required placeholder="+91 phone number" />
+                </label>
+              </div>
+
+              <div class="form-grid">
+                <label>
+                  <span>Industry Type</span>
+                  <select id="industryTypeInput">
+                    <option>Technology</option>
+                    <option>Consulting</option>
+                    <option>Healthcare</option>
+                    <option>Finance</option>
+                    <option>Education</option>
+                    <option>Manufacturing</option>
+                    <option>Retail</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>GST Number</span>
+                  <input type="text" id="gstNumberInput" placeholder="Enter GST number" />
+                </label>
+              </div>
+
+              <label>
+                <span>Corporate Address</span>
+                <textarea id="corporateAddressInput" rows="3" placeholder="Enter complete corporate address"></textarea>
+              </label>
+
+              <label>
+                <span>Company Logo URL</span>
+                <input type="url" id="companyLogoUrlInput" placeholder="Optional logo URL" />
+              </label>
+            </section>
+
+            <section class="form-card">
+              <h3>2. Contact Person Details</h3>
+
+              <div class="form-grid">
+                <label>
+                  <span>Contact Person Name *</span>
+                  <input type="text" id="contactPersonNameInput" required placeholder="Enter contact person name" />
+                </label>
+
+                <label>
+                  <span>Designation</span>
+                  <input type="text" id="designationInput" placeholder="Enter designation" />
+                </label>
+              </div>
+
+              <div class="form-grid">
+                <label>
+                  <span>Email Address</span>
+                  <input type="email" id="contactEmailInput" placeholder="name@company.com" />
+                </label>
+
+                <label>
+                  <span>Phone Number *</span>
+                  <input type="tel" id="contactPhoneInput" required placeholder="+91 phone number" />
+                </label>
+              </div>
+
+              <label>
+                <span>Alternate Contact Number</span>
+                <input type="tel" id="alternateContactNumberInput" placeholder="Optional alternate number" />
+              </label>
+            </section>
+
+            <section class="form-card">
+              <h3>3. Contract Details</h3>
+
+              <div class="form-grid">
+                <label>
+                  <span>Contract Start Date</span>
+                  <input type="date" id="contractStartDateInput" />
+                </label>
+
+                <label>
+                  <span>Contract End Date</span>
+                  <input type="date" id="contractEndDateInput" />
+                </label>
+              </div>
+
+              <div class="form-grid">
+                <label>
+                  <span>Notice Period</span>
+                  <input type="number" id="noticePeriodDaysInput" min="0" value="30" placeholder="30 days" />
+                </label>
+
+                <label>
+                  <span>Billing Cycle</span>
+                  <select id="billingCycleInput">
+                    <option>Monthly</option>
+                    <option>Quarterly</option>
+                    <option>Half Yearly</option>
+                    <option>Yearly</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="form-grid">
+                <label>
+                  <span>Payment Terms</span>
+                  <select id="paymentTermsInput">
+                    <option>Immediate</option>
+                    <option>Net 7 Days</option>
+                    <option selected>Net 15 Days</option>
+                    <option>Net 30 Days</option>
+                    <option>Net 45 Days</option>
+                  </select>
+                </label>
+
+                <label>
+                  <span>Security Deposit</span>
+                  <input type="number" id="securityDepositInput" min="0" placeholder="Enter security deposit" />
+                </label>
+              </div>
+
+              <label>
+                <span>Monthly Contract Value *</span>
+                <input type="number" id="monthlyContractValueInput" min="0" required placeholder="Enter monthly value" />
+              </label>
+
+              <label>
+                <span>Agreement URL</span>
+                <input type="url" id="agreementUrlInput" placeholder="Upload agreement PDF and paste URL" />
+              </label>
+            </section>
+
+            <section class="form-card">
+              <h3>4. Allotment Details</h3>
+
+              <label>
+                <span>Property *</span>
+                <select id="corporatePropertyInput" required>
+                  <option value="">Select property</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Room Type / Bed Type *</span>
+                <select id="roomTypeInput" required>
+                  <option value="">Select property first</option>
+                </select>
+              </label>
+
+              <div class="available-bed-box">
+                <div class="available-bed-head">
+                  <div>
+                    <strong>Available Beds</strong>
+                    <p>Select actual available beds. Total beds allotted will be auto-counted.</p>
+                  </div>
+                  <span id="selectedBedsCount">0 selected</span>
+                </div>
+
+                <div class="beds-picker" id="bedsPicker">
+                  Select property and room type to view available beds.
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <label>
+                  <span>Status</span>
+                  <select id="corporateStatusInput">
+                    <option>Active</option>
+                    <option>Expiring Soon</option>
+                    <option>Inactive</option>
+                    <option>Draft</option>
+                  </select>
+                </label>
+
+                <label class="switch-label">
+                  <span>Reserved for Employees</span>
+                  <input type="checkbox" id="reservedForEmployeesInput" checked />
+                </label>
+              </div>
+
+              <label>
+                <span>Notes / Special Terms</span>
+                <textarea id="notesInput" rows="3" placeholder="Enter special terms or notes"></textarea>
+              </label>
+            </section>
+          </div>
+
+          <aside class="form-summary-card">
+            <h3>Corporate Summary</h3>
+            <p>Live summary before creating corporate.</p>
+
+            <div class="summary-logo" id="summaryLogo">C</div>
+
+            <div class="summary-line">
+              <span>Corporate</span>
+              <strong id="summaryCorporateName">Corporate Name</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Status</span>
+              <strong id="summaryStatus">Active</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Contact Person</span>
+              <strong id="summaryContactPerson">-</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Contact Phone</span>
+              <strong id="summaryContactPhone">-</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Property</span>
+              <strong id="summaryProperty">-</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Contract Period</span>
+              <strong id="summaryDates">-</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Beds Allotted</span>
+              <strong id="summaryBeds">0</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Occupancy Type</span>
+              <strong id="summaryOccupancy">-</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Billing Cycle</span>
+              <strong id="summaryBillingCycle">Monthly</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Monthly Value</span>
+              <strong id="summaryMonthlyValue">-</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Security Deposit</span>
+              <strong id="summaryDeposit">-</strong>
+            </div>
+
+            <div class="checklist">
+              <p><i class="fa-regular fa-circle"></i> Corporate information added</p>
+              <p><i class="fa-regular fa-circle"></i> Contact person details added</p>
+              <p><i class="fa-regular fa-circle"></i> Contract details and billing terms added</p>
+              <p><i class="fa-regular fa-circle"></i> Allotment setup completed</p>
+            </div>
+          </aside>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="secondary-btn" type="button" data-close-modal="corporateModal">Cancel</button>
+        <button class="secondary-btn" type="button" id="saveDraftBtn">Save Draft</button>
+        <button class="primary-btn" type="submit" form="corporateForm" id="createCorporateBtn">
+          <i class="fa-solid fa-check"></i>
+          Create Corporate
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- DETAILS MODAL -->
+  <div class="modal-overlay" id="detailsModal" hidden>
+    <section class="modal-shell details-modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="detailsModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2 id="detailsModalTitle">Corporate Details</h2>
+          <p id="detailsModalSubtitle">Complete corporate information.</p>
+        </div>
+
+        <button class="modal-icon-btn danger" type="button" id="deleteFromModalBtn">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-card" id="detailsModalBody">
+          Loading details...
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/corporate.js?v=500"></script>
+</body>
+</html>

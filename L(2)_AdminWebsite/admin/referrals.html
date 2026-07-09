@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Referral Management | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/referrals.css?v=700" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="admin-app referrals-page" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+           
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html" class="active">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content referrals-main">
+      <header class="referrals-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="top-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search referrals, residents, properties..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="top-action-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <a href="admin-home.html">Dashboard</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Referral Management</strong>
+          </div>
+
+          <h1>Referral Management</h1>
+          <p>Track referrals, referred-to move-in status and approve rewards for next month bill adjustment.</p>
+        </div>
+
+        <button class="gold-btn" type="button" id="openReferralModalBtn">
+          <i class="fa-solid fa-plus"></i>
+          Add Referral
+        </button>
+      </section>
+
+      <section class="referral-stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon blue">
+            <i class="fa-solid fa-user-plus"></i>
+          </div>
+          <div>
+            <h2 id="totalReferralsValue">0</h2>
+            <p>Total Referrals</p>
+            <small>All time</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div>
+            <h2 id="convertedReferralsValue">0</h2>
+            <p>Converted Referrals</p>
+            <small>Moved in</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon orange">
+            <i class="fa-solid fa-gift"></i>
+          </div>
+          <div>
+            <h2 id="totalRewardsValue">₹0</h2>
+            <p>Total Rewards</p>
+            <small>Approved / paid</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon purple">
+            <i class="fa-solid fa-hourglass-half"></i>
+          </div>
+          <div>
+            <h2 id="pendingRewardsValue">0</h2>
+            <p>Rewards Pending</p>
+            <small>Awaiting approval</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon cyan">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <div>
+            <h2 id="paidRewardsValue">0</h2>
+            <p>Rewards Paid</p>
+            <small>Adjusted or paid</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="analytics-grid">
+        <article class="panel-card">
+          <h3>Booking Status Chart</h3>
+          <p>Live referral booking status split from Firebase.</p>
+          <div class="donut-wrap">
+            <div class="donut-chart" id="bookingDonutChart">
+              <div class="donut-center">
+                <strong id="donutTotalValue">0</strong>
+                <span>Referrals</span>
+              </div>
+            </div>
+            <div class="legend-list" id="bookingLegendList"></div>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Reward Status Chart</h3>
+          <p>Reward approval, adjustment, paid and rejected status.</p>
+          <div class="bar-list" id="rewardStatusChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Reward Amount Chart</h3>
+          <p>Reward amount grouped by status in rupees.</p>
+          <div class="bar-list" id="rewardAmountChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Property Wise Referrals</h3>
+          <p>Referral count grouped by property.</p>
+          <div class="bar-list" id="propertyReferralChart"></div>
+        </article>
+      </section>
+
+      <section class="filter-card">
+        <div class="filter-search">
+          <input
+            type="text"
+            id="referralSearchInput"
+            placeholder="Search by referrer, code or referred resident..."
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <select id="propertyFilter">
+          <option>All Properties</option>
+        </select>
+
+        <select id="bookingStatusFilter">
+          <option>All Booking Status</option>
+        </select>
+
+        <select id="rewardStatusFilter">
+          <option>All Reward Status</option>
+        </select>
+
+        <button type="button" id="resetFiltersBtn">
+          <i class="fa-solid fa-xmark"></i>
+          Reset
+        </button>
+      </section>
+
+      <section class="content-grid">
+        <section class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Referral & Referred To Status</h3>
+              <p id="tableSummary">Loading referral records...</p>
+            </div>
+          </div>
+
+          <div class="referral-list" id="referralList">
+            <div class="empty-state">Loading referrals...</div>
+          </div>
+        </section>
+
+        <aside class="panel-card approval-panel">
+          <h3>Approve / Decline Referral</h3>
+          <p>Approve custom reward after referred resident moves in.</p>
+
+          <div class="approval-list" id="approvalList">
+            <div class="empty-state small">No reward approval pending.</div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel-card workflow-card">
+        <h3>How Referral Rewards Work</h3>
+        <p>Reward is allowed after referred-to resident is moved in.</p>
+
+        <div class="workflow-grid">
+          <div class="workflow-step">
+            <span class="wf-icon blue"><i class="fa-solid fa-user-plus"></i></span>
+            <strong>Referral Submitted</strong>
+            <p>Referrer shares code and referred person registers.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="wf-icon orange"><i class="fa-solid fa-bullseye"></i></span>
+            <strong>Lead Created</strong>
+            <p>Lead is created using referral code.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="wf-icon gold"><i class="fa-solid fa-calendar-check"></i></span>
+            <strong>Booking Confirmed</strong>
+            <p>Booking is done by referred person.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="wf-icon green"><i class="fa-solid fa-right-to-bracket"></i></span>
+            <strong>Moved In</strong>
+            <p>Referred person moves in and stays active.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="wf-icon purple"><i class="fa-solid fa-user-shield"></i></span>
+            <strong>Admin Approval</strong>
+            <p>Admin enters custom reward amount.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="wf-icon blue"><i class="fa-solid fa-receipt"></i></span>
+            <strong>Next Bill Adjusted</strong>
+            <p>Reward is credited in next month bill.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="referrals-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Add Referral Modal -->
+  <div class="modal-overlay" id="referralModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="referralModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Referral</h2>
+          <p>Add referrer, referred-to resident, booking status and custom reward amount.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="referralForm">
+        <div class="form-card">
+          <h3>Referral Details</h3>
+
+          <label>
+            <span>Referral / Referred By *</span>
+            <select id="referrerInput" required>
+              <option value="">Select referrer</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Referred To *</span>
+            <select id="referredToInput" required>
+              <option value="">Select referred resident</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Property / Unit</span>
+            <select id="referralPropertyInput">
+              <option value="">Select property</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Referral Code</span>
+            <input id="referralCodeInput" type="text" placeholder="Auto if blank" />
+          </label>
+
+          <div class="field-grid">
+            <label>
+              <span>Referred To Status</span>
+              <select id="bookingStatusInput">
+                <option>Lead Created</option>
+                <option>Booking Confirmed</option>
+                <option>Moved In</option>
+                <option>Converted</option>
+                <option>Cancelled</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Reward Status</span>
+              <select id="rewardStatusInput">
+                <option>Not Eligible</option>
+                <option>Pending Approval</option>
+                <option>Approved</option>
+                <option>Adjusted</option>
+                <option>Paid</option>
+                <option>Rejected</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            <span>Custom Reward Amount</span>
+            <input id="rewardAmountFormInput" type="number" min="0" value="5000" placeholder="Example: 5000" />
+          </label>
+
+          <label>
+            <span>Notes / Remarks</span>
+            <textarea id="referralNotesInput" rows="3" placeholder="Optional internal note"></textarea>
+          </label>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" type="button" data-close-modal="referralModal">Cancel</button>
+        <button class="modal-save-btn" type="submit" form="referralForm" id="saveReferralBtn">
+          <i class="fa-solid fa-check"></i>
+          Save Referral
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Detail / Approve Modal -->
+  <div class="modal-overlay" id="detailModal" hidden>
+    <section class="modal-shell small">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="detailModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Approve / Decline Referral</h2>
+          <p>Reward is credited to referrer and auto adjusted in next month bill.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-card" id="detailContent">Loading...</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/referrals.js?v=700"></script>
+</body>
+</html>

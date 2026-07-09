@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lively Legacy Admin Portal</title>
+
+    <link rel="stylesheet" href="css/login.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <main class="login-page">
+      <section class="login-shell">
+        <!-- LEFT SIDE -->
+        <div class="left-panel">
+          <div class="left-overlay">
+            <div class="brand-area">
+              <img
+                src="assets/logo_login.png"
+                alt="Lively Legacy Accommodations"
+                class="brand-logo"
+              />
+
+              <div class="army-badge">
+                <span></span>
+                <i class="fa-solid fa-shield-halved"></i>
+                <span></span>
+              </div>
+
+              <p>Managed by Ex-Army Professionals</p>
+            </div>
+
+            <div class="hero-content">
+              <h1>
+                Smart Living.
+                <span>Trusted Legacy.</span>
+              </h1>
+
+              <p>
+                A complete platform to manage properties, residents, bookings,
+                payments, and operations seamlessly.
+              </p>
+
+              <div class="features">
+                <div class="feature-item">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  <h4>Secure & Reliable</h4>
+                  <p>Enterprise grade security</p>
+                </div>
+
+                <div class="feature-item">
+                  <i class="fa-solid fa-users"></i>
+                  <h4>Role Based Access</h4>
+                  <p>Different access for different roles</p>
+                </div>
+
+                <div class="feature-item">
+                  <i class="fa-solid fa-chart-column"></i>
+                  <h4>Real-time Insights</h4>
+                  <p>Reports and analytics at your fingertips</p>
+                </div>
+
+                <div class="feature-item">
+                  <i class="fa-solid fa-gear"></i>
+                  <h4>Efficient Operations</h4>
+                  <p>Streamline and automate daily operations</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bottom-strip">
+              <div class="bottom-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+
+              <div>
+                <strong>Discipline. Integrity. Commitment.</strong>
+                <p>Values we bring from the forces to serve you better.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right-panel">
+          <form class="login-card" id="loginForm">
+            <div class="lock-badge">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <h2>Welcome Back!</h2>
+            <p class="login-subtitle">Sign in to your admin dashboard</p>
+
+            <div id="errorBox" class="error-box"></div>
+
+            <div class="form-group">
+              <label for="email">Username</label>
+
+              <div class="input-box">
+                <i class="fa-regular fa-user"></i>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Enter your username"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+
+              <div class="input-box">
+                <i class="fa-solid fa-lock"></i>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter your password"
+                  required
+                />
+
+                <button type="button" class="eye-btn" id="togglePassword">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group role-group">
+              <label>Login as</label>
+
+              <button type="button" class="role-selected" id="roleSelected">
+                <span>
+                  <i class="fa-solid fa-user-gear"></i>
+                  <span id="selectedRoleText">Admin</span>
+                </span>
+
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+
+              <div class="role-menu" id="roleMenu">
+                <button type="button" class="role-option active" data-role="admin">
+                  <span>
+                    <i class="fa-solid fa-user-gear"></i>
+                    Admin
+                  </span>
+
+                  <i class="fa-solid fa-check"></i>
+                </button>
+
+                <button type="button" class="role-option" data-role="staff">
+                  <span>
+                    <i class="fa-solid fa-users-gear"></i>
+                    Staff
+                  </span>
+
+                  <i class="fa-solid fa-check check-hidden"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>
+              Login
+            </button>
+
+         
+
+            <div class="secure-note">
+              <span>
+                <i class="fa-solid fa-shield-halved"></i>
+                Secure Access
+              </span>
+
+              <span class="note-divider"></span>
+
+              <span>Authorized Personnel Only</span>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="js/login.js?v=13"></script>
+  </body>
+</html>
+
+

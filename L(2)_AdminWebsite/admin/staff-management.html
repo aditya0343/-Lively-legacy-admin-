@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Staff Management | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/staff-management.css?v=500" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="admin-app staff-page" id="adminApp">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+            
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html" class="active">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content staff-main">
+
+      <header class="staff-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="staff-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search staff, phone, property, role..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="top-action-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <a href="admin-home.html">Dashboard</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Staff Management</strong>
+          </div>
+
+          <h1>Staff Management</h1>
+          <p>Manage staff, attendance, duties, timings, salary and leave requests.</p>
+        </div>
+
+        <button class="gold-btn" type="button" id="openStaffModalBtn">
+          <i class="fa-solid fa-user-plus"></i>
+          Add Staff
+        </button>
+      </section>
+
+      <section class="staff-stats-grid">
+        <article class="staff-stat-card">
+          <div class="stat-icon navy">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div>
+            <h2 id="totalStaffValue">0</h2>
+            <p>Total Staff</p>
+            <small>Active staff</small>
+          </div>
+        </article>
+
+        <article class="staff-stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div>
+            <h2 id="presentTodayValue">0</h2>
+            <p>Present Today</p>
+            <small>Attendance marked</small>
+          </div>
+        </article>
+
+        <article class="staff-stat-card">
+          <div class="stat-icon orange">
+            <i class="fa-solid fa-briefcase"></i>
+          </div>
+          <div>
+            <h2 id="onDutyValue">0</h2>
+            <p>On Duty</p>
+            <small>Currently working</small>
+          </div>
+        </article>
+
+        <article class="staff-stat-card">
+          <div class="stat-icon purple">
+            <i class="fa-solid fa-user-clock"></i>
+          </div>
+          <div>
+            <h2 id="onLeaveValue">0</h2>
+            <p>On Leave</p>
+            <small>Currently away</small>
+          </div>
+        </article>
+
+        <article class="staff-stat-card">
+          <div class="stat-icon red">
+            <i class="fa-solid fa-file-circle-exclamation"></i>
+          </div>
+          <div>
+            <h2 id="pendingLeavesValue">0</h2>
+            <p>Pending Leave</p>
+            <small>Needs approval</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="charts-grid">
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Role Chart</h3>
+              <p>Active staff grouped by role from Firebase.</p>
+            </div>
+          </div>
+          <div class="bar-list" id="roleBars"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Attendance Chart</h3>
+              <p>Today’s attendance grouped by status.</p>
+            </div>
+          </div>
+          <div class="bar-list" id="attendanceBars"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Duty Status Chart</h3>
+              <p>On duty, off duty and leave status.</p>
+            </div>
+          </div>
+
+          <div class="donut-layout">
+            <div class="donut-box">
+              <canvas id="dutyChart"></canvas>
+              <div class="chart-center">
+                <strong id="dutyChartCenter">0</strong>
+                <span>Staff</span>
+              </div>
+            </div>
+
+            <div class="chart-legend" id="dutyLegend"></div>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Shift Chart</h3>
+              <p>Staff count grouped by shift timing.</p>
+            </div>
+          </div>
+          <div class="bar-list" id="shiftBars"></div>
+        </article>
+      </section>
+
+      <section class="filter-card">
+        <div class="filter-search">
+          <input
+            type="text"
+            id="staffSearchInput"
+            placeholder="Search staff by name, phone or role..."
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <select id="propertyFilter">
+          <option>All Properties</option>
+        </select>
+
+        <select id="roleFilter">
+          <option>All Roles</option>
+        </select>
+
+        <select id="dutyFilter">
+          <option>All Duty</option>
+        </select>
+
+        <select id="shiftFilter">
+          <option>All Shifts</option>
+        </select>
+
+        <select id="activeStatusFilter">
+          <option>Active Staff</option>
+          <option>All Staff</option>
+          <option>Inactive Staff</option>
+        </select>
+
+        <button type="button" id="clearFiltersBtn">
+          <i class="fa-solid fa-xmark"></i>
+          Clear
+        </button>
+      </section>
+
+      <section class="staff-layout">
+        <div class="staff-main-column">
+          <article class="panel-card">
+            <div class="panel-head">
+              <div>
+                <h3>Staff List</h3>
+                <p id="staffListSubText">Loading staff...</p>
+              </div>
+
+              <button type="button" id="exportStaffBtn" class="light-action-btn">
+                <i class="fa-solid fa-download"></i>
+                Export
+              </button>
+            </div>
+
+            <div class="staff-list" id="staffList">
+              <div class="empty-state">Loading staff...</div>
+            </div>
+          </article>
+
+          <section class="bottom-grid">
+            <article class="panel-card">
+              <div class="panel-head">
+                <div>
+                  <h3>Attendance Overview</h3>
+                  <p>Today’s staff attendance.</p>
+                </div>
+              </div>
+
+              <div class="bar-list" id="attendanceOverviewList"></div>
+            </article>
+
+            <article class="panel-card">
+              <div class="panel-head">
+                <div>
+                  <h3>Timings / Shifts</h3>
+                  <p>Shift allocation and schedules.</p>
+                </div>
+              </div>
+
+              <div class="bar-list" id="shiftList"></div>
+            </article>
+
+            <article class="panel-card">
+              <div class="panel-head">
+                <div>
+                  <h3>Leave Requests</h3>
+                  <p>Pending and recent staff leave requests.</p>
+                </div>
+              </div>
+
+              <div class="leave-list" id="leaveRequestList">
+                <div class="empty-state small">Loading leave requests...</div>
+              </div>
+            </article>
+          </section>
+        </div>
+
+        <aside class="staff-side">
+          <article class="side-card">
+            <h3>Role Distribution</h3>
+            <p id="roleDistributionSub">0 total active staff</p>
+            <div class="side-list" id="roleDistributionList"></div>
+          </article>
+
+          <article class="side-card">
+            <h3>Quick Filters</h3>
+
+            <div class="quick-filter-list">
+              <button type="button" data-quick-filter="all">
+                <span><i class="fa-solid fa-users"></i> All Staff</span>
+                <strong id="quickAllValue">0</strong>
+              </button>
+
+              <button type="button" data-quick-filter="present">
+                <span><i class="fa-solid fa-circle"></i> Present Today</span>
+                <strong id="quickPresentValue">0</strong>
+              </button>
+
+              <button type="button" data-quick-filter="on-duty">
+                <span><i class="fa-solid fa-circle"></i> On Duty</span>
+                <strong id="quickDutyValue">0</strong>
+              </button>
+
+              <button type="button" data-quick-filter="on-leave">
+                <span><i class="fa-solid fa-circle"></i> On Leave</span>
+                <strong id="quickLeaveValue">0</strong>
+              </button>
+
+              <button type="button" data-quick-filter="pending-leaves">
+                <span><i class="fa-solid fa-circle"></i> Pending Leave</span>
+                <strong id="quickPendingLeaveValue">0</strong>
+              </button>
+            </div>
+          </article>
+
+          <article class="side-card">
+            <h3>Employment Type</h3>
+            <p>Full time, part time, contract and temporary staff.</p>
+            <div class="bar-list compact" id="employmentBars"></div>
+          </article>
+        </aside>
+      </section>
+
+      <footer class="staff-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Add / Edit Staff Modal -->
+  <div class="modal-overlay" id="staffModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="staffModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2 id="staffModalTitle">Add Staff</h2>
+          <p>Add complete staff profile, property, role, shift, salary, ID proof and emergency details.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="staffForm">
+        <input type="hidden" id="staffEditId" />
+
+        <div class="form-card">
+          <h3>Staff Details</h3>
+
+          <label class="full-field">
+            <span>Staff Full Name *</span>
+            <input id="staffNameInput" type="text" placeholder="Example: Ramesh Kumar" required />
+          </label>
+
+          <div class="field-grid">
+            <label>
+              <span>Staff ID</span>
+              <input id="staffIdInput" type="text" placeholder="Auto generated if blank" />
+            </label>
+
+            <label>
+              <span>Employment Type</span>
+              <select id="employmentTypeInput">
+                <option>Full Time</option>
+                <option>Part Time</option>
+                <option>Contract</option>
+                <option>Temporary</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Phone Number *</span>
+              <input id="staffPhoneInput" type="tel" placeholder="+91 9876543210" required />
+            </label>
+
+            <label>
+              <span>Email</span>
+              <input id="staffEmailInput" type="email" placeholder="Optional" />
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Property *</span>
+            <select id="staffPropertyInput" required>
+              <option value="">Select property</option>
+            </select>
+          </label>
+
+          <div class="field-grid">
+            <label>
+              <span>Role</span>
+              <select id="staffRoleInput">
+                <option>Caretaker</option>
+                <option>Plumber</option>
+                <option>Electrician</option>
+                <option>Housekeeping</option>
+                <option>Security</option>
+                <option>Technician</option>
+                <option>Maintenance Staff</option>
+                <option>Cook</option>
+                <option>Supervisor</option>
+                <option>Manager</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Department</span>
+              <select id="staffDepartmentInput">
+                <option>Maintenance</option>
+                <option>Housekeeping</option>
+                <option>Security</option>
+                <option>Food</option>
+                <option>Administration</option>
+                <option>Operations</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Shift</span>
+              <select id="staffShiftInput">
+                <option>Morning Shift</option>
+                <option>General Shift</option>
+                <option>Evening Shift</option>
+                <option>Night Shift</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Shift Timing</span>
+              <input id="staffShiftTimingInput" type="text" />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Attendance Status</span>
+              <select id="staffAttendanceInput">
+                <option>Present</option>
+                <option>Absent</option>
+                <option>Late</option>
+                <option>On Leave</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Duty Status</span>
+              <select id="staffDutyInput">
+                <option>On Duty</option>
+                <option>Off Duty</option>
+                <option>On Leave</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Availability</span>
+              <select id="staffAvailabilityInput">
+                <option>Available</option>
+                <option>Unavailable</option>
+                <option>Busy</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Gender</span>
+              <select id="staffGenderInput">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Joining Date</span>
+              <input id="staffJoiningDateInput" type="date" />
+            </label>
+
+            <label>
+              <span>Monthly Salary</span>
+              <input id="staffSalaryInput" type="number" min="0" placeholder="Example: 18000" />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>ID Proof Type</span>
+              <select id="staffProofTypeInput">
+                <option>Aadhaar</option>
+                <option>PAN</option>
+                <option>Voter ID</option>
+                <option>Driving License</option>
+                <option>Passport</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              <span>ID Proof Number</span>
+              <input id="staffProofNumberInput" type="text" />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Emergency Contact Name</span>
+              <input id="staffEmergencyNameInput" type="text" />
+            </label>
+
+            <label>
+              <span>Emergency Phone</span>
+              <input id="staffEmergencyPhoneInput" type="tel" />
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Address</span>
+            <textarea id="staffAddressInput" rows="3"></textarea>
+          </label>
+
+          <label class="full-field">
+            <span>Skills / Work Details</span>
+            <textarea id="staffSkillsInput" rows="3" placeholder="Example: Plumbing, electrical, cleaning"></textarea>
+          </label>
+
+          <label class="full-field">
+            <span>Notes</span>
+            <textarea id="staffNotesInput" rows="3" placeholder="Optional internal note"></textarea>
+          </label>
+
+          <label class="switch-card">
+            <div>
+              <strong>Active Staff</strong>
+              <span>Inactive staff will not be shown for complaint assignment.</span>
+            </div>
+            <input type="checkbox" id="staffActiveInput" checked />
+          </label>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" type="button" data-close-modal="staffModal">Cancel</button>
+        <button class="modal-save-btn" type="submit" form="staffForm" id="saveStaffBtn">
+          <i class="fa-solid fa-check"></i>
+          Save Staff
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Staff Detail Modal -->
+  <div class="modal-overlay" id="staffDetailModal" hidden>
+    <section class="modal-shell small">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="staffDetailModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2 id="detailStaffName">Staff Details</h2>
+          <p id="detailStaffSub">Profile and work details</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-card" id="staffDetailContent">Loading...</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/staff-management.js?v=500"></script>
+</body>
+</html>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Visitors | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/visitors.css?v=500" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="admin-app visitors-page" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+            
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html" class="active">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content visitors-main">
+      <header class="visitors-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="top-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search guest, phone, resident, property..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="top-action-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <a href="admin-home.html">Dashboard</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Visitors</strong>
+          </div>
+
+          <h1>Visitors</h1>
+          <p>View visitor requests, confirm pending requests, see accepted requests and track all visitors.</p>
+        </div>
+
+        <button class="gold-btn" type="button" id="openVisitorModalBtn">
+          <i class="fa-solid fa-user-plus"></i>
+          Add Visitor
+        </button>
+      </section>
+
+      <section class="visitor-stats-grid">
+        <article class="visitor-stat-card">
+          <div class="stat-icon navy">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div>
+            <h2 id="totalVisitorsValue">0</h2>
+            <p>All Visitors</p>
+            <small>Total requests</small>
+          </div>
+        </article>
+
+        <article class="visitor-stat-card">
+          <div class="stat-icon orange">
+            <i class="fa-solid fa-hourglass-half"></i>
+          </div>
+          <div>
+            <h2 id="pendingRequestsValue">0</h2>
+            <p>Pending Requests</p>
+            <small>Need confirmation</small>
+          </div>
+        </article>
+
+        <article class="visitor-stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <h2 id="acceptedRequestsValue">0</h2>
+            <p>Accepted Requests</p>
+            <small>Approved visits</small>
+          </div>
+        </article>
+
+        <article class="visitor-stat-card">
+          <div class="stat-icon blue">
+            <i class="fa-solid fa-right-to-bracket"></i>
+          </div>
+          <div>
+            <h2 id="checkedInValue">0</h2>
+            <p>Checked In</p>
+            <small>Currently inside</small>
+          </div>
+        </article>
+
+        <article class="visitor-stat-card">
+          <div class="stat-icon purple">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </div>
+          <div>
+            <h2 id="checkedOutValue">0</h2>
+            <p>Checked Out</p>
+            <small>Visit completed</small>
+          </div>
+        </article>
+
+        <article class="visitor-stat-card">
+          <div class="stat-icon red">
+            <i class="fa-solid fa-ban"></i>
+          </div>
+          <div>
+            <h2 id="restrictedValue">0</h2>
+            <p>Restricted</p>
+            <small>Access denied</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="visitor-charts-grid">
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Status Chart</h3>
+              <p>Live visitor status split from Firebase.</p>
+            </div>
+          </div>
+
+          <div class="donut-layout">
+            <div class="donut-box">
+              <canvas id="statusChart"></canvas>
+              <div class="chart-center">
+                <strong id="statusChartCenter">0</strong>
+                <span>Total</span>
+              </div>
+            </div>
+
+            <div class="chart-legend" id="statusLegend"></div>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Purpose Chart</h3>
+              <p>Visitor requests grouped by purpose.</p>
+            </div>
+          </div>
+
+          <div class="bar-list" id="purposeBars"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>7-Day Visit Chart</h3>
+              <p>Visitor requests by visit date for the last seven days.</p>
+            </div>
+          </div>
+
+          <div class="trend-chart" id="trendChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-head">
+            <div>
+              <h3>Property Chart</h3>
+              <p>Visitor requests grouped by property.</p>
+            </div>
+          </div>
+
+          <div class="bar-list" id="propertyBars"></div>
+        </article>
+      </section>
+
+      <section class="filter-card">
+        <div class="filter-search">
+          <input
+            type="text"
+            id="visitorSearchInput"
+            placeholder="Search by guest name, phone, resident, property..."
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <select id="propertyFilter">
+          <option>All Properties</option>
+        </select>
+
+        <select id="statusFilter">
+          <option>All Status</option>
+        </select>
+
+        <select id="purposeFilter">
+          <option>All Purpose</option>
+        </select>
+
+        <select id="sortFilter">
+          <option>Recently Added</option>
+          <option>Visit Time</option>
+          <option>Guest A-Z</option>
+          <option>Status</option>
+        </select>
+
+        <button type="button" id="clearFiltersBtn">
+          <i class="fa-solid fa-xmark"></i>
+          Clear
+        </button>
+      </section>
+
+      <section class="visitors-layout">
+        <div class="visitors-main-column">
+          <article class="panel-card">
+            <div class="panel-head">
+              <div>
+                <h3>All Visitor Requests</h3>
+                <p id="visitorListSubText">Loading visitor requests...</p>
+              </div>
+            </div>
+
+            <div class="visitor-list" id="visitorList">
+              <div class="empty-state">Loading visitors...</div>
+            </div>
+          </article>
+        </div>
+
+        <aside class="visitors-side">
+          <article class="side-card">
+            <h3>Visitor Overview</h3>
+            <p>Current visitor request status.</p>
+
+            <div class="overview-list" id="visitorOverviewList"></div>
+          </article>
+
+          <article class="side-card">
+            <h3>How it works</h3>
+            <p>Visitor approval workflow.</p>
+
+            <div class="help-list">
+              <div class="help-step">
+                <span><i class="fa-solid fa-clipboard-list"></i></span>
+                <div>
+                  <strong>1. Resident Request</strong>
+                  <p>Resident app saves visitor request into visitors collection.</p>
+                </div>
+              </div>
+
+              <div class="help-step">
+                <span><i class="fa-solid fa-circle-check"></i></span>
+                <div>
+                  <strong>2. Admin Confirms</strong>
+                  <p>Admin accepts or rejects pending visitor requests.</p>
+                </div>
+              </div>
+
+              <div class="help-step">
+                <span><i class="fa-solid fa-right-to-bracket"></i></span>
+                <div>
+                  <strong>3. Check In</strong>
+                  <p>Mark visitor as checked in when they enter the property.</p>
+                </div>
+              </div>
+
+              <div class="help-step">
+                <span><i class="fa-solid fa-right-from-bracket"></i></span>
+                <div>
+                  <strong>4. Check Out</strong>
+                  <p>Mark checked out when the visitor leaves.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <footer class="visitors-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Add Visitor Modal -->
+  <div class="modal-overlay" id="visitorModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="visitorModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Visitor</h2>
+          <p>Admin can add visitor requests, confirm pending requests and track checked-in visitors.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="visitorForm">
+        <div class="form-card">
+          <h3>Visitor Request Details</h3>
+
+          <label class="full-field">
+            <span>Guest Name *</span>
+            <input id="guestNameInput" type="text" placeholder="Example: Rahul Sharma" required />
+          </label>
+
+          <div class="field-grid">
+            <label>
+              <span>Guest Phone *</span>
+              <input id="guestPhoneInput" type="tel" placeholder="+91 9876543210" required />
+            </label>
+
+            <label>
+              <span>Guest Email</span>
+              <input id="guestEmailInput" type="email" placeholder="Optional" />
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Requested By / Resident *</span>
+            <select id="visitorResidentInput" required>
+              <option value="">Select resident</option>
+            </select>
+          </label>
+
+          <label class="full-field">
+            <span>Property *</span>
+            <select id="visitorPropertyInput" required>
+              <option value="">Select property</option>
+            </select>
+          </label>
+
+          <div class="field-grid">
+            <label>
+              <span>Purpose</span>
+              <select id="visitorPurposeInput">
+                <option>Personal Visit</option>
+                <option>Family Visit</option>
+                <option>Friend Visit</option>
+                <option>Delivery</option>
+                <option>Maintenance</option>
+                <option>Interview</option>
+                <option>Official Visit</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Status</span>
+              <select id="visitorStatusInput">
+                <option>Pending</option>
+                <option>Accepted</option>
+                <option>Rejected</option>
+                <option>Checked In</option>
+                <option>Checked Out</option>
+                <option>Restricted</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Visit Date</span>
+              <input id="visitDateInput" type="date" />
+            </label>
+
+            <label>
+              <span>Visit Time</span>
+              <input id="visitTimeInput" type="time" />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>ID Proof Type</span>
+              <select id="visitorProofTypeInput">
+                <option>Aadhaar</option>
+                <option>PAN</option>
+                <option>Voter ID</option>
+                <option>Driving License</option>
+                <option>Passport</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              <span>ID Proof Number</span>
+              <input id="visitorProofNumberInput" type="text" placeholder="Optional" />
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Vehicle Number</span>
+            <input id="visitorVehicleInput" type="text" placeholder="Optional" />
+          </label>
+
+          <label class="full-field">
+            <span>Notes</span>
+            <textarea id="visitorNotesInput" rows="3" placeholder="Internal note"></textarea>
+          </label>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" type="button" data-close-modal="visitorModal">Cancel</button>
+        <button class="modal-save-btn" type="submit" form="visitorForm" id="saveVisitorBtn">
+          <i class="fa-solid fa-check"></i>
+          Save Visitor
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Visitor Detail Modal -->
+  <div class="modal-overlay" id="visitorDetailModal" hidden>
+    <section class="modal-shell small">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="visitorDetailModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2 id="detailVisitorName">Visitor Details</h2>
+          <p id="detailVisitorNo">Visitor request</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-card" id="visitorDetailContent">Loading...</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/visitors.js?v=500"></script>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Agreements & KYC | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/agreements-kyc.css?v=700" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="admin-app agreements-page" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+            
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html" class="active">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content agreements-main">
+      <header class="agreements-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="top-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search agreements, residents, KYC, properties..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="top-action-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <a href="admin-home.html">Dashboard</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Agreements & KYC</strong>
+          </div>
+
+          <h1>Agreements & KYC</h1>
+          <p>Manage resident agreements and manually verify uploaded KYC documents.</p>
+        </div>
+
+        <button class="gold-btn" type="button" id="openAgreementModalBtn">
+          <i class="fa-solid fa-plus"></i>
+          Add Agreement
+        </button>
+      </section>
+
+      <section class="tabs-row">
+        <button type="button" class="tab-btn active" data-tab="agreements">
+          Agreements
+        </button>
+
+        <button type="button" class="tab-btn" data-tab="kyc">
+          KYC Verification
+        </button>
+      </section>
+
+      <section class="stats-grid" id="agreementsStats">
+        <article class="stat-card">
+          <div class="stat-icon blue">
+            <i class="fa-solid fa-file-lines"></i>
+          </div>
+          <div>
+            <h2 id="totalAgreementsValue">0</h2>
+            <p>Total Agreements</p>
+            <small>All time</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <h2 id="activeAgreementsValue">0</h2>
+            <p>Active Agreements</p>
+            <small>Currently active</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon orange">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <div>
+            <h2 id="expiringSoonValue">0</h2>
+            <p>Expiring Soon</p>
+            <small>Within 30 days</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon red">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <h2 id="expiredAgreementsValue">0</h2>
+            <p>Expired Agreements</p>
+            <small>Expired</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="stats-grid hidden" id="kycStats">
+        <article class="stat-card">
+          <div class="stat-icon blue">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div>
+            <h2 id="totalResidentsValue">0</h2>
+            <p>Total Residents</p>
+            <small>All residents</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <h2 id="verifiedKycValue">0</h2>
+            <p>Verified</p>
+            <small>All documents verified</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon orange">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <div>
+            <h2 id="pendingKycValue">0</h2>
+            <p>Pending</p>
+            <small>Under verification</small>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon red">
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <div>
+            <h2 id="incompleteKycValue">0</h2>
+            <p>Incomplete</p>
+            <small>Documents missing</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="charts-grid" id="agreementsCharts">
+        <article class="panel-card">
+          <h3>Agreement Status Chart</h3>
+          <p>Auto fetched from agreements and stay agreements.</p>
+          <div class="bar-list" id="agreementStatusChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Agreement Type Chart</h3>
+          <p>Agreement type split from Firebase records.</p>
+          <div class="bar-list" id="agreementTypeChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Rent & Deposit Chart</h3>
+          <p>Total rent and security deposit in rupees only.</p>
+          <div class="bar-list" id="moneyChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Property Wise Agreements</h3>
+          <p>Agreement count grouped by property.</p>
+          <div class="bar-list" id="agreementPropertyChart"></div>
+        </article>
+      </section>
+
+      <section class="charts-grid hidden" id="kycCharts">
+        <article class="panel-card">
+          <h3>KYC Status Chart</h3>
+          <p>Verified, pending and incomplete residents from Firebase.</p>
+          <div class="bar-list" id="kycStatusChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Document Upload Chart</h3>
+          <p>Available documents from KYC and resident records.</p>
+          <div class="bar-list" id="kycDocumentChart"></div>
+        </article>
+
+        <article class="panel-card">
+          <h3>Property Wise KYC</h3>
+          <p>Resident KYC records grouped by property.</p>
+          <div class="bar-list" id="kycPropertyChart"></div>
+        </article>
+      </section>
+
+      <section class="filter-card">
+        <div class="filter-search">
+          <input
+            type="text"
+            id="localSearchInput"
+            placeholder="Search by resident, property, unit or status..."
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <select id="propertyFilter">
+          <option>All Properties</option>
+        </select>
+
+        <select id="agreementStatusFilter">
+          <option>All Status</option>
+        </select>
+
+        <select id="agreementTypeFilter">
+          <option>All Agreement Types</option>
+        </select>
+
+        <select id="kycStatusFilter" class="hidden">
+          <option>All KYC Status</option>
+        </select>
+
+        <button type="button" id="clearFiltersBtn">
+          <i class="fa-solid fa-xmark"></i>
+          Reset
+        </button>
+      </section>
+
+      <section class="panel-card">
+        <div class="panel-head">
+          <div>
+            <h3 id="listTitle">Agreements & Acceptance Status</h3>
+            <p id="listSubTitle">Loading agreement records...</p>
+          </div>
+        </div>
+
+        <div class="record-list" id="recordList">
+          <div class="empty-state">Loading records...</div>
+        </div>
+      </section>
+
+      <footer class="agreements-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="agreementModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="agreementModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Agreement</h2>
+          <p>Create agreement, set agreement period, rent amount and deposit.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="agreementForm">
+        <div class="form-card">
+          <h3>Agreement Details</h3>
+
+          <label class="full-field">
+            <span>Resident *</span>
+            <select id="agreementResidentInput" required>
+              <option value="">Select resident</option>
+            </select>
+          </label>
+
+          <label class="full-field">
+            <span>Property *</span>
+            <select id="agreementPropertyInput" required>
+              <option value="">Select property</option>
+            </select>
+          </label>
+
+          <div class="field-grid">
+            <label>
+              <span>Agreement Type</span>
+              <select id="agreementTypeInput">
+                <option>Leave & License</option>
+                <option>Rental Agreement</option>
+                <option>PG Agreement</option>
+                <option>Service Agreement</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Status</span>
+              <select id="agreementStatusInput">
+                <option>Active</option>
+                <option>Expiring Soon</option>
+                <option>Expired</option>
+                <option>Terminated</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Start Date</span>
+              <input id="startDateInput" type="date" />
+            </label>
+
+            <label>
+              <span>End Date</span>
+              <input id="endDateInput" type="date" />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Rent Amount ₹</span>
+              <input id="rentAmountInput" type="number" min="0" placeholder="Example: 25000" />
+            </label>
+
+            <label>
+              <span>Security Deposit ₹</span>
+              <input id="securityDepositInput" type="number" min="0" placeholder="Example: 50000" />
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Notes</span>
+            <textarea id="agreementNotesInput" rows="3" placeholder="Optional internal note"></textarea>
+          </label>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" type="button" data-close-modal="agreementModal">Cancel</button>
+        <button class="modal-save-btn" type="submit" form="agreementForm" id="saveAgreementBtn">
+          <i class="fa-solid fa-check"></i>
+          Save Agreement
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <div class="modal-overlay" id="agreementDetailModal" hidden>
+    <section class="modal-shell small">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="agreementDetailModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2 id="detailAgreementTitle">Agreement Details</h2>
+          <p id="detailAgreementSub">Agreement type</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-card" id="agreementDetailContent">Loading...</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-overlay" id="kycDetailModal" hidden>
+    <section class="modal-shell small">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="kycDetailModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2 id="detailKycTitle">KYC Details</h2>
+          <p id="detailKycSub">KYC Verification</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-card" id="kycDetailContent">Loading...</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/agreements-kyc.js?v=700"></script>
+</body>
+</html>

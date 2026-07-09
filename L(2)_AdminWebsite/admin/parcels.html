@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Parcels | Lively Legacy Admin</title>
+
+  <link rel="stylesheet" href="../css/parcels.css?v=500" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="admin-app parcels-page" id="adminApp">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" class="sidebar-brand-logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="admin-home.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <div class="nav-dropdown" id="propertiesDropdown">
+          <button class="nav-dropdown-btn" type="button" id="propertiesToggle">
+            <span>
+              <i class="fa-solid fa-building"></i>
+              <span class="nav-text">Properties</span>
+            </span>
+            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </button>
+
+          <div class="nav-submenu">
+            <a href="properties.html">All Properties</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="beds.html">Beds</a>
+           
+          </div>
+        </div>
+
+        <a href="residents.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Residents</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="bookings.html">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Bookings & Leads</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="revenue.html">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Revenue & Billing</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="food.html">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Food Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="complaints.html">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Complaints</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="staff-management.html">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Staff Management</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="visitors.html">
+          <i class="fa-solid fa-user-check"></i>
+          <span>Visitors</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="parcels.html" class="active">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcels</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="agreements-kyc.html">
+          <i class="fa-solid fa-file-signature"></i>
+          <span>Agreements & KYC</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="referrals.html">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>Referrals</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="corporate.html">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Corporate</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="reports.html">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports & Analytics</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+          <i class="fa-solid fa-chevron-right nav-arrow"></i>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content parcels-main">
+      <header class="parcels-topbar">
+        <div class="left-top">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div class="top-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="text"
+            id="globalSearchInput"
+            placeholder="Search tracking ID, resident, property, courier..."
+          />
+        </div>
+
+        <div class="topbar-right">
+          <button class="top-action-btn" id="refreshBtn" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            Refresh
+          </button>
+
+          <div class="admin-profile-box">
+            <button class="admin-profile-btn" id="adminProfileBtn" type="button">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+
+              <div class="admin-profile-text">
+                <strong id="adminName">Admin</strong>
+                <p>Super Admin</p>
+              </div>
+
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div class="profile-dropdown" id="profileDropdown">
+              <div class="profile-dropdown-head">
+                <div class="admin-avatar small" id="adminAvatarSmall">AD</div>
+
+                <div>
+                  <strong id="dropdownAdminName">Admin</strong>
+                  <p id="dropdownAdminEmail">admin@email.com</p>
+                </div>
+              </div>
+
+              <button id="logoutBtn" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-title-row">
+        <div>
+          <div class="breadcrumb">
+            <a href="admin-home.html">Dashboard</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <strong>Parcels</strong>
+          </div>
+
+          <h1>Parcels</h1>
+          <p>Track all parcels: requested, received by staff, ready for pickup and handed over to resident.</p>
+        </div>
+
+        <button class="gold-btn" type="button" id="openParcelModalBtn">
+          <i class="fa-solid fa-plus"></i>
+          Add Parcel
+        </button>
+      </section>
+
+      <section class="parcel-stats-grid">
+        <article class="parcel-stat-card">
+          <div class="stat-icon navy">
+            <i class="fa-solid fa-boxes-stacked"></i>
+          </div>
+          <div>
+            <h2 id="totalParcelsValue">0</h2>
+            <p>Total Parcels</p>
+            <small>All time</small>
+          </div>
+        </article>
+
+        <article class="parcel-stat-card">
+          <div class="stat-icon blue">
+            <i class="fa-solid fa-clipboard-list"></i>
+          </div>
+          <div>
+            <h2 id="requestedValue">0</h2>
+            <p>Requested</p>
+            <small>Resident requests</small>
+          </div>
+        </article>
+
+        <article class="parcel-stat-card">
+          <div class="stat-icon orange">
+            <i class="fa-solid fa-user-gear"></i>
+          </div>
+          <div>
+            <h2 id="receivedByStaffValue">0</h2>
+            <p>Received by Staff</p>
+            <small>At property</small>
+          </div>
+        </article>
+
+        <article class="parcel-stat-card">
+          <div class="stat-icon purple">
+            <i class="fa-solid fa-envelope-open-text"></i>
+          </div>
+          <div>
+            <h2 id="readyForPickupValue">0</h2>
+            <p>Ready for Pickup</p>
+            <small>Awaiting resident</small>
+          </div>
+        </article>
+
+        <article class="parcel-stat-card">
+          <div class="stat-icon green">
+            <i class="fa-solid fa-handshake"></i>
+          </div>
+          <div>
+            <h2 id="handedOverValue">0</h2>
+            <p>Handed Over</p>
+            <small>Delivered to resident</small>
+          </div>
+        </article>
+
+        <article class="parcel-stat-card">
+          <div class="stat-icon red">
+            <i class="fa-solid fa-rotate-left"></i>
+          </div>
+          <div>
+            <h2 id="returnedValue">0</h2>
+            <p>Returned</p>
+            <small>Returned parcels</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="filter-card">
+        <div class="filter-search">
+          <input
+            type="text"
+            id="parcelSearchInput"
+            placeholder="Search by tracking ID, resident, courier..."
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <select id="propertyFilter">
+          <option>All Properties</option>
+        </select>
+
+        <select id="statusFilter">
+          <option>All Status</option>
+        </select>
+
+        <select id="parcelTypeFilter">
+          <option>All Parcel Type</option>
+        </select>
+
+        <select id="sortFilter">
+          <option>Recently Added</option>
+          <option>Received Time</option>
+          <option>Tracking ID</option>
+          <option>Resident A-Z</option>
+          <option>Status</option>
+        </select>
+
+        <button type="button" id="clearFiltersBtn">
+          <i class="fa-solid fa-xmark"></i>
+          Clear
+        </button>
+      </section>
+
+      <section class="parcels-layout">
+        <div class="parcels-main-column">
+          <article class="panel-card">
+            <div class="panel-head">
+              <div>
+                <h3>All Parcels</h3>
+                <p id="parcelListSubText">Loading parcel records...</p>
+              </div>
+            </div>
+
+            <div class="parcel-list" id="parcelList">
+              <div class="empty-state">Loading parcels...</div>
+            </div>
+          </article>
+        </div>
+
+        <aside class="parcels-side">
+          <article class="side-card">
+            <h3>Parcel Overview</h3>
+            <p>Current parcel handling status.</p>
+
+            <div class="overview-list" id="parcelOverviewList"></div>
+          </article>
+
+          <article class="side-card">
+            <h3>How it works</h3>
+            <p>Parcel handling workflow.</p>
+
+            <div class="help-list">
+              <div class="help-step">
+                <span><i class="fa-solid fa-clipboard-list"></i></span>
+                <div>
+                  <strong>1. Parcel Requested</strong>
+                  <p>Resident or admin creates a parcel request.</p>
+                </div>
+              </div>
+
+              <div class="help-step">
+                <span><i class="fa-solid fa-user-gear"></i></span>
+                <div>
+                  <strong>2. Received by Staff</strong>
+                  <p>Staff receives parcel at the property and updates status.</p>
+                </div>
+              </div>
+
+              <div class="help-step">
+                <span><i class="fa-solid fa-bell"></i></span>
+                <div>
+                  <strong>3. Ready for Pickup</strong>
+                  <p>Resident can be informed that parcel is ready.</p>
+                </div>
+              </div>
+
+              <div class="help-step">
+                <span><i class="fa-solid fa-handshake"></i></span>
+                <div>
+                  <strong>4. Handed Over</strong>
+                  <p>Mark handed over once resident collects the parcel.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <footer class="parcels-footer">
+        <p>© 2026 Lively Legacy Accommodations. All rights reserved.</p>
+        <p>Version 2.0.0</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Add Parcel Modal -->
+  <div class="modal-overlay" id="parcelModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="parcelModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2>Add Parcel</h2>
+          <p>Add parcel tracking details, resident, property, courier and handover status.</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-regular fa-circle-question"></i>
+        </button>
+      </header>
+
+      <form class="modal-body" id="parcelForm">
+        <div class="form-card">
+          <h3>Parcel Details</h3>
+
+          <label class="full-field">
+            <span>Tracking ID *</span>
+            <input id="trackingIdInput" type="text" placeholder="Example: TRK123456789" required />
+          </label>
+
+          <label class="full-field">
+            <span>Resident *</span>
+            <select id="parcelResidentInput" required>
+              <option value="">Select resident</option>
+            </select>
+          </label>
+
+          <label class="full-field">
+            <span>Property *</span>
+            <select id="parcelPropertyInput" required>
+              <option value="">Select property</option>
+            </select>
+          </label>
+
+          <div class="field-grid">
+            <label>
+              <span>Courier / Delivery Partner *</span>
+              <input id="courierInput" type="text" placeholder="Example: BlueDart, DTDC" required />
+            </label>
+
+            <label>
+              <span>Parcel Type</span>
+              <select id="parcelTypeInput">
+                <option>Document</option>
+                <option>Shopping</option>
+                <option>Food Delivery</option>
+                <option>Electronics</option>
+                <option>Clothing</option>
+                <option>Gift</option>
+                <option>Medicine</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Parcel Status</span>
+            <select id="parcelStatusInput">
+              <option>Requested</option>
+              <option selected>Received by Staff</option>
+              <option>Ready for Pickup</option>
+              <option>Handed Over to Resident</option>
+              <option>Returned</option>
+            </select>
+          </label>
+
+          <div class="field-grid">
+            <label>
+              <span>Received Date</span>
+              <input id="receivedDateInput" type="date" />
+            </label>
+
+            <label>
+              <span>Received Time</span>
+              <input id="receivedTimeInput" type="time" />
+            </label>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Received by Staff</span>
+              <input id="receivedByStaffInput" type="text" placeholder="Staff name" />
+            </label>
+
+            <label>
+              <span>Handed Over To</span>
+              <input id="handedOverToInput" type="text" placeholder="Resident name" />
+            </label>
+          </div>
+
+          <label class="full-field">
+            <span>Notes</span>
+            <textarea id="parcelNotesInput" rows="3" placeholder="Optional internal note"></textarea>
+          </label>
+        </div>
+      </form>
+
+      <footer class="modal-footer">
+        <button class="modal-back-btn" type="button" data-close-modal="parcelModal">Cancel</button>
+        <button class="modal-save-btn" type="submit" form="parcelForm" id="saveParcelBtn">
+          <i class="fa-solid fa-check"></i>
+          Save Parcel
+        </button>
+      </footer>
+    </section>
+  </div>
+
+  <!-- Parcel Detail Modal -->
+  <div class="modal-overlay" id="parcelDetailModal" hidden>
+    <section class="modal-shell small">
+      <header class="modal-header">
+        <button class="modal-icon-btn" type="button" data-close-modal="parcelDetailModal">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div>
+          <h2 id="detailParcelTitle">Parcel Details</h2>
+          <p id="detailParcelSub">Courier</p>
+        </div>
+
+        <button class="modal-icon-btn" type="button">
+          <i class="fa-solid fa-circle-info"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-card" id="parcelDetailContent">Loading...</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="../js/parcels.js?v=500"></script>
+</body>
+</html>

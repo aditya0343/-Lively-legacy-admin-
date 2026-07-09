@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Mark Attendance | Lively Legacy</title>
+
+  <link rel="stylesheet" href="css/attendance.css?v=500" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+</head>
+
+<body>
+  <div class="staff-app" id="staffApp">
+
+    <aside class="staff-sidebar" id="staffSidebar">
+      <div class="staff-logo-wrap">
+        <img src="../assets/logo.png" alt="Lively Legacy" />
+      </div>
+
+      <nav class="staff-nav">
+        <a href="staff-dashboard.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="attendance.html" class="active">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Mark Attendance</span>
+        </a>
+
+        <a href="visitor-management.html">
+          <i class="fa-solid fa-users"></i>
+          <span>Visitor Management</span>
+        </a>
+
+        <a href="parcel-management.html">
+          <i class="fa-solid fa-box"></i>
+          <span>Parcel Management</span>
+        </a>
+
+        <a href="assigned-tasks.html">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span>Assigned Tasks</span>
+        </a>
+
+        <a href="moveout-settlement.html">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <span>Move-out Settlement</span>
+        </a>
+
+        <a href="announcements.html">
+          <i class="fa-solid fa-bullhorn"></i>
+          <span>Announcements</span>
+        </a>
+
+        <button type="button" id="logoutBtn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <div class="staff-value-card">
+        <div class="value-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div>
+          <strong>Discipline. Integrity. Commitment.</strong>
+          <p>Values we bring from the forces to serve you better.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="staff-main">
+
+      <header class="staff-topbar">
+        <div class="top-left">
+          <button class="menu-btn" id="menuBtn" type="button">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div>
+            <h1>Mark Attendance</h1>
+            <p id="topPropertyText">Staff panel</p>
+          </div>
+        </div>
+
+        <div class="top-right">
+          <button class="notification-btn" type="button" id="notificationBtn">
+            <i class="fa-regular fa-bell"></i>
+            <span id="notificationCount">0</span>
+          </button>
+
+          <div class="staff-profile-mini">
+            <div class="staff-avatar" id="staffAvatarText">ST</div>
+            <div>
+              <strong id="staffNameTop">Staff</strong>
+              <p id="staffEmailTop">staff@email.com</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="date-row">
+        <div>
+          <h2>Attendance Verification</h2>
+          <p>Verify location and selfie before marking your attendance.</p>
+        </div>
+
+        <div class="date-time-card">
+          <div>
+            <i class="fa-regular fa-calendar"></i>
+            <span id="todayDate">Today</span>
+          </div>
+
+          <div>
+            <i class="fa-regular fa-clock"></i>
+            <span id="currentTime">--:--</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="attendance-layout">
+        <aside class="left-panel">
+
+          <div class="status-card">
+            <div class="status-head">
+              <div class="status-icon" id="statusIcon">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+
+              <div>
+                <h3>Attendance Status</h3>
+                <p id="attendanceStatusText">
+                  Checking today attendance...
+                </p>
+              </div>
+
+              <span class="status-badge not-marked" id="attendanceStatusBadge">
+                Loading
+              </span>
+            </div>
+
+            <div class="shift-box">
+              <h3>Shift Details</h3>
+
+              <div class="shift-row">
+                <span>Staff</span>
+                <strong id="staffName">Loading...</strong>
+              </div>
+
+              <div class="shift-row">
+                <span>Staff ID</span>
+                <strong id="staffId">--</strong>
+              </div>
+
+              <div class="shift-row">
+                <span>Shift</span>
+                <strong id="shiftName">Loading...</strong>
+              </div>
+
+              <div class="shift-row">
+                <span>Start Time</span>
+                <strong id="shiftStart">--</strong>
+              </div>
+
+              <div class="shift-row">
+                <span>End Time</span>
+                <strong id="shiftEnd">--</strong>
+              </div>
+
+              <div class="shift-row">
+                <span>Total Break</span>
+                <strong id="breakTime">--</strong>
+              </div>
+            </div>
+
+            <div class="info-note">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>Please mark attendance only from your assigned property.</span>
+            </div>
+          </div>
+
+          <div class="notes-card">
+            <h3>Important Notes</h3>
+
+            <ul>
+              <li>Location verification is required before attendance.</li>
+              <li>Selfie verification is required for identity proof.</li>
+              <li>Attendance can be marked only once per day.</li>
+              <li>Your attendance syncs with admin website and mobile app.</li>
+            </ul>
+          </div>
+
+        </aside>
+
+        <section class="verification-card">
+          <div class="verification-head">
+            <div>
+              <h2>Complete Verification</h2>
+              <p>Location and selfie are saved with the staff attendance record.</p>
+            </div>
+
+            <button type="button" class="refresh-data-btn" id="refreshDataBtn">
+              <i class="fa-solid fa-rotate-right"></i>
+              Refresh Data
+            </button>
+          </div>
+
+          <div class="verify-grid">
+
+            <div class="verify-box">
+              <div class="verify-head">
+                <div class="verify-icon blue">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div>
+                  <h3>1. Location Verification</h3>
+                  <p>Allow browser location access and verify distance from property.</p>
+                </div>
+              </div>
+
+              <div class="map-box">
+                <div class="map-bg"></div>
+                <div class="map-circle" id="mapCircle">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+              </div>
+
+              <div class="location-result" id="locationResult">
+                <i class="fa-solid fa-circle-info"></i>
+                <div>
+                  <strong id="locationStatusTitle">Waiting for location</strong>
+                  <p id="locationAddress">Property address will load automatically.</p>
+                </div>
+              </div>
+
+              <button type="button" class="outline-btn" id="refreshLocationBtn">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                Refresh Location
+              </button>
+
+              <div class="small-status" id="locationAccessText">
+                <i class="fa-solid fa-circle-info"></i>
+                Location access is required.
+              </div>
+            </div>
+
+            <div class="verify-box">
+              <div class="verify-head">
+                <div class="verify-icon purple">
+                  <i class="fa-solid fa-camera"></i>
+                </div>
+
+                <div>
+                  <h3>2. Selfie Verification</h3>
+                  <p>Take a clear selfie for attendance verification.</p>
+                </div>
+              </div>
+
+              <div class="selfie-box">
+                <video id="selfieVideo" autoplay playsinline muted></video>
+                <canvas id="selfieCanvas"></canvas>
+
+                <div class="selfie-placeholder" id="selfiePlaceholder">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+
+                <img id="selfiePreview" alt="Selfie Preview" />
+              </div>
+
+              <div class="selfie-actions">
+                <button type="button" class="outline-btn purple-btn" id="captureSelfieBtn">
+                  <i class="fa-solid fa-camera"></i>
+                  Capture Selfie
+                </button>
+
+                <button type="button" class="outline-btn danger-btn" id="retakeSelfieBtn">
+                  <i class="fa-solid fa-rotate-left"></i>
+                  Retake
+                </button>
+              </div>
+
+              <div class="small-status" id="selfieStatusText">
+                Make sure your face is clearly visible.
+              </div>
+            </div>
+
+          </div>
+
+          <div class="attendance-alert danger" id="attendanceMessage">
+            <div>
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+              <strong id="attendanceMessageTitle">Verification required</strong>
+              <p id="attendanceMessageText">
+                Click Refresh Location and Capture Selfie before marking attendance.
+              </p>
+            </div>
+
+            <button type="button" id="markAttendanceBtn">
+              <i class="fa-solid fa-check"></i>
+              Mark Attendance
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <section class="attendance-history-card">
+        <div class="history-head">
+          <div>
+            <h3>Recent Attendance</h3>
+            <p>Latest attendance records synced from Firebase.</p>
+          </div>
+        </div>
+
+        <div class="history-list" id="attendanceHistoryList">
+          <div class="empty-state">Loading attendance history...</div>
+        </div>
+      </section>
+
+      <div class="bottom-help">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>If you are facing any issue, contact your administrator.</span>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="notificationModal" hidden>
+    <section class="modal-shell">
+      <header class="modal-header">
+        <div>
+          <h2>Notifications</h2>
+          <p>Latest updates related to your attendance and staff activity.</p>
+        </div>
+
+        <button class="modal-close" type="button" data-close-modal="notificationModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="modal-body">
+        <div class="notification-list" id="notificationList">
+          <div class="empty-state">No notifications yet.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script type="module" src="js/attendance.js?v=500"></script>
+</body>
+</html>
